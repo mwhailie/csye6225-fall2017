@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonObject;
 
+/**
+ * SHIRUI_WANG,001226459, wang.shirui@husky.neu.edu
+ * WENHE_MA, 001238705, ma.wenhe@husky.neu.edu
+ * YUTING_JING, 0012 , jing.yu@husky.neu.edu
+ */
+
 @Controller
 public class HomeController {
 
