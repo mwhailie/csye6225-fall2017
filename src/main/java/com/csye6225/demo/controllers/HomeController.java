@@ -1,11 +1,15 @@
 package com.csye6225.demo.controllers;
 
 
+import com.csye6225.demo.pojos.User;
+import com.csye6225.demo.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonObject;
@@ -18,6 +22,9 @@ import com.google.gson.JsonObject;
 
 @Controller
 public class HomeController {
+  @Autowired
+  private UserRepository userRepository;
+
 
   private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -28,6 +35,22 @@ public class HomeController {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("message", "Hello CSYE 6225!!!");
 
+    return jsonObject.toString();
+  }
+
+  @RequestMapping(value = "/register", method = RequestMethod.GET, produces = "application/json")
+  @ResponseBody
+  public String register(@RequestParam String name
+          , @RequestParam String password
+          , @RequestParam String email) {
+
+    User user = new User();
+    user.setName(name);
+    user.setPassword(password);
+    user.setEmail(email);
+    userRepository.save(user);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("message", "Welcome!");
     return jsonObject.toString();
   }
 
