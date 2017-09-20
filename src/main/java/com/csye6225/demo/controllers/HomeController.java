@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
 import com.google.gson.JsonObject;
@@ -40,36 +37,36 @@ public class HomeController {
     return jsonObject.toString();
   }
 
-
-//  @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/plain")
-//  @ResponseBody
-//  public String login() {
-//
-//
-//    return "this is login!";
-//  }
-//
-//  @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = {"text/plain", "application/*"})
-//  @ResponseBody
-//  public String logout(@RequestParam String userStr) {
-//    Gson gson = new Gson();
-//    User user = gson.fromJson(userStr,User.class);
-//    return "Hi, "+user.getName()+", this is logout";
-////    return "Hi, "+userStr+", this is logout";
-//  }
-  @RequestMapping(value = "/register", method = RequestMethod.GET, produces = "application/json")
+  @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
-  public String register(@RequestParam String name
-          , @RequestParam String password
-          , @RequestParam String email) {
+  public String loginPost(@RequestBody String sUser) {
+    Gson gson = new Gson();
+    User user = gson.fromJson(sUser,User.class);
+    JsonObject jsonObject = new JsonObject();
+    if(userRepository.exists(user.getId().longValue())){
+      jsonObject.addProperty("message", "Hi "+user.getName()+"Login successfully! ");
 
-    User user = new User();
-    user.setName(name);
-    user.setPassword(password);
-    user.setEmail(email);
+    }
+    else jsonObject.addProperty("message", "Login failure! ");
+      return jsonObject.toString();
+  }
+
+  @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = {"text/plain", "application/*"})
+  @ResponseBody
+  public String logout(@RequestParam String userStr) {
+    Gson gson = new Gson();
+    User user = gson.fromJson(userStr,User.class);
+    return "Hi, "+user.getName()+", this is logout";
+  }
+
+  @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
+  @ResponseBody
+  public String registerPost(@RequestBody String sUser) {
+    Gson gson = new Gson();
+    User user = gson.fromJson(sUser,User.class);
     userRepository.save(user);
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("message", "Welcome!");
+    jsonObject.addProperty("message", "Hi "+user.getName()+"Register successfully! ");
     return jsonObject.toString();
   }
 
