@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.csye6225.demo.Bean.User;
 import com.google.gson.Gson;
 
 import com.google.gson.JsonObject;
@@ -41,24 +40,23 @@ public class HomeController {
     return jsonObject.toString();
   }
 
-<<<<<<< HEAD
-  @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/plain")
-  @ResponseBody
-  public String login() {
 
-
-    return "this is login!";
-  }
-
-  @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = {"text/plain", "application/*"})
-  @ResponseBody
-  public String logout(@RequestParam String userStr) {
-    Gson gson = new Gson();
-    User user = gson.fromJson(userStr,User.class);
-    return "Hi, "+user.getName()+", this is logout";
-//    return "Hi, "+userStr+", this is logout";
-  }
-=======
+//  @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/plain")
+//  @ResponseBody
+//  public String login() {
+//
+//
+//    return "this is login!";
+//  }
+//
+//  @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = {"text/plain", "application/*"})
+//  @ResponseBody
+//  public String logout(@RequestParam String userStr) {
+//    Gson gson = new Gson();
+//    User user = gson.fromJson(userStr,User.class);
+//    return "Hi, "+user.getName()+", this is logout";
+////    return "Hi, "+userStr+", this is logout";
+//  }
   @RequestMapping(value = "/register", method = RequestMethod.GET, produces = "application/json")
   @ResponseBody
   public String register(@RequestParam String name
@@ -75,5 +73,4 @@ public class HomeController {
     return jsonObject.toString();
   }
 
->>>>>>> 9e36191654bd1e19b3d11238a6e2a8ce2c856e03
 }
