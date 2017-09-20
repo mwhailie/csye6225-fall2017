@@ -43,7 +43,8 @@ public class HomeController {
     Gson gson = new Gson();
     User user = gson.fromJson(sUser,User.class);
     JsonObject jsonObject = new JsonObject();
-    if(userRepository.exists(user.getId().longValue())){
+    jsonObject.addProperty("message", "Hi "+user.getName());
+    if(userRepository.findByEmail(user.getEmail())!=null && user.getPassword().equals(userRepository.findByEmail(user.getEmail()).getPassword())){
       jsonObject.addProperty("message", "Hi "+user.getName()+"Login successfully! ");
 
     }

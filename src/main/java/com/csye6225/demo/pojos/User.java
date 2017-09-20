@@ -1,13 +1,15 @@
 package com.csye6225.demo.pojos;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 @Table(name="user")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
