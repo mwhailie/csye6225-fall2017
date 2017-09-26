@@ -90,9 +90,15 @@ public class HomeController {
   public String registerPost(@RequestBody String sUser) {
     Gson gson = new Gson();
     User user = gson.fromJson(sUser, User.class);
-    userRepository.save(user);
+    User user_db = userRepository.findByEmail(user.getEmail());
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("message", "Hi " + user.getName() + "Register successfully! ");
+
+    if(user_db == null){
+      userRepository.save(user);
+      jsonObject.addProperty("message", "Hi " + user.getName() + ", register successfully! ");
+    } else {
+      jsonObject.addProperty("message", "Register failure!  " + user.getName() + " already exists! ");
+    }
     return jsonObject.toString();
   }
 
