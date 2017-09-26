@@ -7,6 +7,7 @@ import com.csye6225.demo.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 //Professor's
 import com.google.gson.JsonObject;
@@ -90,6 +91,8 @@ public class HomeController {
   public String registerPost(@RequestBody String sUser) {
     Gson gson = new Gson();
     User user = gson.fromJson(sUser, User.class);
+    String pw_hash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+    user.setPassword(pw_hash);
     User user_db = userRepository.findByEmail(user.getEmail());
     JsonObject jsonObject = new JsonObject();
 
