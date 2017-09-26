@@ -2,13 +2,15 @@
 
 ## Team Members
 
-SHIRUI_WANG,001226459, wang.shirui@husky.neu.edu
-WENHE_MA, 001238705, ma.wenhe@husky.neu.edu
-YUTING_JING, 00121590 , jing.yu@husky.neu.edu
-HAOAN_YAN, 001220895, yan.hao@husky.neu.edu
+* **Shirui Wang** , *001226459* , wang.shirui@husky.neu.edu
+* **Wenhe Ma** , *001238705* ,ma.wenhe@husky.neu.edu
+* **Yuting Jing** , *001221590* , jing.yu@husky.neu.edu
+* **Haoan Yan** , *001220895* , yan.hao@husky.neu.edu
 
 
 ## Set Up Mysql
+
+Execute following command on your bash shell
 ```
 sudo mysql --password
 create database db_csye6225;
