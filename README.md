@@ -1,5 +1,4 @@
-
-#CSYE6225
+# CSYE6225
 
 ## Team Members
 
@@ -44,4 +43,3 @@ where *user* is the username and *password* is the password.
  ```
  {"message":"you are logged in. current time is Tue Sep 19 20:03:49 EDT 2017"}
  ```
->>>>>>> 2e8db93ff22215fce2ea607ce175bd04cc8acbcb

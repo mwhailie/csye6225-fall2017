@@ -70,8 +70,9 @@ public class HomeController {
     User user = gson.fromJson(sUser,User.class);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("message", "Hi "+user.getName());
-    if(userRepository.findByEmail(user.getEmail())!=null && user.getPassword().equals(userRepository.findByEmail(user.getEmail()).getPassword())){
-      jsonObject.addProperty("message", "Hi "+user.getName()+"Login successfully! ");
+    User check = userRepository.findByEmail(user.getEmail());
+    if(check!=null && BCrypt.checkpw(user.getPassword(), check.getPassword())){
+      jsonObject.addProperty("message", "Hi "+check.getName()+" Login successfully! ");
 
     }
     else jsonObject.addProperty("message", "Login failure! ");
