@@ -61,7 +61,7 @@ public class HomeController {
     return jsonObject.toString();
   }
 
-<<<<<<< HEAD
+
   @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
   public String loginPost(@RequestBody String sUser) {
@@ -89,17 +89,18 @@ public class HomeController {
   @ResponseBody
   public String registerPost(@RequestBody String sUser) {
     Gson gson = new Gson();
-    User user = gson.fromJson(sUser,User.class);
+    User user = gson.fromJson(sUser, User.class);
     userRepository.save(user);
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("message", "Hi "+user.getName()+"Register successfully! ");
-=======
+    jsonObject.addProperty("message", "Hi " + user.getName() + "Register successfully! ");
+    return jsonObject.toString();
+  }
+
   @RequestMapping(value = "/testPost", method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
   public String testPost() {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("message", "authorized for /testPost");
->>>>>>> 2ec0e99ed8939649f32402b8ad08bfdf9a8d20c6
     return jsonObject.toString();
   }
 
