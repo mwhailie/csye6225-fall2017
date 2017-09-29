@@ -3,19 +3,26 @@
 ## Team Members
 
 * **Shirui Wang** , *001226459* , wang.shirui@husky.neu.edu
-* **Wenhe Ma** , *001238705* ,ma.wenhe@husky.neu.edu
+* **Wenhe Ma** , *001238705* , ma.wenhe@husky.neu.edu
 * **Yuting Jing** , *001221590* , jing.yu@husky.neu.edu
 * **Haoan Yan** , *001220895* , yan.hao@husky.neu.edu
 
 
 ## Set Up Mysql
 
-Execute following command on your bash shell
+## Set up
+
+To run this project, you may have to change the following code in application.properties
 ```
-sudo mysql --password
+spring.datasource.url=jdbc:mysql://localhost:3306/db_csye6225
+spring.datasource.username=root
+spring.datasource.password=root
+```
+as your database setting
+
+Then execute the following command in your mysql
+```
 create database db_csye6225;
-create user 'root'@'localhost' identified by 'root';
-grant all on db_csye6225.* to 'root'@'localhost';
 ```
 
 ## Make Unauthenticated HTTP Request
