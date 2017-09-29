@@ -63,7 +63,7 @@ public class HomeController {
   }
 
 
-  @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
+  @RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
   public String loginPost(@RequestBody String sUser) {
     Gson gson = new Gson();
@@ -79,7 +79,7 @@ public class HomeController {
       return jsonObject.toString();
   }
 
-  @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = {"text/plain", "application/*"})
+  @RequestMapping(value = "/user/logout", method = RequestMethod.GET, produces = {"text/plain", "application/*"})
   @ResponseBody
   public String logout(@RequestParam String userStr) {
     Gson gson = new Gson();
@@ -87,7 +87,7 @@ public class HomeController {
     return "Hi, "+user.getName()+", this is logout";
   }
 
-  @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
+  @RequestMapping(value = "/user/register", method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
   public String registerPost(@RequestBody String sUser) {
     Gson gson = new Gson();

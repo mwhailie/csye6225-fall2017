@@ -43,3 +43,7 @@ where *user* is the username and *password* is the password.
  ```
  {"message":"you are logged in. current time is Tue Sep 19 20:03:49 EDT 2017"}
  ```
+
+## TravisCI
+
+* [TravisCI](https://travis-ci.com/mwhailie/csye6225-fall2017/builds/) - TravisCI builds
