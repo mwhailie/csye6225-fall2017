@@ -15,7 +15,7 @@
                         ]
                     }
                 ],
-                "KeyName": "aws-key-pair",
+                "KeyName": "csye6225-aws",
                 "SubnetId": "subnet-4e1db42a"
             }
         },
