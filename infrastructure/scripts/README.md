@@ -31,7 +31,9 @@ Create a CloudFormation stack that contains following resources:
 - EC2 Instance with the specifications below
 - Resource Record in the Route 53 zone for your domain with the IP of the newly launched EC2 instance
 
+`create-csye6225-cloudformation-stack.sh <stack-name>`
+
 ### `delete-csye6225-cloudformation-stack.sh`
 Terminate EC2 instance. Will take the stack name as command line argument.
 
-`delete-security-group.sh <stack-name>`
+`delete-csye6225-cloudformation-stack.sh <stack-name>`
