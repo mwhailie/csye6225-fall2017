@@ -1,4 +1,4 @@
-# scripts
+# cloudformation
 
 ## Description
 
