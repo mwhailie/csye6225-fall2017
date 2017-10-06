@@ -7,4 +7,4 @@ instanceId=$(aws cloudformation describe-stack-resources --stack-name "mystack" 
 aws ec2 modify-instance-attribute --no-disable-api-termination --instance-id $instanceId
 
 #delete the stack named mystack
-aws cloudformation delete-stack --stack-name mystack
+aws cloudformation delete-stack --stack-name $1
