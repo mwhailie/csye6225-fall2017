@@ -20,6 +20,15 @@ Delete security groups.
 - Retrieving instance’s public IP address.
 - Add/Update type A resource record set ec2.YOUR_DOMAIN_NAME.me in the Route 53 zone for your domain with the IP of the newly launched EC2 instance. TTL 60 seconds.
 
+To run this shell, you may have to change the key-name to your own keyname
+
+`# START AN INSTANCE & GET ITS ID
+INSTANCE_ID=$(aws ec2 run-instances --image-id ami-cd0f5cb6 --count 1 --instance-type t2.micro --key-name id_rsa`
+
+the last line. Change value of "Name" to your Domain Name.
+
+`aws route53 change-resource-record-sets --hosted-zone-id Z3PGXZUZ3TZUH6 --change-batch "{\"Comment\":\"Update record to reflect new IP address\",\"Changes\":[{\"Action\":\"UPSERT\",\"ResourceRecordSet\":{\"Name\":\"csye6225-fall2017-wenhe.me.\",\"Type\":\"A\",\"TTL\":60,\"ResourceRecords\":[{\"Value\":\"$PUBLIC_IP\"}]}}]}"`
+
 ### delete-security-group.sh
 Terminate EC2 instance. Will take the instance-id as command line argument.
 
