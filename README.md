@@ -51,7 +51,7 @@ where *user* is the username and *password* is the password.
 
 ## GitHub Release
 * [v2.1](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v2.1) - Assignment 4
-* [v1,0](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v1.0) - Assigment 3
+* [v1.0](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v1.0) - Assigment 3
 
 
 ## TravisCI
