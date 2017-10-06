@@ -22,9 +22,8 @@ Delete security groups.
 
 To run this shell, you may have to change the key-name to your own keyname
 
-`# START AN INSTANCE & GET ITS ID
-
-INSTANCE_ID=$(aws ec2 run-instances --image-id ami-cd0f5cb6 --count 1 --instance-type t2.micro --key-name id_rsa`
+```# START AN INSTANCE & GET ITS ID
+INSTANCE_ID=$(aws ec2 run-instances --image-id ami-cd0f5cb6 --count 1 --instance-type t2.micro --key-name id_rsa```
 
 the last line. Change value of "Name" to your Domain Name.
 
