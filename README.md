@@ -8,8 +8,6 @@
 * **Haoan Yan** , *001220895* , yan.hao@husky.neu.edu
 
 
-## Set Up Mysql
-
 ## Set up
 
 To run this project, you may have to change the following code in application.properties
@@ -50,6 +48,11 @@ where *user* is the username and *password* is the password.
  ```
  {"message":"you are logged in. current time is Tue Sep 19 20:03:49 EDT 2017"}
  ```
+
+## GitHub Release
+* [v2.1](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v2.1) - Assignment 4
+* [v1.0](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v1.0) - Assignment 3
+
 
 ## TravisCI
 

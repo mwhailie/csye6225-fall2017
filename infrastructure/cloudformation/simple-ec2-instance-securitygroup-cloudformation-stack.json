@@ -1,0 +1,78 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Sample CloudFormation Template for CSYE 6225 - Fall 2017",
+    "Resources": {
+        "EC2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": "ami-cd0f5cb6",
+                "InstanceType": "t2.micro",
+                "SecurityGroupIds": [
+                    {
+                        "Fn::GetAtt": [
+                            "WebServerSecurityGroup",
+                            "GroupId"
+                        ]
+                    }
+                ],
+                "KeyName": "id_rsa",
+                "SubnetId": "subnet-1010351c",
+                "BlockDeviceMappings" : [
+                    {
+                       "DeviceName" : "/dev/sda1",
+                       "Ebs" : {
+                          "VolumeType" : "gp2",
+                          "VolumeSize" : "16"
+                       }
+                    }
+                 ],
+                "DisableApiTermination": true
+            }
+        },
+        "WebServerSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName": "csye6225-fall2017-mystack-webapp",
+                "GroupDescription": "csye security group (Enable HTTP access via port 80, SSH access via port 22)",
+                "VpcId": "vpc-819f7cf9",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "80",
+                        "ToPort": "80",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "443",
+                        "ToPort": "443",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ]
+            }
+        },
+         "RecordSetGroup": {
+            "Type" : "AWS::Route53::RecordSetGroup",
+            "Properties" : {
+               "Comment" : "Update record to reflect new IP address",
+               "HostedZoneId" : "Z1F26EV7CHPHZS",
+               "RecordSets" : [ 
+                    {
+                        "Name": "csye6225-fall2017-wangshirui.me.",
+                        "Type" : "A",
+                        "TTL" : "60",
+                        "ResourceRecords" : [
+                            { "Fn::GetAtt" : [ "EC2Instance", "PublicIp" ] }
+                        ]
+                    }
+                ]
+            }
+         }
+    }
+}
