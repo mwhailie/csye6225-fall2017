@@ -16,7 +16,7 @@
                     }
                 ],
                 "KeyName": "id_rsa",
-                "SubnetId": "subnet-1010351c",
+                "SubnetId": { "Ref" : "ParamSubnetID" },
                 "BlockDeviceMappings" : [
                     {
                        "DeviceName" : "/dev/sda1",
@@ -34,7 +34,7 @@
             "Properties": {
                 "GroupName": "csye6225-fall2017-mystack-webapp",
                 "GroupDescription": "csye security group (Enable HTTP access via port 80, SSH access via port 22)",
-                "VpcId": "vpc-819f7cf9",
+                "VpcId" : { "Ref" : "ParamVPCID" },
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
@@ -61,10 +61,10 @@
             "Type" : "AWS::Route53::RecordSetGroup",
             "Properties" : {
                "Comment" : "Update record to reflect new IP address",
-               "HostedZoneId" : "Z1F26EV7CHPHZS",
+               "HostedZoneId" :  { "Ref" : "ParamHostedZoneID" },
                "RecordSets" : [ 
                     {
-                        "Name": "csye6225-fall2017-wangshirui.me.",
+                        "Name": { "Ref" : "ParamRecordSetsName" },
                         "Type" : "A",
                         "TTL" : "60",
                         "ResourceRecords" : [
@@ -74,5 +74,19 @@
                 ]
             }
          }
-    }
+    },
+    "Parameters" : {
+       "ParamVPCID" : {
+            "Type" : "String"
+       },
+       "ParamSubnetID" : {
+            "Type" : "String"
+       },
+       "ParamHostedZoneID" : {
+            "Type" : "String"
+       },
+       "ParamRecordSetsName" : {
+            "Type" : "String"
+       }
+   }
 }
