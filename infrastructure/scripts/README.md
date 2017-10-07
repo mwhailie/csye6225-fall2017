@@ -29,12 +29,16 @@ INSTANCE_ID=$(aws ec2 run-instances --image-id ami-cd0f5cb6 --count 1 --instance
 
 You may also have to change the last line. Change value of "Name" to your Domain Name.
 
-`aws route53 change-resource-record-sets --hosted-zone-id Z3PGXZUZ3TZUH6 --change-batch "{\"Comment\":\"Update record to reflect new IP address\",\"Changes\":[{\"Action\":\"UPSERT\",\"ResourceRecordSet\":{\"Name\":\"csye6225-fall2017-wenhe.me.\",\"Type\":\"A\",\"TTL\":60,\"ResourceRecords\":[{\"Value\":\"$PUBLIC_IP\"}]}}]}"`
+```
+aws route53 change-resource-record-sets --hosted-zone-id Z3PGXZUZ3TZUH6 --change-batch "{\"Comment\":\"Update record to reflect new IP address\",\"Changes\":[{\"Action\":\"UPSERT\",\"ResourceRecordSet\":{\"Name\":\"csye6225-fall2017-wenhe.me.\",\"Type\":\"A\",\"TTL\":60,\"ResourceRecords\":[{\"Value\":\"$PUBLIC_IP\"}]}}]}"
+```
 
 ### delete-security-group.sh
 Terminate EC2 instance. Will take the instance-id as command line argument.
 
-`delete-security-group.sh <instance-id>`
+```
+delete-security-group.sh <instance-id>
+```
 
 ### create-csye6225-cloudformation-stack.sh
 Create a CloudFormation stack that contains following resources:
@@ -42,9 +46,13 @@ Create a CloudFormation stack that contains following resources:
 - EC2 Instance with the specifications below
 - Resource Record in the Route 53 zone for your domain with the IP of the newly launched EC2 instance
 
-`create-csye6225-cloudformation-stack.sh <stack-name>`
+```
+create-csye6225-cloudformation-stack.sh <stack-name>
+```
 
 ### delete-csye6225-cloudformation-stack.sh
 Terminate EC2 instance. Will take the stack name as command line argument.
 
-`delete-csye6225-cloudformation-stack.sh <stack-name>`
+```
+delete-csye6225-cloudformation-stack.sh <stack-name>
+```
