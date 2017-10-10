@@ -11,18 +11,19 @@ public class Attachment {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid",strategy = "uuid")
-    private UUID attachmentId;
+    private String attachmentId;
+
     @ManyToOne
     private Task task;
 
     public Attachment() {
     }
 
-    public UUID getAttachmentId() {
+    public String getAttachmentId() {
         return attachmentId;
     }
 
-    public void setAttachmentId(UUID attachmentId) {
+    public void setAttachmentId(String attachmentId) {
         this.attachmentId = attachmentId;
     }
 

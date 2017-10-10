@@ -2,8 +2,11 @@ package com.csye6225.demo.controllers;
 
 
 //our's
+import com.csye6225.demo.pojos.Task;
 import com.csye6225.demo.pojos.User;
+import com.csye6225.demo.repositories.TaskRepository;
 import com.csye6225.demo.repositories.UserRepository;
+import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
@@ -34,7 +38,8 @@ import java.util.Date;
 public class HomeController {
   @Autowired
   private UserRepository userRepository;
-
+  @Autowired
+  private TaskRepository taskRepository;
 
   private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -53,15 +58,6 @@ public class HomeController {
 
     return jsonObject.toString();
   }
-
-//  @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
-//  @ResponseBody
-//  public String test() {
-//    JsonObject jsonObject = new JsonObject();
-//    jsonObject.addProperty("message", "authorized for /test");
-//    return jsonObject.toString();
-//  }
-
 
   @RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
