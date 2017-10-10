@@ -1,7 +1,7 @@
 package com.csye6225.demo.pojos;
 
 import org.hibernate.annotations.GenericGenerator;
-
+import javax.validation.constraints.Size;
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
@@ -10,12 +10,13 @@ import java.util.UUID;
 @Table(name="task")
 public class Task {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid",strategy = "uuid")
     private String id;
+    @Size(max = 4096)
     private String description;
+    @ManyToOne(cascade=CascadeType.ALL)
 
-    @ManyToOne
     private User user;
 
     @OneToMany

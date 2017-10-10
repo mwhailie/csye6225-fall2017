@@ -30,7 +30,7 @@ import java.util.Date;
 /**
  * SHIRUI_WANG,001226459, wang.shirui@husky.neu.edu
  * WENHE_MA, 001238705, ma.wenhe@husky.neu.edu
- * YUTING_JING, 00121590 , jing.yu@husky.neu.edu
+ * YUTING_JING, 001221590 , jing.yu@husky.neu.edu
  * HAOAN_YAN, 001220895, yan.hao@husky.neu.edu
  */
 
@@ -50,7 +50,7 @@ public class HomeController {
     JsonObject jsonObject = new JsonObject();
 
     if (SecurityContextHolder.getContext().getAuthentication() != null
-        && SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) {
+            && SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) {
       jsonObject.addProperty("message", "you are not logged in!!!");
     } else {
       jsonObject.addProperty("message", "you are logged in. current time is " + new Date().toString());
@@ -59,37 +59,27 @@ public class HomeController {
     return jsonObject.toString();
   }
 
-  @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
-  @ResponseBody
-  public String test() {
-    JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("message", "authorized for /test");
-    return jsonObject.toString();
-  }
-
-
   @RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
   public String loginPost(@RequestBody String sUser) {
     Gson gson = new Gson();
-    User user = gson.fromJson(sUser,User.class);
+    User user = gson.fromJson(sUser, User.class);
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("message", "Hi "+user.getName());
+    jsonObject.addProperty("message", "Hi " + user.getName());
     User check = userRepository.findByEmail(user.getEmail());
-    if(check!=null && BCrypt.checkpw(user.getPassword(), check.getPassword())){
-      jsonObject.addProperty("message", "Hi "+check.getName()+" Login successfully! ");
+    if (check != null && BCrypt.checkpw(user.getPassword(), check.getPassword())) {
+      jsonObject.addProperty("message", "Hi " + check.getName() + " Login successfully! ");
 
-    }
-    else jsonObject.addProperty("message", "Login failure! ");
-      return jsonObject.toString();
+    } else jsonObject.addProperty("message", "Login failure! ");
+    return jsonObject.toString();
   }
 
   @RequestMapping(value = "/user/logout", method = RequestMethod.GET, produces = {"text/plain", "application/*"})
   @ResponseBody
   public String logout(@RequestParam String userStr) {
     Gson gson = new Gson();
-    User user = gson.fromJson(userStr,User.class);
-    return "Hi, "+user.getName()+", this is logout";
+    User user = gson.fromJson(userStr, User.class);
+    return "Hi, " + user.getName() + ", this is logout";
   }
 
   @RequestMapping(value = "/user/register", method = RequestMethod.POST, produces = "application/json")
@@ -102,7 +92,7 @@ public class HomeController {
     User user_db = userRepository.findByEmail(user.getEmail());
     JsonObject jsonObject = new JsonObject();
 
-    if(user_db == null){
+    if (user_db == null) {
       userRepository.save(user);
       jsonObject.addProperty("message", "Hi " + user.getName() + ", register successfully! ");
     } else {
@@ -111,25 +101,5 @@ public class HomeController {
     return jsonObject.toString();
   }
 
-  @RequestMapping(value = "/tasks", method = RequestMethod.POST, produces = "application/json")
-  @ResponseBody
-  public String createTask (@RequestBody String sTask, HttpServletResponse response) {
-    response.setStatus(HttpServletResponse.SC_CREATED);
-    response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
-    Gson gson = new Gson();
-    Task task = gson.fromJson(sTask, Task.class);
-    taskRepository.save(task);
-    JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("message", "Create task " +task.getId()+" "+ task.getDescription() + " successfully! ");
-    return jsonObject.toString();
-  }
-
-  @RequestMapping(value = "/testPost", method = RequestMethod.POST, produces = "application/json")
-  @ResponseBody
-  public String testPost() {
-    JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("message", "authorized for /testPost");
-    return jsonObject.toString();
-  }
 
 }
