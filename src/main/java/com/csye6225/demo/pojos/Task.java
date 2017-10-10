@@ -3,27 +3,32 @@ package com.csye6225.demo.pojos;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name="task")
 public class Task {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid",strategy = "uuid")
-    private UUID id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
     private String description;
+
     @ManyToOne
     private User user;
+
+    @OneToMany
+    private List<Attachment> attachmentList;
 
     public Task() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,5 +46,13 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Attachment> getAttachmentList() {
+        return attachmentList;
+    }
+
+    public void setAttachmentList(List<Attachment> attachmentList) {
+        this.attachmentList = attachmentList;
     }
 }
