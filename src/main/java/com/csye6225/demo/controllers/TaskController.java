@@ -5,6 +5,7 @@ import com.csye6225.demo.repositories.UserRepository;
 import com.csye6225.demo.repositories.TaskRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,15 @@ public class TaskController {
     }
 
 
+    @RequestMapping(value = "/tasks/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    @ResponseBody
+    public String deleteTask (@PathVariable String id, HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
+        taskRepository.delete(id);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("message", "Delete task " + id +" successfully! ");
+        return jsonObject.toString();
+    }
 
 }
