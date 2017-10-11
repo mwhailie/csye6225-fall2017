@@ -16,7 +16,6 @@ public class Task {
     @Size(max = 4096)
     private String description;
     @ManyToOne(cascade=CascadeType.ALL)
-
     private User user;
 
     @OneToMany
