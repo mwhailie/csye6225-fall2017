@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.*;
 @Transactional
-public interface AttachmentRepository extends CrudRepository<Attachment, Long> {
+public interface AttachmentRepository extends CrudRepository<Attachment, Integer> {
 
 }
