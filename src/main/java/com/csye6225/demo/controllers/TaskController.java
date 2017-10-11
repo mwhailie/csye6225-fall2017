@@ -1,6 +1,10 @@
 package com.csye6225.demo.controllers;
 
 import com.csye6225.demo.pojos.Task;
+
+import com.csye6225.demo.pojos.User;
+import com.csye6225.demo.repositories.UserRepository;
+
 import com.csye6225.demo.repositories.TaskRepository;
 import com.csye6225.demo.repositories.UserRepository;
 import com.google.gson.Gson;
@@ -10,9 +14,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.UUID;
 
 @Controller
@@ -26,12 +38,14 @@ public class TaskController {
 
     @RequestMapping(value = "/tasks", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String createTasks(@RequestBody String sTask, HttpServletResponse response) {
+        public String createTasks(@RequestBody String sTask, Principal principal, HttpServletResponse response) {
+
         response.setStatus(HttpServletResponse.SC_CREATED);
         JsonObject jsonObject = new JsonObject();
         Gson gson = new Gson();
         Task task = gson.fromJson(sTask,Task.class);
-        task.setId(UUID.randomUUID().toString());
+        User user = userRepository.findByName(principal.getName());
+        task.setUser(user);
         taskRepository.save(task);
         jsonObject.addProperty("message", "task: "+task.getId());
         return jsonObject.toString();
