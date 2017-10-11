@@ -2,31 +2,26 @@ package com.csye6225.demo.controllers;
 
 
 //our's
-import com.csye6225.demo.pojos.Task;
+
 import com.csye6225.demo.pojos.User;
 import com.csye6225.demo.repositories.TaskRepository;
 import com.csye6225.demo.repositories.UserRepository;
-import org.apache.http.entity.ContentType;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
-//Professor's
-import com.google.gson.JsonObject;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.google.gson.Gson;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+
+//Professor's
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 /**
  * SHIRUI_WANG,001226459, wang.shirui@husky.neu.edu

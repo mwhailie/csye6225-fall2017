@@ -1,10 +1,10 @@
 package com.csye6225.demo.pojos;
 
 import org.hibernate.annotations.GenericGenerator;
-import javax.validation.constraints.Size;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name="task")
@@ -16,6 +16,8 @@ public class Task {
     @Size(max = 4096)
     private String description;
     @ManyToOne(cascade=CascadeType.ALL)
+
+
 
     private User user;
 
@@ -56,4 +58,5 @@ public class Task {
     public void setAttachmentList(List<Attachment> attachmentList) {
         this.attachmentList = attachmentList;
     }
+
 }
