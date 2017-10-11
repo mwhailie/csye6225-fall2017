@@ -1,10 +1,6 @@
 package com.csye6225.demo.pojos;
 
 import javax.persistence.*;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.List;
 
 
