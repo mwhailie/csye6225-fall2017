@@ -15,7 +15,7 @@
                         ]
                     }
                 ],
-                "KeyName": "id_rsa",
+                "KeyName": "MyKeyPairs",
                 "SubnetId": { "Ref" : "ParamSubnetID" },
                 "BlockDeviceMappings" : [
                     {

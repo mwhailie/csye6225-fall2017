@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.UUID;
 
 import java.util.Date;
@@ -34,12 +35,14 @@ public class TaskController {
 
     @RequestMapping(value = "/tasks", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String createTasks(@RequestBody String sTask, HttpServletResponse response) {
+    public String createTasks(@RequestBody String sTask, HttpServletResponse response, Principal principal) {
         response.setStatus(HttpServletResponse.SC_CREATED);
         JsonObject jsonObject = new JsonObject();
         Gson gson = new Gson();
         Task task = gson.fromJson(sTask,Task.class);
-        task.setId(UUID.randomUUID().toString());
+        String userEmail = principal.getName();
+        long userId = userRepository.findByEmail(userEmail).getId();
+        task.setUserId(userId);
         taskRepository.save(task);
         jsonObject.addProperty("message", "task: "+task.getId());
         return jsonObject.toString();
@@ -66,6 +69,15 @@ public class TaskController {
         taskRepository.delete(id);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("message", "Delete task " + id +" successfully! ");
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/testTasks", method = RequestMethod.GET)
+    @ResponseBody
+    public String testTasks(Principal principal) {
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("userName", principal.getName());
         return jsonObject.toString();
     }
 

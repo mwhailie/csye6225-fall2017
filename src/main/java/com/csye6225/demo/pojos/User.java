@@ -22,6 +22,7 @@ public class User {
     @OneToMany
     private List<Task> taskList;
 
+
     public Integer getId() {
         return id;
     }

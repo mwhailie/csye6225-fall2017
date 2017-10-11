@@ -1,5 +1,6 @@
 package com.csye6225.demo.auth;
 
+import com.csye6225.demo.authTest.HibernateUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,8 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   public UserDetailsService userDetailsService() {
-    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-    manager.createUser(User.withUsername("user").password(bCryptPasswordEncoder.encode("password")).roles("USER").build());
-    return manager;
+//    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//    manager.createUser(User.withUsername("user").password(bCryptPasswordEncoder.encode("password")).roles("USER").build());
+//    return manager;
+    HibernateUserDetailsService hibernateUserDetailsService = new HibernateUserDetailsService();
+    return hibernateUserDetailsService;
   }
 }
