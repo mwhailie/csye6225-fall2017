@@ -37,7 +37,9 @@ public class FileIOController {
     @ResponseBody
     public String attachFile(@PathVariable String id,  @RequestParam("file") MultipartFile file) throws Exception {
         Task task = taskRepository.findOne(id);
+
         System.out.println(task);
+
         JsonObject jsonObject = new JsonObject();
 
         Attachment attachment = new Attachment();
@@ -49,7 +51,6 @@ public class FileIOController {
         attachment.setPath(filePath);
         attachment.setTask(task);
         attachmentRepository.save(attachment);
-
 
         jsonObject.addProperty("path", attachment.getPath());
         jsonObject.addProperty("task", attachment.getTask().toString());
@@ -64,11 +65,13 @@ public class FileIOController {
         if(!file.isEmpty()) {
             String filename = file.getOriginalFilename();
             File filepath = new File(path,filename);
+
             //if path not exist, create the folder
             if (!filepath.getParentFile().exists()) {
                 filepath.getParentFile().mkdirs();
             }
             String finalPath = path + File.separator + filename;
+
             //transfer the files into the target folder
             file.transferTo(new File(finalPath));
             return finalPath;
@@ -101,6 +104,39 @@ public class FileIOController {
             }
         }
         return array.toString();
+
+    @RequestMapping(value = "/tasks/{id}/attachments/{idAttachments}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deleteFile(@PathVariable String id, @PathVariable String idAttachments ) throws Exception {
+        Attachment attachment = attachmentRepository.findOne(new Integer(idAttachments));
+        Task task = taskRepository.findOne(id);
+        String filePath = attachment.getPath();
+        JsonObject jsonObject = new JsonObject();
+        boolean deleteSuccess = false;
+        if(attachment.getTask() == task) {
+            deleteSuccess = delete(filePath);
+            if(deleteSuccess){
+                attachmentRepository.delete(new Integer(idAttachments));
+            }
+            jsonObject.addProperty("message", deleteSuccess ? "Delete Successfully" : "Delete Failed: no such file");
+        }
+        else{
+            jsonObject.addProperty("message", "Delete Failed: Attachment not match the task");
+        }
+        return jsonObject.toString();
+    }
+
+    private static boolean delete(String fileName) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            System.out.println("[log] Delete File failed:" + fileName + "not exist！");
+            return false;
+        } else {
+            if (file.isFile())
+                return file.delete();
+        }
+        return false;
+
     }
 
 

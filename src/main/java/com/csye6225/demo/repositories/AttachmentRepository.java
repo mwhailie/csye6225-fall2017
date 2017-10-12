@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.transaction.*;
 @Transactional
+
 public interface AttachmentRepository extends CrudRepository<Attachment, Long> {
     public List<Attachment> findByTask(Task task);
+
 }
