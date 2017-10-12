@@ -13,6 +13,7 @@ import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.UUID;
@@ -35,16 +37,23 @@ public class TaskController {
     private TaskRepository taskRepository;
     private final static Logger logger = LoggerFactory.getLogger(TaskController.class);
 
-
     @RequestMapping(value = "/tasks", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-        public String createTasks(@RequestBody String sTask, Principal principal, HttpServletResponse response) {
+        public String createTasks(@RequestBody String sTask, Principal principal, HttpServletRequest request, HttpServletResponse response) {
 
         response.setStatus(HttpServletResponse.SC_CREATED);
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         JsonObject jsonObject = new JsonObject();
         Gson gson = new Gson();
         Task task = gson.fromJson(sTask,Task.class);
-        User user = userRepository.findByName(principal.getName());
+
+        User user;
+        try{
+            user = userRepository.findByName(principal.getName());
+        }catch (Exception e){
+            jsonObject.addProperty("message", "user does not exist");
+            return jsonObject.toString();
+        }
         task.setUser(user);
         taskRepository.save(task);
         jsonObject.addProperty("message", "task: "+task.getId());

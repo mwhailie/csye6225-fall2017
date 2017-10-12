@@ -98,12 +98,13 @@ public class FileIOController {
                     e.addProperty("path", curAttachment.getPath());
                     array.add(e);
                 } catch (Exception e) {
-                    logger.error("Error in deserializing received constraints",e);
+                    logger.error("Error in deserializing received constraints", e);
                     return null;
                 }
             }
         }
         return array.toString();
+    }
 
     @RequestMapping(value = "/tasks/{id}/attachments/{idAttachments}", method = RequestMethod.DELETE)
     @ResponseBody

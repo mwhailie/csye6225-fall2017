@@ -12,8 +12,12 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
+import javax.sql.DataSource;
+
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 
   @Autowired
   private BasicAuthEntryPoint basicAuthEntryPoint;
@@ -26,11 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf()
         .disable()
         .authorizeRequests()
-        .antMatchers("/").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .httpBasic()
-        .authenticationEntryPoint(basicAuthEntryPoint);
+        .antMatchers("/").permitAll().and().httpBasic();
+//        .anyRequest().authenticated()
+//        .and()
+//        .httpBasic()
+//        .authenticationEntryPoint(basicAuthEntryPoint);
   }
 
   @Bean
@@ -44,4 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     manager.createUser(User.withUsername("user").password(bCryptPasswordEncoder.encode("password")).roles("USER").build());
     return manager;
   }
+
+
 }

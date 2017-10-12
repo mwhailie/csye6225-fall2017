@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +33,15 @@ import java.util.Date;
 
 @Controller
 public class HomeController {
+
+
   @Autowired
   private UserRepository userRepository;
   @Autowired
   private TaskRepository taskRepository;
+
+  @Autowired
+  private UserDetailsManager users;
 
   private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -96,7 +102,5 @@ public class HomeController {
     }
     return jsonObject.toString();
   }
-
-
 
 }
