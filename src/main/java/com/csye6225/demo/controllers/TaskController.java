@@ -62,9 +62,26 @@ public class TaskController {
 
     @RequestMapping(value = "/tasks/{id}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
-    public String updateTasks(@PathVariable("id") String id, @RequestParam String description) {
+    public String updateTasks(@PathVariable("id") String id, Principal principal,@RequestParam String description) {
         JsonObject jsonObject = new JsonObject();
-        Task task = taskRepository.findOne(id);
+        Task task ;
+        try{
+            task = taskRepository.findOne(id);
+        }catch (Exception e){
+            jsonObject.addProperty("message", "task does not exist");
+            return jsonObject.toString();
+        }
+        User user;
+        try{
+            user = userRepository.findByName(principal.getName());
+        }catch (Exception e){
+            jsonObject.addProperty("message", "user does not exist");
+            return jsonObject.toString();
+        }
+        if(user != task.getUser()){
+            jsonObject.addProperty("message", "user does not match");
+            return jsonObject.toString();
+        }
         task.setDescription(description);
         taskRepository.save(task);
         jsonObject.addProperty("task_id", task.getId());
@@ -75,11 +92,30 @@ public class TaskController {
 
     @RequestMapping(value = "/tasks/{id}", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
-    public String deleteTask (@PathVariable String id, HttpServletResponse response) {
-        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    public String deleteTask (@PathVariable String id, Principal principal,HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
-        taskRepository.delete(id);
         JsonObject jsonObject = new JsonObject();
+        Task task ;
+        try{
+            task = taskRepository.findOne(id);
+        }catch (Exception e){
+            jsonObject.addProperty("message", "task does not exist");
+            return jsonObject.toString();
+        }
+        User user;
+        try{
+            user = userRepository.findByName(principal.getName());
+        }catch (Exception e){
+            jsonObject.addProperty("message", "user does not exist");
+            return jsonObject.toString();
+        }
+        if(user != task.getUser()){
+            jsonObject.addProperty("message", "user does not match");
+            return jsonObject.toString();
+        }
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        taskRepository.delete(id);
+        jsonObject = new JsonObject();
         jsonObject.addProperty("message", "Delete task " + id +" successfully! ");
         return jsonObject.toString();
     }

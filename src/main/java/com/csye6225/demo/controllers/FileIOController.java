@@ -33,7 +33,7 @@ public class FileIOController {
 
     private final static Logger logger = LoggerFactory.getLogger(FileIOController.class);
 
-    @RequestMapping(value = "/tasks/{id}/attachment", method = RequestMethod.POST)
+    @RequestMapping(value = "/tasks/{id}/attachments", method = RequestMethod.POST)
     @ResponseBody
     public String attachFile(@PathVariable String id,  @RequestParam("file") MultipartFile file) throws Exception {
         Task task = taskRepository.findOne(id);
@@ -108,7 +108,9 @@ public class FileIOController {
 
     @RequestMapping(value = "/tasks/{id}/attachments/{idAttachments}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteFile(@PathVariable String id, @PathVariable String idAttachments ) throws Exception {
+    public String deleteFile(@PathVariable String id, @PathVariable String idAttachments, HttpServletResponse response) throws Exception {
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         Attachment attachment = attachmentRepository.findOne(new Integer(idAttachments));
         Task task = taskRepository.findOne(id);
         String filePath = attachment.getPath();

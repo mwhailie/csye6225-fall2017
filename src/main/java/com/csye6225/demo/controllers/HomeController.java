@@ -40,8 +40,7 @@ public class HomeController {
   @Autowired
   private TaskRepository taskRepository;
 
-  @Autowired
-  private UserDetailsManager users;
+
 
   private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
