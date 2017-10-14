@@ -49,7 +49,7 @@ public class TaskController {
 
         User user;
         try{
-            user = userRepository.findByName(principal.getName());
+            user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
             return jsonObject.toString();
@@ -73,7 +73,7 @@ public class TaskController {
         }
         User user;
         try{
-            user = userRepository.findByName(principal.getName());
+            user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
             return jsonObject.toString();
@@ -104,7 +104,7 @@ public class TaskController {
         }
         User user;
         try{
-            user = userRepository.findByName(principal.getName());
+            user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
             return jsonObject.toString();
