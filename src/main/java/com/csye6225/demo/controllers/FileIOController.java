@@ -6,7 +6,9 @@ import com.csye6225.demo.repositories.AttachmentRepository;
 import com.csye6225.demo.repositories.TaskRepository;
 import com.csye6225.demo.repositories.UserRepository;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
 import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.List;
 
 @Controller
 public class FileIOController {
@@ -34,6 +37,9 @@ public class FileIOController {
     @ResponseBody
     public String attachFile(@PathVariable String id,  @RequestParam("file") MultipartFile file) throws Exception {
         Task task = taskRepository.findOne(id);
+
+        System.out.println(task);
+
         JsonObject jsonObject = new JsonObject();
 
         //Gson gson = new Gson();
@@ -77,9 +83,37 @@ public class FileIOController {
         }
     }
 
+
+    @RequestMapping(value = "/tasks/{id}/attachments", method = RequestMethod.GET)
+    @ResponseBody
+    public String listFile(@PathVariable String id) throws Exception {
+        Task task = taskRepository.findOne(id);
+        //List<Attachment> attachList = task.getAttachmentList();
+        List<Attachment> attachList = attachmentRepository.findByTask(task);
+
+        JsonArray array = new JsonArray();
+        if (attachList.size() > 0) {
+            for (int i = 0; i < attachList.size(); i++) {
+                try {
+                    JsonObject e = new JsonObject();
+                    Attachment curAttachment = attachList.get(i);
+                    e.addProperty("id", curAttachment.getId());
+                    e.addProperty("path", curAttachment.getPath());
+                    array.add(e);
+                } catch (Exception e) {
+                    logger.error("Error in deserializing received constraints", e);
+                    return null;
+                }
+            }
+        }
+        return array.toString();
+    }
+
     @RequestMapping(value = "/tasks/{id}/attachments/{idAttachments}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteFile(@PathVariable String id, @PathVariable String idAttachments ) throws Exception {
+    public String deleteFile(@PathVariable String id, @PathVariable String idAttachments, HttpServletResponse response) throws Exception {
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         Attachment attachment = attachmentRepository.findOne(new Integer(idAttachments));
         Task task = taskRepository.findOne(id);
         String filePath = attachment.getPath();
@@ -108,6 +142,7 @@ public class FileIOController {
                 return file.delete();
         }
         return false;
+
     }
 
 

@@ -19,7 +19,7 @@ public class Task {
     @ManyToOne(cascade=CascadeType.ALL)
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "task",orphanRemoval=true, cascade=CascadeType.ALL)
     private List<Attachment> attachmentList;
 
     public Task() {
