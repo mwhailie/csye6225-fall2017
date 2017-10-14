@@ -2,13 +2,10 @@ package com.csye6225.demo.pojos;
 
 import com.csye6225.demo.repositories.UserRepository;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.validation.constraints.Size;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name="task")
@@ -20,8 +17,7 @@ public class Task {
     @Size(max = 4096)
     private String description;
     @ManyToOne(cascade=CascadeType.ALL)
-    private long userId;
-
+    private User user;
 
     @OneToMany
     private List<Attachment> attachmentList;
@@ -45,12 +41,12 @@ public class Task {
         this.description = description;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Attachment> getAttachmentList() {
@@ -60,4 +56,5 @@ public class Task {
     public void setAttachmentList(List<Attachment> attachmentList) {
         this.attachmentList = attachmentList;
     }
+
 }

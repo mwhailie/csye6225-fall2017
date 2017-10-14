@@ -1,28 +1,31 @@
 package com.csye6225.demo.controllers;
 
 import com.csye6225.demo.pojos.Task;
+
+import com.csye6225.demo.pojos.User;
 import com.csye6225.demo.repositories.UserRepository;
+
 import com.csye6225.demo.repositories.TaskRepository;
+import com.csye6225.demo.repositories.UserRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.UUID;
-
-import java.util.Date;
 
 @Controller
 public class TaskController {
@@ -35,14 +38,13 @@ public class TaskController {
 
     @RequestMapping(value = "/tasks", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String createTasks(@RequestBody String sTask, HttpServletResponse response, Principal principal) {
+        public String createTasks(@RequestBody String sTask, Principal principal, HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_CREATED);
         JsonObject jsonObject = new JsonObject();
         Gson gson = new Gson();
         Task task = gson.fromJson(sTask,Task.class);
-        String userEmail = principal.getName();
-        long userId = userRepository.findByEmail(userEmail).getId();
-        task.setUserId(userId);
+        User user = userRepository.findByName(principal.getName());
+        task.setUser(user);
         taskRepository.save(task);
         jsonObject.addProperty("message", "task: "+task.getId());
         return jsonObject.toString();
