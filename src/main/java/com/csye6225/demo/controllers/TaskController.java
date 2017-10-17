@@ -49,12 +49,13 @@ public class TaskController {
 
         User user;
         try{
-            user = userRepository.findByName(principal.getName());
+            user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
             return jsonObject.toString();
         }
         task.setUser(user);
+
         taskRepository.save(task);
         jsonObject.addProperty("message", "task: "+task.getId());
         return jsonObject.toString();
@@ -64,6 +65,7 @@ public class TaskController {
     @ResponseBody
     public String updateTasks(@PathVariable("id") String id, Principal principal,@RequestParam String description) {
         JsonObject jsonObject = new JsonObject();
+
         Task task ;
         try{
             task = taskRepository.findOne(id);
@@ -73,7 +75,7 @@ public class TaskController {
         }
         User user;
         try{
-            user = userRepository.findByName(principal.getName());
+            user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
             return jsonObject.toString();
@@ -104,7 +106,7 @@ public class TaskController {
         }
         User user;
         try{
-            user = userRepository.findByName(principal.getName());
+            user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
             return jsonObject.toString();

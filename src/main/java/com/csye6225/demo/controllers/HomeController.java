@@ -88,10 +88,18 @@ public class HomeController {
   public String registerPost(@RequestBody String sUser) {
     Gson gson = new Gson();
     User user = gson.fromJson(sUser, User.class);
+    JsonObject jsonObject = new JsonObject();
+
+    String email = user.getEmail();
+    int index = email.indexOf("@");
+    if (index <= 0 || index >= email.length() - 1) {
+      jsonObject.addProperty("message", "Invalid Email!");
+      return jsonObject.toString();
+    }
+
     String pw_hash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
     user.setPassword(pw_hash);
     User user_db = userRepository.findByEmail(user.getEmail());
-    JsonObject jsonObject = new JsonObject();
 
     if (user_db == null) {
       userRepository.save(user);
