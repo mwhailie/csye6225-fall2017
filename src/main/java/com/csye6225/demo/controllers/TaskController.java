@@ -55,6 +55,7 @@ public class TaskController {
             return jsonObject.toString();
         }
         task.setUser(user);
+
         taskRepository.save(task);
         jsonObject.addProperty("message", "task: "+task.getId());
         return jsonObject.toString();
@@ -64,6 +65,7 @@ public class TaskController {
     @ResponseBody
     public String updateTasks(@PathVariable("id") String id, Principal principal,@RequestParam String description) {
         JsonObject jsonObject = new JsonObject();
+
         Task task ;
         try{
             task = taskRepository.findOne(id);
