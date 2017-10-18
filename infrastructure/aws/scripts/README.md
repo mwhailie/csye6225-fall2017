@@ -4,8 +4,6 @@
 
 Assortment of scripts that run on the AWS Command Line Interface (CLI). To run these script, you need to first install and configure AWS Command Line Interface (CLI).
 
-You may also have to install [jp](http://macappstore.org/jq/), a JSON processor, to excute the following scripts.
-
 ## Description
 
 ### create-security-group.sh
