@@ -33,7 +33,7 @@ deploy:
     region: us-east-1
     skip_cleanup: true
   - provider: codedeploy
-    access_key_id: <access_key_id>
+    access_key_id: 14D1154F77C292BB81AC021ABCAFC63A
     bucket: code-deploy.csye6225.com
     key: SimpleJavaProject-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
