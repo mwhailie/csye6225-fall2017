@@ -1,6 +1,5 @@
 package com.csye6225.demo.auth;
 
-import com.csye6225.demo.authTest.HibernateUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
@@ -57,11 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   public UserDetailsService userDetailsService() {
-//    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//    manager.createUser(User.withUsername("user").password(bCryptPasswordEncoder.encode("password")).roles("USER").build());
-//    return manager;
-    HibernateUserDetailsService hibernateUserDetailsService = new HibernateUserDetailsService();
-    return hibernateUserDetailsService;
+    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+    manager.createUser(User.withUsername("user").password(bCryptPasswordEncoder.encode("password")).roles("USER").build());
+    return manager;
+
   }
 
 
@@ -70,8 +66,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     auth.jdbcAuthentication().dataSource(this.dataSource).usersByUsernameQuery("select name, password, true from user where name = ?").passwordEncoder(bCryptPasswordEncoder)
             .authoritiesByUsernameQuery("select name, 'USER' from user where name = ?");
   }
-//  @Bean
-//  public PasswordEncoder passwordEncoder() {
-//    return NoOpPasswordEncoder.getInstance();
-//  }
+
 }
