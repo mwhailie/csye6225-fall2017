@@ -63,8 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-    auth.jdbcAuthentication().dataSource(this.dataSource).usersByUsernameQuery("select name, password, true from user where name = ?").passwordEncoder(bCryptPasswordEncoder)
-            .authoritiesByUsernameQuery("select name, 'USER' from user where name = ?");
+    auth.jdbcAuthentication().dataSource(this.dataSource).usersByUsernameQuery("select email, password, true from user where email = ?").passwordEncoder(bCryptPasswordEncoder)
+            .authoritiesByUsernameQuery("select email, 'USER' from user where email = ?");
   }
 
 }

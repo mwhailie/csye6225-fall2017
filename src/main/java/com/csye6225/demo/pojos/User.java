@@ -15,7 +15,7 @@ public class User {
     private String name;
     private String password;
     private String email;
-    @OneToMany
+    @OneToMany(mappedBy = "user",orphanRemoval=true, cascade=CascadeType.ALL)
     private List<Task> taskList;
 
 

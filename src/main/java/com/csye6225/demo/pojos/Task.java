@@ -16,7 +16,7 @@ public class Task {
     private String id;
     @Size(max = 4096)
     private String description;
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     private User user;
 
     @OneToMany(mappedBy = "task",orphanRemoval=true, cascade=CascadeType.ALL)
