@@ -43,7 +43,7 @@ deploy:
     bundle_type: zip
 
     region: us-east-1
-    application: myApp
+    application: codedeploy/csye_assignment7-${TRAVIS_JOB_NUMBER}
     deployment_group: myApp-group
     secret_access_key:
       secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
