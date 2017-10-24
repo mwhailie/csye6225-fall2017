@@ -42,7 +42,7 @@ deploy:
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application: csye_assignment7-${TRAVIS_JOB_NUMBER}
+    application: dpl-${TRAVIS_JOB_NUMBER}
     deployment_group: csye_assignment7-${TRAVIS_JOB_NUMBER}
     region: us-east-1
     secret_access_key:
