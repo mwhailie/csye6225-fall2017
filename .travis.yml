@@ -4,19 +4,11 @@ jdk:
 sudo: false
 install: true
 script:
-<<<<<<< HEAD
+
 - "./gradlew war"
 - "./gradlew build"
-notifications:
-  email:
-    recipients:
-    - wang.shirui@husky.neu.edu
-    - yan.hao@husky.neu.edu
-    - jing.yu@husky.neu.edu
-    - ma.wenhe@husky.neu.edu
-=======
-  - ./gradlew build
-  - ./gradlew war
+
+
 
 after_success:
   - mkdir codedeploy
@@ -66,4 +58,3 @@ notifications:
       - jing.yu@husky.neu.edu
       - ma.wenhe@husky.neu.edu
       
->>>>>>> f75bfb39e9193c0e61ba96c0a1ecc7853a7e15cf
