@@ -48,7 +48,7 @@ deploy:
     - ls -al
 local_dir: codedeploy
 - ls -al
-    application: csye_assignment7-${TRAVIS_JOB_NUMBER}
+    application: csye_assignment7
 
     - ls -al
     deployment_group: myApp-group
