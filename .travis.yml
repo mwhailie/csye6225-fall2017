@@ -34,9 +34,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: 14D1154F77C292BB81AC021ABCAFC63A
+    access_key_id: AKIAJWZFOWTCUARU7UHQ
     secret_access_key:
-      secure: a0V4bIthvjmdO/KsUBPwx92yStQnlGn8hpZZngV+26XXGelVXJt5DXumPQJQVwWFbXv7IYiaP6+8OCnDAz8rK9Kdr1u1XucYvmR6uJhSplwYfcyBwr5guU9gWnChUvCXwmlqGhxwsO93ar6Uu4ytkMGwpbRSq9brFfLPvN1+zgvpEUDaxGbAEwBsxSF3Eq2o/OMX9TYtjscigaVU0K5i00ODxdkW5yaoSAIJkQEWCygVZ9iyV11nS6BasWHAGG1dU8fYO0Amq5qKmadnhwMeOB9iN6EiU/BrNhDZQ/U0xGOrECe0Ptn2TZGbpz4BoxymJ1RxT2Xt02v15Md4ruTWD5M+sleWRUnYCeoNAzQpZMcuN7QXyqhxysjQgw1OPhlUQR8x70w3stvdsd+Sk607Eab7U20vDEXpSMipjeyBMIWf18GvTQWx5mp6SNtjMBcouDh+7pZJTdMSPK28oi96NtcLyZM1xpaPqw+/byXVV2r6Fqk/C2ipXs5KvGcKAUmpDvVxn4D2QymPsAVAKiMn7N8J83cSf7BwZIpPuq5i2OBPEkjP7quQK6HYAV9Ip5rGSBiF7QB7icwQUjmoyHg8ND2dGgoLh67nL5GUIigvSpx6n49i0tAcbV+9AKpZYGfH7/eAstKbRagScqTWJ0bmfw9GFoHkscY7mxbJeECh2FA=
+      secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall2017-mawenhe.com
     region: us-east-1
@@ -44,7 +44,7 @@ deploy:
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: 14D1154F77C292BB81AC021ABCAFC63A
+    access_key_id: AKIAJWZFOWTCUARU7UHQ
     bucket: code-deploy.csye6225-fall2017-mawenhe.com
     key: SimpleJavaProject-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
@@ -52,7 +52,7 @@ deploy:
     deployment_group: SimpleJavaProject
     region: us-east-1
     secret_access_key:
-      secure: a0V4bIthvjmdO/KsUBPwx92yStQnlGn8hpZZngV+26XXGelVXJt5DXumPQJQVwWFbXv7IYiaP6+8OCnDAz8rK9Kdr1u1XucYvmR6uJhSplwYfcyBwr5guU9gWnChUvCXwmlqGhxwsO93ar6Uu4ytkMGwpbRSq9brFfLPvN1+zgvpEUDaxGbAEwBsxSF3Eq2o/OMX9TYtjscigaVU0K5i00ODxdkW5yaoSAIJkQEWCygVZ9iyV11nS6BasWHAGG1dU8fYO0Amq5qKmadnhwMeOB9iN6EiU/BrNhDZQ/U0xGOrECe0Ptn2TZGbpz4BoxymJ1RxT2Xt02v15Md4ruTWD5M+sleWRUnYCeoNAzQpZMcuN7QXyqhxysjQgw1OPhlUQR8x70w3stvdsd+Sk607Eab7U20vDEXpSMipjeyBMIWf18GvTQWx5mp6SNtjMBcouDh+7pZJTdMSPK28oi96NtcLyZM1xpaPqw+/byXVV2r6Fqk/C2ipXs5KvGcKAUmpDvVxn4D2QymPsAVAKiMn7N8J83cSf7BwZIpPuq5i2OBPEkjP7quQK6HYAV9Ip5rGSBiF7QB7icwQUjmoyHg8ND2dGgoLh67nL5GUIigvSpx6n49i0tAcbV+9AKpZYGfH7/eAstKbRagScqTWJ0bmfw9GFoHkscY7mxbJeECh2FA=
+      secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
     wait-until-deployed: true
     on:
       all_branches: true
