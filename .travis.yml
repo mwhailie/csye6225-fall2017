@@ -23,7 +23,7 @@ after_success:
 
 before_deploy:
   - cd ..
-  - ls -al
+
 
 deploy:
   - provider: s3
