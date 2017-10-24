@@ -18,6 +18,7 @@ public class User {
     @OneToMany(mappedBy = "user",orphanRemoval=true, cascade=CascadeType.ALL)
     private List<Task> taskList;
 
+
     public Integer getId() {
         return id;
     }

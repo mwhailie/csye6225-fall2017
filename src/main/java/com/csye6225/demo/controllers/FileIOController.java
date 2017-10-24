@@ -42,6 +42,9 @@ public class FileIOController {
 
         JsonObject jsonObject = new JsonObject();
 
+        //Gson gson = new Gson();
+       // Attachment attachment = gson.fromJson("",Attachment.class);
+
         Attachment attachment = new Attachment();
         String folder = "/myFile";
         String relativePath = System.getProperty("user.dir");

@@ -1,5 +1,6 @@
 package com.csye6225.demo.pojos;
 
+import com.csye6225.demo.repositories.UserRepository;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
