@@ -14,6 +14,7 @@ hooks:
   AfterInstall:
    - location: ./restartTomcat.sh
      timeout: 180
+<<<<<<< HEAD
      runas: ubuntu
 =======
 version: 0.0
@@ -33,3 +34,8 @@ hooks:
      timeout: 180
      runas: ubuntu
 >>>>>>> f75bfb39e9193c0e61ba96c0a1ecc7853a7e15cf
+=======
+     runas: ubuntu
+
+     #comment
+>>>>>>> 3110ad1f1496f4b8eef9a1800b51fd2ab2c35ece
