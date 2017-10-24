@@ -27,7 +27,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAIFZTTDPUGY3JXMRA
     secret_access_key:
-      secure: EAGXBUvzLPKQp/f6sgF+BvRD1jZ+E0tRVqrNVZRLiN3eKE4ksWY+uW252NEN4+JqzM1C3a7rtlkla8GYKGnXoG04wR7/1yAUe5zH5QABCFCEUDasiay5N7YSieu28x4MXmgstxvPSi4io2yDgiFnZOA2vO9I2CYf6jt4tYQdoKjQ5I2Jy9C1o/2ZCAmULZMhfdv7tJmjVEycAAlG+YmOASxix8S4YGdLsSJnnzH0ifs7AtipzCYi+HG1NEvAnVA4Z09EbwjLTRvaUojujdOdY9OdtvC8gOTSERzN1ULCHCZuFg1Tyq92moGRDKIPeuNV26wqABn87GFOc/gSCRTGPET25bTGxoNm5G53RKgveJuB87spccoVbgYe/rH9REMXmyQOSDC39yX0LVRGPXUgvdRivtzdPDDTV6rU9GZurdZoyb/JKfS4LcPZmrTrgFwXowvBug2wQsobQXja6FF0+wbKSj+N23NLfKv/nU1/t26PIsEKhDH5oEklnEnO7QMLqHn5Y5b+hIVwUFY7VpHK2FiBgEKbjyx/A/J+Ss9CpEB8srp6KOhdxnaYRKXbgF68Yow8NnIB5h32byyR1QV7zPH8J9CZzJWrA091gE8twesc0UmCrFGb08rtSieg3nUlq4qqkzA5YGpdFpYSRN3QpC7folVsndvgpjzMscYxXEw=
+      secure: lvjADBnlzHN9A0xI0D7s2Yoi+6HdLDFN8iw1RuQT
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall2017-mawenhe.com
     region: us-east-1
@@ -43,7 +43,7 @@ deploy:
     deployment_group: SimpleJavaProject
     region: us-east-1
     secret_access_key:
-      secure: EAGXBUvzLPKQp/f6sgF+BvRD1jZ+E0tRVqrNVZRLiN3eKE4ksWY+uW252NEN4+JqzM1C3a7rtlkla8GYKGnXoG04wR7/1yAUe5zH5QABCFCEUDasiay5N7YSieu28x4MXmgstxvPSi4io2yDgiFnZOA2vO9I2CYf6jt4tYQdoKjQ5I2Jy9C1o/2ZCAmULZMhfdv7tJmjVEycAAlG+YmOASxix8S4YGdLsSJnnzH0ifs7AtipzCYi+HG1NEvAnVA4Z09EbwjLTRvaUojujdOdY9OdtvC8gOTSERzN1ULCHCZuFg1Tyq92moGRDKIPeuNV26wqABn87GFOc/gSCRTGPET25bTGxoNm5G53RKgveJuB87spccoVbgYe/rH9REMXmyQOSDC39yX0LVRGPXUgvdRivtzdPDDTV6rU9GZurdZoyb/JKfS4LcPZmrTrgFwXowvBug2wQsobQXja6FF0+wbKSj+N23NLfKv/nU1/t26PIsEKhDH5oEklnEnO7QMLqHn5Y5b+hIVwUFY7VpHK2FiBgEKbjyx/A/J+Ss9CpEB8srp6KOhdxnaYRKXbgF68Yow8NnIB5h32byyR1QV7zPH8J9CZzJWrA091gE8twesc0UmCrFGb08rtSieg3nUlq4qqkzA5YGpdFpYSRN3QpC7folVsndvgpjzMscYxXEw=
+      secure: lvjADBnlzHN9A0xI0D7s2Yoi+6HdLDFN8iw1RuQT
     wait-until-deployed: true
     on:
       all_branches: true
