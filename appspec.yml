@@ -7,7 +7,6 @@ files:
   - source: ./restartTomcat.sh
     destination: /home/ubuntu
   - source: ./build/libs/test-1.0.0.war
-<<<<<<< HEAD
     destination: /var/lib/tomcat7/webapps
 
 hooks:
