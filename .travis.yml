@@ -15,4 +15,25 @@ notifications:
       - yan.hao@husky.neu.edu
       - jing.yu@husky.neu.edu
       - ma.wenhe@husky.neu.edu
+
+deploy:
+   -provider: s3
+    access_key_id: AKIAIFPBBWZL6NJXH63A
+    secret_access_key:
+        secure: "CziHWyuXvCe7/DfAp5kLABx2ItPQKpjVuWmDxCKcdfWhYf7DN19oGn/OD70Ol40gXLu+gK0fBrC3OsPdh6DV7+m976VsXJmDVKXB+vH+x67x2ZqxUb5MCuqBwMsyHnrqTeglYSQp+lJIGaF8pQno6jf4yxP7hFuatwhx0M2F4Dy5oZDYC8CDQpDK1HKIl6g1UmH5uQLXFPFF3WrXQsYTEZTR/Zy4u3Sq/VEw8I1ykgi5N6V/15MKVQBMMJnlJ8XdA2s8V7be70JceddyMTmR6P9SfHeVk4Rq9Nh0+IB3cR7dknboY7Nk4WVjD0Wwcnm7OAsj7L1kUNKEGgGT8z4s2oHysjEjzqQ2HS83mnN4Q3s4kA9zuPt4440NgDU/18N1F34EJvJ2Gp8Q34tVY44beM5SqvduJbwoNKfAPwuGOsi6UaoDTnkkuNhKbqZApCYZ2PTLgK69ft1qAvWqiM5yy+977xLJg2V/r/u8vaCSx9XNtJvoN1Y4GM3ouH+HCJ1+YLRKCgZU+PYogquv+cXRyBVTQ1MBbShMjD1p3zIcFidyoM2kIMuROB8xuS2iLkvZuU2icQe2+6SYDwv7HV0vJ1gpASDcrbw6PFW5+nb3JNkRbH5NoKbq+unL8kXN0qNkFOhw4rq2Ie733gLO8BXQvDxwRzm66riLSuKjAm7NBMU="
+    local_dir: codedeploy
+    bucket: code-deploy.csye6225-fall-jing.yu.me
+    region: us-east-1
+    skip_cleanup: true
+  -provider: codedeploy
+    access_key_id: AKIAIFPBBWZL6NJXH63A
+    bucket: code-deploy.csye6225-fall-jing.yu.me
+    key: SimpleJavaProject-${TRAVIS_JOB_NUMBER}.zip
+    bundle_type: zip
+    application: SimpleJavaProject
+    deployment_group: SimpleJavaProject
+    region: us-east-1
+    secret_access_key:
+      secure: "CziHWyuXvCe7/DfAp5kLABx2ItPQKpjVuWmDxCKcdfWhYf7DN19oGn/OD70Ol40gXLu+gK0fBrC3OsPdh6DV7+m976VsXJmDVKXB+vH+x67x2ZqxUb5MCuqBwMsyHnrqTeglYSQp+lJIGaF8pQno6jf4yxP7hFuatwhx0M2F4Dy5oZDYC8CDQpDK1HKIl6g1UmH5uQLXFPFF3WrXQsYTEZTR/Zy4u3Sq/VEw8I1ykgi5N6V/15MKVQBMMJnlJ8XdA2s8V7be70JceddyMTmR6P9SfHeVk4Rq9Nh0+IB3cR7dknboY7Nk4WVjD0Wwcnm7OAsj7L1kUNKEGgGT8z4s2oHysjEjzqQ2HS83mnN4Q3s4kA9zuPt4440NgDU/18N1F34EJvJ2Gp8Q34tVY44beM5SqvduJbwoNKfAPwuGOsi6UaoDTnkkuNhKbqZApCYZ2PTLgK69ft1qAvWqiM5yy+977xLJg2V/r/u8vaCSx9XNtJvoN1Y4GM3ouH+HCJ1+YLRKCgZU+PYogquv+cXRyBVTQ1MBbShMjD1p3zIcFidyoM2kIMuROB8xuS2iLkvZuU2icQe2+6SYDwv7HV0vJ1gpASDcrbw6PFW5+nb3JNkRbH5NoKbq+unL8kXN0qNkFOhw4rq2Ie733gLO8BXQvDxwRzm66riLSuKjAm7NBMU="
+    wait-until-deployed: true
       
