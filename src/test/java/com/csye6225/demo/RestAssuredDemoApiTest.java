@@ -19,6 +19,7 @@ public class RestAssuredDemoApiTest {
   @Test
   public void testGetHomePage() throws URISyntaxException {
 //    RestAssured.when().get(new URI("http://localhost:8080/")).then().statusCode(200);
+    //test merge master
   }
 
   @Test
