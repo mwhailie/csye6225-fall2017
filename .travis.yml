@@ -45,12 +45,12 @@ deploy:
 
     region: us-east-1
 
-    - ls -al
+
 local_dir: codedeploy
-- ls -al
+
     application: csye_assignment7
 
-    - ls -al
+
     deployment_group: myApp-group
     secret_access_key:
       secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
