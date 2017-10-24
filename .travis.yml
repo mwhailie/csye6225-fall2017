@@ -16,10 +16,11 @@ after_success:
   - mv csye_assignment7-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
   - pwd
-#  - cd codedeploy
-#  - ls -al
-#  - pwd
-#
+  - cd codedeploy
+  - ls -al
+  - pwd
+  - cd ..
+
 #before_deploy:
 #  - cd ..
 
