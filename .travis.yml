@@ -44,7 +44,7 @@ deploy:
     bundle_type: zip
 
     region: us-east-1
-    application: csye
+    application: csye6225-fall2017
 
     deployment_group: myApp-group
     secret_access_key:
