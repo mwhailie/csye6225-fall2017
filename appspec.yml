@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: 0.0
 os: linux
 
@@ -14,3 +15,21 @@ hooks:
    - location: ./restartTomcat.sh
      timeout: 180
      runas: ubuntu
+=======
+version: 0.0
+os: linux
+
+files:
+  - source: ./appspec.yml
+    destination: /home/ubuntu
+  - source: ./restartTomcat.sh
+    destination: /home/ubuntu
+  - source: ./build/libs/test-1.0.0.war
+    destination: /var/lib/tomcat8/webapps
+
+hooks:
+  AfterInstall:
+   - location: ./restartTomcat.sh
+     timeout: 180
+     runas: ubuntu
+>>>>>>> f75bfb39e9193c0e61ba96c0a1ecc7853a7e15cf
