@@ -37,10 +37,10 @@ deploy:
   - provider: codedeploy
     access_key_id: AKIAIFZTTDPUGY3JXMRA
     bucket: code-deploy.csye6225-fall-jing.yu.me
-    key: csye6225-fall2017-${TRAVIS_JOB_NUMBER}.zip
+    key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application: csye6225-fall2017
-    deployment_group: csye6225-fall2017
+    application: csye_assignment7
+    deployment_group: csye_assignment7
     region: us-east-1
     secret_access_key:
       secure: lvjADBnlzHN9A0xI0D7s2Yoi+6HdLDFN8iw1RuQT
