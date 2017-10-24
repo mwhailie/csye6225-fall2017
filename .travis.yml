@@ -44,12 +44,7 @@ deploy:
     bundle_type: zip
 
     region: us-east-1
-
-
-local_dir: codedeploy
-
-    application: csye_assignment7
-
+    application: csye
 
     deployment_group: myApp-group
     secret_access_key:
