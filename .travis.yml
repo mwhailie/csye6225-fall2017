@@ -35,7 +35,9 @@ deploy:
     skip_cleanup: true
     on:
       all_branches: true
+
   - provider: codedeploy
+    local_dir: codedeploy
     access_key_id: AKIAJWZFOWTCUARU7UHQ
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
