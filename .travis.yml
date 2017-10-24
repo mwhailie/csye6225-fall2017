@@ -46,7 +46,7 @@ deploy:
     region: us-east-1
     application: CSYE6225
 
-    deployment_group: myApp-group
+    deployment_group: CSYE6225
     secret_access_key:
       secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
     wait-until-deployed: true
