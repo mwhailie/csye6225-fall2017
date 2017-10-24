@@ -1,7 +1,6 @@
 #!/bin/bash
 #delete a stack instance
-
-instanceId=$(aws cloudformation describe-stack-resources --stack-name $1 | jq -r '.StackResources[0].PhysicalResourceId')
+instanceId=$(aws cloudformation describe-stack-resource --stack-name mys --logical-resource-id EC2Instance --query "StackResourceDetail.PhysicalResourceId" --output text)
 
 #enable-api-termination
 aws ec2 modify-instance-attribute --no-disable-api-termination --instance-id $instanceId

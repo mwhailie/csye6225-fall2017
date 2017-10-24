@@ -1,10 +1,7 @@
 package com.csye6225.demo.pojos;
 
 import javax.persistence.*;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
 
 
 @Entity
@@ -18,6 +15,9 @@ public class User {
     private String name;
     private String password;
     private String email;
+    @OneToMany(mappedBy = "user",orphanRemoval=true, cascade=CascadeType.ALL)
+    private List<Task> taskList;
+
 
     public Integer getId() {
         return id;
@@ -49,5 +49,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 }

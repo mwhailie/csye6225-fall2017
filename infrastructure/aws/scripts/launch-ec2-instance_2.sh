@@ -22,4 +22,4 @@ aws ec2 modify-volume --volume-id $VOLUMES_ID --size 16 --volume-type gp2
 PUBLIC_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID | jq -r '.Reservations[0].Instances[0].PublicIpAddress')
 
 # Record Set
-aws route53 change-resource-record-sets --hosted-zone-id Z3PGXZUZ3TZUH6 --change-batch "{\"Comment\":\"Update record to reflect new IP address\",\"Changes\":[{\"Action\":\"UPSERT\",\"ResourceRecordSet\":{\"Name\":\"csye6225-fall2017-wenhe.me.\",\"Type\":\"A\",\"TTL\":60,\"ResourceRecords\":[{\"Value\":\"$PUBLIC_IP\"}]}}]}"
+aws route53 change-resource-record-sets --hosted-zone-id ZB1V1M89K31BX --change-batch "{\"Comment\":\"Update record to reflect new IP address\",\"Changes\":[{\"Action\":\"UPSERT\",\"ResourceRecordSet\":{\"Name\":\"csye6225-fall2017-jingyu.me.\",\"Type\":\"A\",\"TTL\":60,\"ResourceRecords\":[{\"Value\":\"$PUBLIC_IP\"}]}}]}"
