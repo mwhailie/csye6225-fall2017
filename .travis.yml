@@ -39,11 +39,18 @@ deploy:
   - provider: codedeploy
     access_key_id: AKIAJWZFOWTCUARU7UHQ
     bucket: code-deploy.csye6225-fall2017-yanhao.me
+    - ls -al
     key: codedeploy/csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
 
     region: us-east-1
-    application: codedeploy/csye_assignment7-${TRAVIS_JOB_NUMBER}
+
+    - ls -al
+local_dir: codedeploy
+- ls -al
+    application: csye_assignment7-${TRAVIS_JOB_NUMBER}
+
+    - ls -al
     deployment_group: myApp-group
     secret_access_key:
       secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
