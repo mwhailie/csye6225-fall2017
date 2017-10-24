@@ -38,7 +38,7 @@ deploy:
   - provider: codedeploy
     access_key_id: AKIAJWZFOWTCUARU7UHQ
     bucket: code-deploy.csye6225-fall2017-yanhao.me
-    key: SimpleJavaProject-${TRAVIS_JOB_NUMBER}.zip
+    key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
     application: SimpleJavaProject
     deployment_group: SimpleJavaProject
