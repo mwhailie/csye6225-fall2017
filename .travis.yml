@@ -42,7 +42,7 @@ deploy:
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
     application: csye6225
-    deployment_group: csye6225Fleet
+    deployment_group: CSYE6225
     region: us-east-1
     secret_access_key:
       secure: lvjADBnlzHN9A0xI0D7s2Yoi+6HdLDFN8iw1RuQT
