@@ -28,7 +28,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAJWZFOWTCUARU7UHQ
     secret_access_key:
-      secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10tXXX
+      secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     region: us-east-1
