@@ -21,14 +21,14 @@ public class RestAssuredDemoApiTest {
     RestAssured.when().get(new URI("http://localhost:8080/")).then().statusCode(200);
   }
 
-  @Test
-  public void testCreateTask() throws Exception {
-      RestAssured
-             .given()
-                .auth().preemptive().basic("user", "password").body("{\"description\":\"des\"}")
-              .expect()
-                .statusCode(201)
-              .when()
-                .post("http://localhost:8080/tasks");
-  }
+  // @Test
+  // public void testCreateTask() throws Exception {
+  //     RestAssured
+  //            .given()
+  //               .auth().preemptive().basic("user", "password").body("{\"description\":\"des\"}")
+  //             .expect()
+  //               .statusCode(201)
+  //             .when()
+  //               .post("http://localhost:8080/tasks");
+  // }
 }
