@@ -1,55 +1,59 @@
 language: java
 jdk:
-- oraclejdk8
+  - oraclejdk8
+
 sudo: false
 install: true
+
 script:
-- ./gradlew build
-- ./gradlew war
+  - ./gradlew build
+  - ./gradlew war
+
 after_success:
-- mkdir codedeploy
-- zip -r csye_assignment7-${TRAVIS_JOB_NUMBER}.zip build/libs/test-1.0.0.war appspec.yml
-- ls -al
-- mv csye_assignment7-${TRAVIS_JOB_NUMBER}.zip codedeploy/
-- ls -al
-- pwd
-- cd codedeploy
-- ls -al
-- pwd
+  - mkdir codedeploy
+  - zip -r csye_assignment7-${TRAVIS_JOB_NUMBER}.zip build/libs/test-1.0.0.war appspec.yml
+  - ls -al
+  - mv csye_assignment7-${TRAVIS_JOB_NUMBER}.zip codedeploy/
+  - ls -al
+  - pwd
+  - cd codedeploy
+  - ls -al
+  - pwd
+
 before_deploy:
-- cd ..
+  - cd ..
+
 deploy:
-- provider: s3
-  access_key_id: AKIAIHT54JJWV5TWZEDA
-  secret_access_key:
-    secure: dsNOt4HaU+oJE+g+V8FpOL0GTfp3VuPTCyT/gbcRjGIG2B1E/aZiyShuojf1VxmaFA3UGom8lmMaTo9oDgDI/n3wQ6YqZCOwQeitK5Y8eG0fSVNjg94J8xeXzO/0nUd6tMs+Vr8Pxc9zuryybHw7VS83q0/oUer8wj6HOtoI190Cl85aXR11PgxVAUaB12mht08hBNseAAb0NsLi2irmk8EwQJRhxg2DaV1mpIHgCIBnawT5DZK4KeI4XV95WLqbkblF7UaA02vER8f0afors3VQTnYp6ZELt4UaLbjoHSscWHvmN04H0+UdwpCO/bLR6gIOws34O9JrEq0Y725jaxceo/RLOA6g4oL8AO5KRjEPFUlJuvn3ICg85xwMHpY8uOnV2TK0sTnSA19rLASPQqk2nbFd5ykmtAN7M7vpQhgWBsRVjim3Rxu8dX+q1ltm+2QUN4qWEpL3pSZcO8q94ImY71oTtgWjlh2re9r6yk5MIBJef7icjqdvD/7l5PYfDM3ENssJbt5W2eBCTZpCYecHcG+n/pkKfaTmwdGSUiA+aFZUj5QcM3txDALtXlCLpDeeWNnIe67A1aHnRvmXqWhCeuXtgvQnbz/0CzDBYwxU2G1kZeMqhIzOZXpChiaafyNR2iWDEtB9QrOAjPsZpaCR/t6Qn/j7BoWy7X1x2Ck=
-  local_dir: codedeploy
-  bucket: code-deploy.csye6225-fall2017-mawenhe.me
-  region: us-east-1
-  skip_cleanup: true
-  on:
-    all_branches: true
-- provider: codedeploy
-  access_key_id: AKIAIHT54JJWV5TWZEDA
-  bucket: code-deploy.csye6225-fall2017-mawenhe.me
-  key: SimpleJavaProject-${TRAVIS_JOB_NUMBER}.zip
-  bundle_type: zip
-  application: SimpleJavaProject
-  deployment_group: SimpleJavaProject
-  region: us-east-1
-  secret_access_key:
-    secure: dsNOt4HaU+oJE+g+V8FpOL0GTfp3VuPTCyT/gbcRjGIG2B1E/aZiyShuojf1VxmaFA3UGom8lmMaTo9oDgDI/n3wQ6YqZCOwQeitK5Y8eG0fSVNjg94J8xeXzO/0nUd6tMs+Vr8Pxc9zuryybHw7VS83q0/oUer8wj6HOtoI190Cl85aXR11PgxVAUaB12mht08hBNseAAb0NsLi2irmk8EwQJRhxg2DaV1mpIHgCIBnawT5DZK4KeI4XV95WLqbkblF7UaA02vER8f0afors3VQTnYp6ZELt4UaLbjoHSscWHvmN04H0+UdwpCO/bLR6gIOws34O9JrEq0Y725jaxceo/RLOA6g4oL8AO5KRjEPFUlJuvn3ICg85xwMHpY8uOnV2TK0sTnSA19rLASPQqk2nbFd5ykmtAN7M7vpQhgWBsRVjim3Rxu8dX+q1ltm+2QUN4qWEpL3pSZcO8q94ImY71oTtgWjlh2re9r6yk5MIBJef7icjqdvD/7l5PYfDM3ENssJbt5W2eBCTZpCYecHcG+n/pkKfaTmwdGSUiA+aFZUj5QcM3txDALtXlCLpDeeWNnIe67A1aHnRvmXqWhCeuXtgvQnbz/0CzDBYwxU2G1kZeMqhIzOZXpChiaafyNR2iWDEtB9QrOAjPsZpaCR/t6Qn/j7BoWy7X1x2Ck=
-  wait-until-deployed: true
-  on:
-    all_branches: true
+  - provider: s3
+    access_key_id: AKIAIHT54JJWV5TWZEDA
+    secret_access_key:
+      secure: dsNOt4HaU+oJE+g+V8FpOL0GTfp3VuPTCyT/gbcRjGIG2B1E/aZiyShuojf1VxmaFA3UGom8lmMaTo9oDgDI/n3wQ6YqZCOwQeitK5Y8eG0fSVNjg94J8xeXzO/0nUd6tMs+Vr8Pxc9zuryybHw7VS83q0/oUer8wj6HOtoI190Cl85aXR11PgxVAUaB12mht08hBNseAAb0NsLi2irmk8EwQJRhxg2DaV1mpIHgCIBnawT5DZK4KeI4XV95WLqbkblF7UaA02vER8f0afors3VQTnYp6ZELt4UaLbjoHSscWHvmN04H0+UdwpCO/bLR6gIOws34O9JrEq0Y725jaxceo/RLOA6g4oL8AO5KRjEPFUlJuvn3ICg85xwMHpY8uOnV2TK0sTnSA19rLASPQqk2nbFd5ykmtAN7M7vpQhgWBsRVjim3Rxu8dX+q1ltm+2QUN4qWEpL3pSZcO8q94ImY71oTtgWjlh2re9r6yk5MIBJef7icjqdvD/7l5PYfDM3ENssJbt5W2eBCTZpCYecHcG+n/pkKfaTmwdGSUiA+aFZUj5QcM3txDALtXlCLpDeeWNnIe67A1aHnRvmXqWhCeuXtgvQnbz/0CzDBYwxU2G1kZeMqhIzOZXpChiaafyNR2iWDEtB9QrOAjPsZpaCR/t6Qn/j7BoWy7X1x2Ck=
+    local_dir: codedeploy
+    bucket: code-deploy.csye6225-fall2017-mawenhe.me
+    region: us-east-1
+    skip_cleanup: true
+    on:
+      all_branches: true
+  - provider: codedeploy
+    access_key_id: AKIAIHT54JJWV5TWZEDA
+    bucket: code-deploy.csye6225-fall2017-mawenhe.me
+    key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
+    bundle_type: zip
+    application: csye_assignment7
+    deployment_group: csye_assignment7
+    region: us-east-1
+    secret_access_key:
+      secure: dsNOt4HaU+oJE+g+V8FpOL0GTfp3VuPTCyT/gbcRjGIG2B1E/aZiyShuojf1VxmaFA3UGom8lmMaTo9oDgDI/n3wQ6YqZCOwQeitK5Y8eG0fSVNjg94J8xeXzO/0nUd6tMs+Vr8Pxc9zuryybHw7VS83q0/oUer8wj6HOtoI190Cl85aXR11PgxVAUaB12mht08hBNseAAb0NsLi2irmk8EwQJRhxg2DaV1mpIHgCIBnawT5DZK4KeI4XV95WLqbkblF7UaA02vER8f0afors3VQTnYp6ZELt4UaLbjoHSscWHvmN04H0+UdwpCO/bLR6gIOws34O9JrEq0Y725jaxceo/RLOA6g4oL8AO5KRjEPFUlJuvn3ICg85xwMHpY8uOnV2TK0sTnSA19rLASPQqk2nbFd5ykmtAN7M7vpQhgWBsRVjim3Rxu8dX+q1ltm+2QUN4qWEpL3pSZcO8q94ImY71oTtgWjlh2re9r6yk5MIBJef7icjqdvD/7l5PYfDM3ENssJbt5W2eBCTZpCYecHcG+n/pkKfaTmwdGSUiA+aFZUj5QcM3txDALtXlCLpDeeWNnIe67A1aHnRvmXqWhCeuXtgvQnbz/0CzDBYwxU2G1kZeMqhIzOZXpChiaafyNR2iWDEtB9QrOAjPsZpaCR/t6Qn/j7BoWy7X1x2Ck=
+    wait-until-deployed: true
+    on:
+      all_branches: true
+    
+
 notifications:
   email:
     recipients:
-    - wang.shirui@husky.neu.edu
-    - yan.hao@husky.neu.edu
-    - jing.yu@husky.neu.edu
-    - ma.wenhe@husky.neu.edu
-AKIAIHT54JJWV5TWZEDA:
-  secure: kc+Us/sUa9d7Y0TUu7xDw4EGtQP2COOaagEdDHTz+M9sWpWiWCW3+KFaLspb/LT7SMh+DNI7mSVQtGeHe3qMT9zhrdZci4FW7PJi1GGspbkpeYLZ5hASIHeKkU6jBtQJ+/g8gi58TaDSQKxWFIQRJADHYyU3vAfzyJnprc/srnxsYxQY6UUqpGgJgpNSA1CoUyfCQ2oevny7FPa1VWBzDuIUnkBooUJEOqHE1hsSF286q+ApXmUG4GcogebSETi9aKNzeQyLQyHOn57DIXRj9LrZFf9uLGLJq66niYdwYvSXycpvsrTWNJjNc/trr7sJSd/vShok9kcd3utEQSkhf3PEDlpxQeF08OT/YJRtYC7veb0bTSQ7RSzncVPZMD56W/rprfjjtpd0YMRlBJHMe8XaZ3H8eQ3c7MZBu11VefBxh0NbgJbb+Rh7Bma5Z+weuoPJsSq24yjcOLSb40TNq6K2dxIob4K8KYsuquoHzoc+bhxuuIEAmu02Z5aKp8RnOv7rmJA8k5ii+1vNdQc6piu1GP/Ax1yA/M+shc+TbBagliqYgA/u2P6FU/wpPIq5+UDjXjjlEi+4VuKrsj01G7+qOdf6l2AlhnkIohPCTcF0Lr6zUpLwFw3fEhYXVPH0dj4GBRV18HecnyXmF3kt4gDYZAVmNNHDFV0Ybb1T07c=
-dAGF3Bj6CU8OlFFqJrlOjyLz2cEjtutnyld4JqIe:
-  secure: JYrvMWxBNKRaKIs3WA9y8Cpr16kjd9l/GM14RdwmY3uImKrtPoOKluyWGlDzcI2y7FWFrzDvXFmhWT4uHreDe4YEB2vFw+5Mx6DNk8X2pyUpwSlGSWn5wlqbLm6mYwdEv90K3GpnO/5uwmq/5RcT+yiL7IFVW6NRe7MRlYoMoTpgOm3Q1nqOu6ZocTrW1rRQed7NXAckV6ZwCjZV3kue1X7G7bK7fnMsIbgezwbjwT7Cd/xdyGuKqarN0MayiBOZnDb7Pyd2WUTww9NbNexLjdFlxr/D2IJFwG6OqsGQC828ehEqpM+wpQk4or/BrEst3b4qpO4UeFLQHtXV+r/wQSabVjwKwzP/FhKJTy1y2708RjMQO5lXgU4TZcEKTZJHK+7Y2XP5rcNQ3svRV90SmeMj7gJhAcuwMRAMAI1B+alqGC+tOwJKCXZWAX/2IZro8XZgFc740h4TfYvvKtpcbGDWmUxU4fB1dENUUrhNpzHfPhmyx0l6Mn0is5EfBv6ie4SN67BUJH1lvsNNHk2Qv7lc911BQMdDuylIboyCdnxeUZaOOuMb12odCCcwMy27b9wghfb2TJDcGoff+tjXjMmt6PgiJpI5LGjoR45UPeYoWn0ZFeCC9JzY9MOosqTBjjLhr4iepmAhQK0YX45J84gU9QhaOzo99TG5dQrp724=
+      - wang.shirui@husky.neu.edu
+      - yan.hao@husky.neu.edu
+      - jing.yu@husky.neu.edu
+      - ma.wenhe@husky.neu.edu
+      
