@@ -43,10 +43,14 @@ public class TaskController {
     @ResponseBody
     public String createTasks(@RequestBody String sTask, Principal principal, HttpServletRequest request, HttpServletResponse response) {
 
-        response.setStatus(HttpServletResponse.SC_CREATED);
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         JsonObject jsonObject = new JsonObject();
         Gson gson = new Gson();
+        if(gson.fromJson(sTask,Task.class).getDescription().length() >= 4096){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            jsonObject.addProperty("message", "task: bad request : size too large");
+            return jsonObject.toString();
+        }
         Task task = gson.fromJson(sTask,Task.class);
 
         User user;
@@ -59,13 +63,14 @@ public class TaskController {
         task.setUser(user);
 
         taskRepository.save(task);
+        response.setStatus(HttpServletResponse.SC_CREATED);
         jsonObject.addProperty("message", "task: "+task.getId());
         return jsonObject.toString();
     }
 
     @RequestMapping(value = "/tasks/{id}", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
-    public String updateTasks(@PathVariable("id") String id, Principal principal,@RequestParam String description) {
+    public String updateTasks(@PathVariable("id") String id, Principal principal,@RequestParam String description, HttpServletResponse response) {
         JsonObject jsonObject = new JsonObject();
 
         Task task ;
@@ -73,6 +78,7 @@ public class TaskController {
             task = taskRepository.findOne(id);
         }catch (Exception e){
             jsonObject.addProperty("message", "task does not exist");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
         User user;
@@ -80,10 +86,12 @@ public class TaskController {
             user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
         if(user != task.getUser()){
             jsonObject.addProperty("message", "user does not match");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return jsonObject.toString();
         }
         task.setDescription(description);
@@ -104,6 +112,7 @@ public class TaskController {
             task = taskRepository.findOne(id);
         }catch (Exception e){
             jsonObject.addProperty("message", "task does not exist");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
         User user;
@@ -111,10 +120,12 @@ public class TaskController {
             user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
         if(user != task.getUser()){
             jsonObject.addProperty("message", "user does not match");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return jsonObject.toString();
         }
         response.setStatus(HttpServletResponse.SC_NO_CONTENT);
@@ -125,17 +136,18 @@ public class TaskController {
 
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
     @ResponseBody
-    public String listTasks(@PathVariable String id, Principal principal) throws Exception {
+    public String listTasks( Principal principal,HttpServletResponse response) throws Exception {
         JsonObject jsonObject = new JsonObject();
         User user;
         try{
             user = userRepository.findByEmail(principal.getName());
         }catch (Exception e){
             jsonObject.addProperty("message", "user does not exist");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
 
-        List<Task> tasks = taskRepository.findTaskByUser_id(id);
+        List<Task> tasks = taskRepository.findTaskByUser_id(user.getId());
         JsonArray array = new JsonArray();
         if (tasks.size() > 0) {
             for (int i = 0; i < tasks.size(); i++) {
