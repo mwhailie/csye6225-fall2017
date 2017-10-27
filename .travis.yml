@@ -42,8 +42,8 @@ deploy:
     bucket: code-deploy.csye6225-fall2017-mawenhe.me
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application: codeDeploy
-    deployment_group: codeDeploy
+    application: csye6225_assignment7
+    deployment_group: csye6225_assignment7
     region: us-east-1
     wait-until-deployed: true
     on:
