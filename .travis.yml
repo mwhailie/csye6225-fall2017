@@ -29,7 +29,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAJWZFOWTCUARU7UHQ
     secret_access_key:
-      secure: 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
+      secure: S+ueRocobQ6oUH4AHljYSeGvjH+zmdXdti+ZpF5tgZ5p3VMifLzyIWip9Ilz24tGUehjnPGWccHvbn5uZzodXncba8J9JoMoa35kX9m/bza2yhpc5Aeyq6WDqOe082WPd3U/aY5fJc61AIdpuXL4bVcXAqtQd/Eg03aeUavgBOH6HlFGcnNH1TExNoLmBl/E5pbOQqm+VVARC976idUAda1nePKPal0YMtf1m2gYmxknIvZNOtKmWxjDSBf4tx3l1KiV6kb3theIH4hcFlMsvF+2IC4l49LFNfgqnJiXwgeqdN45TUKb8dRz3JXr0ODWVbrEdAiiU1J5wAtLrWu+kVs62E9L4tgUWHdR6QnRfMiT/STCbDPNttOf7Iruf+DmyQK9/6Q+3X1FOpwtqsD6tEOUQU6k3JqR5HaMeiMsP6DW7FIJj12698MzFxzx2W3gCH7HcZgGOSjCLIlual4Xsdg0+fTon45XZWr6RsiIGmhjcXfgR94/oXMVxVGeI9rlf3JXovydWx4L7Zf+rik0Y1LhtnxzZJOKJ3XGvQ4AY4TRVSiKbnuL8kjWZknhMFwiiOM+9/3OYqGltaReVOyX+LsmADB3rQC1dlShIMBSdNR3FwBDuyTEsaUuLCu3nX2bKC1CLS852WV0QU9qnkDzyN10q29O0lFi2I4Ym4mYCb0=
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     region: us-east-1
@@ -48,7 +48,9 @@ deploy:
 
     deployment_group: CSYE6225
     secret_access_key:
-      secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
+    secure: S+ueRocobQ6oUH4AHljYSeGvjH+zmdXdti+ZpF5tgZ5p3VMifLzyIWip9Ilz24tGUehjnPGWccHvbn5uZzodXncba8J9JoMoa35kX9m/bza2yhpc5Aeyq6WDqOe082WPd3U/aY5fJc61AIdpuXL4bVcXAqtQd/Eg03aeUavgBOH6HlFGcnNH1TExNoLmBl/E5pbOQqm+VVARC976idUAda1nePKPal0YMtf1m2gYmxknIvZNOtKmWxjDSBf4tx3l1KiV6kb3theIH4hcFlMsvF+2IC4l49LFNfgqnJiXwgeqdN45TUKb8dRz3JXr0ODWVbrEdAiiU1J5wAtLrWu+kVs62E9L4tgUWHdR6QnRfMiT/STCbDPNttOf7Iruf+DmyQK9/6Q+3X1FOpwtqsD6tEOUQU6k3JqR5HaMeiMsP6DW7FIJj12698MzFxzx2W3gCH7HcZgGOSjCLIlual4Xsdg0+fTon45XZWr6RsiIGmhjcXfgR94/oXMVxVGeI9rlf3JXovydWx4L7Zf+rik0Y1LhtnxzZJOKJ3XGvQ4AY4TRVSiKbnuL8kjWZknhMFwiiOM+9/3OYqGltaReVOyX+LsmADB3rQC1dlShIMBSdNR3FwBDuyTEsaUuLCu3nX2bKC1CLS852WV0QU9qnkDzyN10q29O0lFi2I4Ym4mYCb0=
+
+      #secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
     wait-until-deployed: true
     on:
       all_branches: true
