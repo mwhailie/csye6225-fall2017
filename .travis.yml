@@ -43,7 +43,7 @@ deploy:
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
     application: csye6225_assignment7
-    deployment_group: deployment #
+    deployment_group: csye6225_assignment7 #
     region: us-east-1
     wait-until-deployed: true
     on:
