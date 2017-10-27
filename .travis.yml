@@ -22,28 +22,34 @@ after_success:
 
 before_deploy:
   - cd ..
+  - pwd
 
 deploy:
   - provider: s3
-    access_key_id: CF8A557AD866258994BF0C6CC8ABE931
-    secrete_access_key:
-	secure: DANm8M83tNlMu9wckWS2zChjHlo4iVg2yLdek1Ya1hjS8bR0QA9MOzmtIsfWIer12rJgkOcNiDp0egQkcrx4qGZ7NYNGPFuJ5VS1KyNwj8tOHMVr3Bdm1uU+NLhknHX8qXjomDNLK+5YFukX+l3cOmVuMfKq0zhmJCCIxojOMAk9ig1CG6bQ57I9oBS1aNqSpLiA0fED8lUGjd4NSIEvGGNZ2vRjIBH3cJRwRodSxbcJmn8A3GUtgmvZu5qvNnpuAM53GZkauPKtof9YLIEBTv2t9hKpXUlR5EUA6agQDkDC8v3PqbYzf11pYTc+UwzI8w4dydt3WwpLCS0LjnpGtGoUi811LkcQbHptMq9BTrF3LgIC4NhDyicBiqtFHWqoHTLJ6rI/sQ4JxU1Nyp2FHs74VrAVWey8tB0kWHZjsxY0XVC7Nd6h03IFuELQlINzuEiRaMOgdaDpxLn6kw6OCqwRALxeSR1kv7ormMpDNcGXAbQYcMSCfOJBUpzMzLEtFQ0bSGZI948gVMUtO9pDtOmtX8WTouRetHpKJ2K4My2xGNlXqRAN1YWv4BbHLC9Am2EJ4AQ49w3jx/2Y933vVSC2YonZsfhmCm93GFJExXr5Rdt5ptuDQrPrGN+Ter5ufB86q+YljtjxTdmEWUX4SK0o9fSTf/f0j0t3s13azeg=
+    access_key_id: AKIAIKS3JQUCDYF5GB7A
+
+    secret_access_key:
+      secure: iMOVhER09HKVTXd9JzIWblsf2K3sFnjXSpQLGErsiv0qe6cCe1jHeozNi4Zfo5duPPRr5oJkLEvb42TXspBLbSeZjernVkNF8in4OJGxf9EuMV+RgPEFudRXija/xOpc0yT5LKn8fKeg0ogj07vlrNhj17V81cRoLaCOfAN2lCm4f9NmV++9hjwvy4sCrw8E+O2oXi+b0IEEReq69JrXtUoYQvZ2mUTpFUIW8IvGoK1xnI/oX0MHkoPqDEvN5CPdOHHp2TYiC2ynBy70k+z22ezo8VB1eReu2y3xSxO8Fz+mBCUGMjXaWCexbNZ3IYKuY0D/OvARz14W7U/COldraRn9/z2GU92TvaCiLI/jQ51g4fXgJmN+NhF9qC6tyU3ETG68RvCHgVbemZ0fIUMi1wuEQ3Si/Yf9z1cNJApnlom4+9E/B1eUkJBnNRc5zgppy8dJ3PGiESR8kW/1XLIdimbGiGN01LlOw3TzssvMRSLzee9Qy5NJdKzd1Fuyq09O2KZcWAii6kFqmbGGbcVkm8/h7SHQX2CotXgEzkB9rWREtqWWMQJXkW+DypqsDkQT3i6E3MHFOKkBoRDgrqjubyby8pAqweGIDrVIOXcpTvDdPnD+vI+Ft0V4IPKHamDW4C33nljykf4PE7sRB4EIBN+gbii6M7XG+QOZsDKKgqo=
     local_dir: codedeploy
-    bucket: code-deploy.csye.com
+    bucket: code-deploy.csye6225-fall2017-mawenhe.me
     region: us-east-1
     skip_cleanup: true
- - provider: codedeploy
-    access_key_id: CF8A557AD866258994BF0C6CC8ABE931
-    bucket: code-deploy.csye6225.com
-    key: SimpleJavaProject-${TRAVIS_JOB_NUMBER}.zip
-    bundle_type: zip
-    application: SimpleJavaProject
-    deployment_group: SimpleJavaProject
-    region: us-east-1
+    on:
+      all_branches: true
+  - provider: codedeploy
+    access_key_id: AKIAIKS3JQUCDYF5GB7A
     secret_access_key:
-      secure:  DANm8M83tNlMu9wckWS2zChjHlo4iVg2yLdek1Ya1hjS8bR0QA9MOzmtIsfWIer12rJgkOcNiDp0egQkcrx4qGZ7NYNGPFuJ5VS1KyNwj8tOHMVr3Bdm1uU+NLhknHX8qXjomDNLK+5YFukX+l3cOmVuMfKq0zhmJCCIxojOMAk9ig1CG6bQ57I9oBS1aNqSpLiA0fED8lUGjd4NSIEvGGNZ2vRjIBH3cJRwRodSxbcJmn8A3GUtgmvZu5qvNnpuAM53GZkauPKtof9YLIEBTv2t9hKpXUlR5EUA6agQDkDC8v3PqbYzf11pYTc+UwzI8w4dydt3WwpLCS0LjnpGtGoUi811LkcQbHptMq9BTrF3LgIC4NhDyicBiqtFHWqoHTLJ6rI/sQ4JxU1Nyp2FHs74VrAVWey8tB0kWHZjsxY0XVC7Nd6h03IFuELQlINzuEiRaMOgdaDpxLn6kw6OCqwRALxeSR1kv7ormMpDNcGXAbQYcMSCfOJBUpzMzLEtFQ0bSGZI948gVMUtO9pDtOmtX8WTouRetHpKJ2K4My2xGNlXqRAN1YWv4BbHLC9Am2EJ4AQ49w3jx/2Y933vVSC2YonZsfhmCm93GFJExXr5Rdt5ptuDQrPrGN+Ter5ufB86q+YljtjxTdmEWUX4SK0o9fSTf/f0j0t3s13azeg=
+      secure: iMOVhER09HKVTXd9JzIWblsf2K3sFnjXSpQLGErsiv0qe6cCe1jHeozNi4Zfo5duPPRr5oJkLEvb42TXspBLbSeZjernVkNF8in4OJGxf9EuMV+RgPEFudRXija/xOpc0yT5LKn8fKeg0ogj07vlrNhj17V81cRoLaCOfAN2lCm4f9NmV++9hjwvy4sCrw8E+O2oXi+b0IEEReq69JrXtUoYQvZ2mUTpFUIW8IvGoK1xnI/oX0MHkoPqDEvN5CPdOHHp2TYiC2ynBy70k+z22ezo8VB1eReu2y3xSxO8Fz+mBCUGMjXaWCexbNZ3IYKuY0D/OvARz14W7U/COldraRn9/z2GU92TvaCiLI/jQ51g4fXgJmN+NhF9qC6tyU3ETG68RvCHgVbemZ0fIUMi1wuEQ3Si/Yf9z1cNJApnlom4+9E/B1eUkJBnNRc5zgppy8dJ3PGiESR8kW/1XLIdimbGiGN01LlOw3TzssvMRSLzee9Qy5NJdKzd1Fuyq09O2KZcWAii6kFqmbGGbcVkm8/h7SHQX2CotXgEzkB9rWREtqWWMQJXkW+DypqsDkQT3i6E3MHFOKkBoRDgrqjubyby8pAqweGIDrVIOXcpTvDdPnD+vI+Ft0V4IPKHamDW4C33nljykf4PE7sRB4EIBN+gbii6M7XG+QOZsDKKgqo=
+    bucket: code-deploy.csye6225-fall2017-mawenhe.me
+    key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
+    bundle_type: zip
+    application: codeDeploy
+    deployment_group: codeDeploy
+    region: us-east-1
     wait-until-deployed: true
-
+    on:
+      all_branches: true
+    
 notifications:
   email:
     recipients:
