@@ -58,7 +58,7 @@ notifications:
   email:
     recipients:
     #  - wang.shirui@husky.neu.edu
-    #  - yan.hao@husky.neu.edu
+    #  - yan.hao@husky.neu.edu 1
     #  - jing.yu@husky.neu.edu
     #  - ma.wenhe@husky.neu.edu
 
