@@ -50,11 +50,11 @@ deploy:
       all_branches: true
     
 
-notifications:
-  email:
-    recipients:
-      - wang.shirui@husky.neu.edu
-      - yan.hao@husky.neu.edu
-      - jing.yu@husky.neu.edu
-      - ma.wenhe@husky.neu.edu
+#notifications:
+#  email:
+#    recipients:
+#      - wang.shirui@husky.neu.edu
+#      - yan.hao@husky.neu.edu
+#      - jing.yu@husky.neu.edu
+#      - ma.wenhe@husky.neu.edu
       
