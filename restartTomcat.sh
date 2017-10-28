@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo /etc/init.d/tomcat6 restart
+sudo /etc/init.d/tomcat8 restart
