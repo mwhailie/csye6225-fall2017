@@ -11,7 +11,7 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r csye_assignment7-${TRAVIS_JOB_NUMBER}.zip build/libs/ROOT.war appspec.yml
+  - zip -r csye_assignment7-${TRAVIS_JOB_NUMBER}.zip build/libs/ROOT.war appspec.yml restartTomcat.sh
   - ls -al
   - mv csye_assignment7-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
