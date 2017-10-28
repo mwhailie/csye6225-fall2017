@@ -36,7 +36,7 @@ deploy:
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: AKIAIFZTTDPUGY3JXMRA
+    access_key_id: $key_id
     bucket: code-deploy.csye6225-fall-jing.yu.me
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
