@@ -29,7 +29,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAJWZFOWTCUARU7UHQ
     secret_access_key:
-      secure: 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
+      secure: skey
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     region: us-east-1
@@ -48,7 +48,7 @@ deploy:
     deployment_group: CSYE6225
     secret_access_key:
 
-      secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
+      secure: skey
     wait-until-deployed: true
     on:
       all_branches: true
