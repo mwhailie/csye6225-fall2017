@@ -23,41 +23,39 @@ after_success:
 
 before_deploy:
   - cd ..
-
+  - pwd
 
 deploy:
   - provider: s3
     access_key_id: AKIAJWZFOWTCUARU7UHQ
     secret_access_key:
-      secure: KRz2XwP5Q+JVCqzmzPv1PfCqzp6whbsKDPKzxLPUro1RbwJoLidcYgdjnqxXjQI8DWGjKAcgHRDb4h/cly7GHpCWvUZdTP/fMtcwkqTnYtrJ9yGA0H8XdeaqRolhJ7BcdZxwhkJRhJFOGoHrW03zZ/THPZir2RJELMgGQljrbb4IQEoefYhbUrronmpwwaLu/wC3OBlR6mfJFmnKnn4gINjs+NPAo3cKye5EvX3qfCsm8oAAET5obTPWH8d1ZJZU55UKlrmB3nEFDKkQkpu0HEWzP9hmA71CGnvZpXCQCniiRAhREsSZIfsF2K5pbtfrzMPCfKEIRX1vWPYZ+IsDh/S13XNDcyFVPBTfv/OGUxyDz+FkwkRkOzin8jt2dBVunytBJDNrX64EF6hFUd7w5gVemcyfK0TiikUqqvWpsURKexfqA9rvjrxEvP9tvFMaUkFxlGO0J6eDzCFZLVu3vzKhxOxiHtniv4jSBdcFMQJVyMoTt/ljWSkkeZzkTd8jEY7ma65xeNY/o5VsnwV2J+S4q9MYEam4uxeljb3ZKgBGnLEJZlgQiaNHsA14AWukHQ/Ycx6CI08Wglg2RqaD3vxz26NDbe+WuAtvV6uKLufU/wXoXkEhtf5VYtr4azLcvWvdDu8rbxTVRaQ44mPhmSkYRkwxCS1CZQ72SB0Rwp8=
+      secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     region: us-east-1
     skip_cleanup: true
     on:
       all_branches: true
-
   - provider: codedeploy
     access_key_id: AKIAJWZFOWTCUARU7UHQ
+    secret_access_key:
+      secure: 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
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    region: us-east-1
     application: CSYE6225
-
     deployment_group: CSYE6225
-    secret_access_key:
-
-      secure: KRz2XwP5Q+JVCqzmzPv1PfCqzp6whbsKDPKzxLPUro1RbwJoLidcYgdjnqxXjQI8DWGjKAcgHRDb4h/cly7GHpCWvUZdTP/fMtcwkqTnYtrJ9yGA0H8XdeaqRolhJ7BcdZxwhkJRhJFOGoHrW03zZ/THPZir2RJELMgGQljrbb4IQEoefYhbUrronmpwwaLu/wC3OBlR6mfJFmnKnn4gINjs+NPAo3cKye5EvX3qfCsm8oAAET5obTPWH8d1ZJZU55UKlrmB3nEFDKkQkpu0HEWzP9hmA71CGnvZpXCQCniiRAhREsSZIfsF2K5pbtfrzMPCfKEIRX1vWPYZ+IsDh/S13XNDcyFVPBTfv/OGUxyDz+FkwkRkOzin8jt2dBVunytBJDNrX64EF6hFUd7w5gVemcyfK0TiikUqqvWpsURKexfqA9rvjrxEvP9tvFMaUkFxlGO0J6eDzCFZLVu3vzKhxOxiHtniv4jSBdcFMQJVyMoTt/ljWSkkeZzkTd8jEY7ma65xeNY/o5VsnwV2J+S4q9MYEam4uxeljb3ZKgBGnLEJZlgQiaNHsA14AWukHQ/Ycx6CI08Wglg2RqaD3vxz26NDbe+WuAtvV6uKLufU/wXoXkEhtf5VYtr4azLcvWvdDu8rbxTVRaQ44mPhmSkYRkwxCS1CZQ72SB0Rwp8=
-
+    region: us-east-1
     wait-until-deployed: true
     on:
       all_branches: true
-    
 
-notifications:
-  email:
-    recipients:
+
+    #smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
+
+#notifications:
+#  email:
+#    recipients:
     #  - wang.shirui@husky.neu.edu
     #  - yan.hao@husky.neu.edu 3
     #  - jing.yu@husky.neu.edu
