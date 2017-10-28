@@ -26,9 +26,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAIFZTTDPUGY3JXMRA
+    access_key_id: $key_id
     secret_access_key:
-      secure: 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
+      secure: $secure
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall-jing.yu.me
     region: us-east-1
@@ -44,7 +44,7 @@ deploy:
     deployment_group: csye6225
     region: us-east-1
     secret_access_key:
-      secure: lvjADBnlzHN9A0xI0D7s2Yoi+6HdLDFN8iw1RuQT
+      secure: $secure
     wait-until-deployed: true
     on:
       all_branches: true
