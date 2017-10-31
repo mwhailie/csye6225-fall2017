@@ -1,4 +1,4 @@
-sudo service tomcat7 stop
-cd /var/lib/tomcat7/webapps
+sudo service tomcat8 stop
+cd /var/lib/tomcat8/webapps
 sudo rm -rf ROOT
-sudo service tomcat7 start
+sudo service tomcat8 start
