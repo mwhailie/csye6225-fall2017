@@ -3,10 +3,10 @@ jdk:
 - oraclejdk8
 sudo: false
 install: true
-script:
 
-- "./gradlew war"
-- "./gradlew build"
+script:
+  - ./gradlew build
+  - ./gradlew war
 
 
 
