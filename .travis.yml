@@ -26,9 +26,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAIFZTTDPUGY3JXMRA
+    access_key_id: AKIAJIMWCWWGXXJNJJHA
     secret_access_key:
-      secure: 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
+      secure: OZ4KfWQPd6EUCEzO7kIkpT9rtehxsVLVD89BluqT
     local_dir: codedeploy
     bucket: code-deploy.csye6225-fall-jing.yu.me
     region: us-east-1
@@ -36,7 +36,7 @@ deploy:
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: AKIAIFZTTDPUGY3JXMRA
+    access_key_id: AKIAJIMWCWWGXXJNJJHA
     bucket: code-deploy.csye6225-fall-jing.yu.me
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
@@ -44,7 +44,7 @@ deploy:
     deployment_group: csye6225
     region: us-east-1
     secret_access_key:
-      secure: lvjADBnlzHN9A0xI0D7s2Yoi+6HdLDFN8iw1RuQT
+      secure: OZ4KfWQPd6EUCEzO7kIkpT9rtehxsVLVD89BluqT
     wait-until-deployed: true
     on:
       all_branches: true
