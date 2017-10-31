@@ -40,8 +40,8 @@ deploy:
     bucket: code-deploy.csye6225-fall2017-yanhao.me
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application: csye6225
-    deployment_group: csye6225
+    application: CSYE6225
+    deployment_group: CSYE6225
     region: us-east-1
     secret_access_key:
       secure: smMeQy1VGR8mmrWjAVEp0h7QmaXdlalb7odzt10t
