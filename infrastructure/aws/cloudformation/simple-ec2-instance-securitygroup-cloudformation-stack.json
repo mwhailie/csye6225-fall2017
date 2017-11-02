@@ -4,18 +4,6 @@
     "Resources": {
         "EC2Instance": {
             "Type": "AWS::EC2::Instance",
-            "Metadata": {
-                "AWS::CloudFormation::Init": {
-                    "config": {
-                        "packages": {
-                            "apt": {
-                                "java-1.8.0-openjdk": [],
-                                "tomcat8": []
-                            }
-                        }
-                    }
-                }
-            },
             "Properties": {
                 "ImageId": "ami-cd0f5cb6",
                 "InstanceType": "t2.micro",
