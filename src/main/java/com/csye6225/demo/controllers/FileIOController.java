@@ -82,8 +82,9 @@ public class FileIOController {
             jsonObject.addProperty("Error Type       " , e.getClass().toString());
             return jsonObject.toString();
         }
+
         try {
-            AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+            AmazonS3 s3client = new AmazonS3Client();
             s3client.putObject(new PutObjectRequest(bucketName, keyName, fileToUpload));
         } catch (AmazonServiceException ase) {
             jsonObject.addProperty("Status", "Caught an AmazonServiceException, which " +
