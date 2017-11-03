@@ -42,14 +42,15 @@ public class FileIOController {
 
     @RequestMapping(value = "/tasks/{id}/attachments", method = RequestMethod.POST)
     @ResponseBody
-    public String attachFile(@PathVariable String id,  @RequestParam("file") MultipartFile file) throws Exception {
+    public String attachFile(@PathVariable String id,  @RequestParam("file") MultipartFile file,HttpServletResponse response) throws Exception {
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         JsonObject jsonObject = new JsonObject();
         Task task;
         try {
             task = taskRepository.findOne(id);
         }catch (Exception e){
-
-            //jsonObject.addProperty("description", task.getDescription());
+            jsonObject.addProperty("message", "task does not exist");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
 
@@ -66,8 +67,13 @@ public class FileIOController {
         //Upload to S3
         String bucketName     = "csye6225-fall2017-mawenhe.me.csye6225.com";
         String keyName        = task.getId() + ":" + attachment.getId().toString();
-        File fileToUpload = transferFile(file, relativePath + folder);
-
+        File fileToUpload;
+        try {
+            fileToUpload = transferFile(file, relativePath + folder);
+        }catch (IOException e){
+            jsonObject.addProperty("Error Message: " , e.getMessage());
+            return jsonObject.toString();
+        }
         try {
             AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
             s3client.putObject(new PutObjectRequest(bucketName, keyName, fileToUpload));
@@ -81,6 +87,7 @@ public class FileIOController {
             jsonObject.addProperty("AWS Error Code   " , ase.getErrorCode());
             jsonObject.addProperty("Error Type       " , ase.getErrorType().toString());
             jsonObject.addProperty("Request ID       " , ase.getRequestId());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
 
         } catch (AmazonClientException ace) {
@@ -90,15 +97,18 @@ public class FileIOController {
                     "communicate with S3, " +
                     "such as not being able to access the network.");
             jsonObject.addProperty("Error Message: " , ace.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }catch (Exception e) {
             jsonObject.addProperty("Error Message: " , e.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
 
         jsonObject.addProperty("path", attachment.getPath());
         jsonObject.addProperty("task", attachment.getTask().toString());
         jsonObject.addProperty("attachment_id", attachment.getId());
+        response.setStatus(HttpServletResponse.SC_OK);
         //jsonObject.addProperty("description", task.getDescription());
         return jsonObject.toString();
     }
