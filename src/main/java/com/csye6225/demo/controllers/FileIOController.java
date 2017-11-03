@@ -71,7 +71,13 @@ public class FileIOController {
         try {
             fileToUpload = transferFile(file, relativePath + folder);
         }catch (IOException e){
-            System.out.println("111111111");
+            logger.error("1111111" );
+            jsonObject.addProperty("Error Message: " , e.getMessage());
+            jsonObject.addProperty("Error Type       " , e.getClass().toString());
+            return jsonObject.toString();
+        }
+        catch (Exception e){
+            logger.error("22222222" );
             jsonObject.addProperty("Error Message: " , e.getMessage());
             jsonObject.addProperty("Error Type       " , e.getClass().toString());
             return jsonObject.toString();
@@ -98,12 +104,12 @@ public class FileIOController {
                     "an internal error while trying to " +
                     "communicate with S3, " +
                     "such as not being able to access the network.");
-            System.out.println("4444444");
             jsonObject.addProperty("Error Message: " , ace.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }catch (Exception e) {
-            System.out.println("22222");
+            logger.error("33333333" );
+            jsonObject.addProperty("Error Type: " , e.getClass().toString());
             jsonObject.addProperty("Error Message: " , e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
@@ -143,9 +149,10 @@ public class FileIOController {
         if(!file.isEmpty()) {
             String filename = file.getOriginalFilename();
             File filepath = new File(path,filename);
+            logger.error("size of file is--------------------------------------" + filepath.length());
             return filepath;
         } else {
-            System.out.println("3333333");
+            logger.error("empty multipartfile");
             throw new IOException("empty multipartfile");
         }
     }
