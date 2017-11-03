@@ -72,6 +72,7 @@ public class FileIOController {
             fileToUpload = transferFile(file, relativePath + folder);
         }catch (IOException e){
             jsonObject.addProperty("Error Message: " , e.getMessage());
+            jsonObject.addProperty("Error Type       " , e.getErrorType().toString());
             return jsonObject.toString();
         }
         try {
@@ -141,7 +142,7 @@ public class FileIOController {
             File filepath = new File(path,filename);
             return filepath;
         } else {
-            throw new IOException();
+            throw new IOException("empty multipartfile");
         }
     }
 
