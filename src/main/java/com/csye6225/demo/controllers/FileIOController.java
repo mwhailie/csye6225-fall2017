@@ -91,6 +91,9 @@ public class FileIOController {
                     "such as not being able to access the network.");
             jsonObject.addProperty("Error Message: " , ace.getMessage());
             return jsonObject.toString();
+        }catch (Exception e) {
+            jsonObject.addProperty("Error Message: " , e.getMessage());
+            return jsonObject.toString();
         }
 
         jsonObject.addProperty("path", attachment.getPath());
@@ -128,7 +131,7 @@ public class FileIOController {
             File filepath = new File(path,filename);
             return filepath;
         } else {
-            return null;
+            throw new IOException();
         }
     }
 
