@@ -71,6 +71,7 @@ public class FileIOController {
         try {
             fileToUpload = transferFile(file, relativePath + folder);
         }catch (IOException e){
+            System.out.println("111111111");
             jsonObject.addProperty("Error Message: " , e.getMessage());
             jsonObject.addProperty("Error Type       " , e.getClass().toString());
             return jsonObject.toString();
@@ -101,6 +102,7 @@ public class FileIOController {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }catch (Exception e) {
+            System.out.println("22222");
             jsonObject.addProperty("Error Message: " , e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
@@ -142,6 +144,7 @@ public class FileIOController {
             File filepath = new File(path,filename);
             return filepath;
         } else {
+            System.out.println("3333333");
             throw new IOException("empty multipartfile");
         }
     }
