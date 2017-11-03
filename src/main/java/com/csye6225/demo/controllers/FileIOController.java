@@ -72,7 +72,7 @@ public class FileIOController {
             fileToUpload = transferFile(file, relativePath + folder);
         }catch (IOException e){
             jsonObject.addProperty("Error Message: " , e.getMessage());
-            jsonObject.addProperty("Error Type       " , e.getErrorType().toString());
+            jsonObject.addProperty("Error Type       " , e.getClass().toString());
             return jsonObject.toString();
         }
         try {
