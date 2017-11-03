@@ -54,10 +54,10 @@
                         }
                     }
                 ],
-                "Tag" : {
+                "Tags" : [{
                     "Key" : "NAME",
                     "Value" : "CSYE6225"
-                },
+                }],
                 "DisableApiTermination": false
             }
         },
