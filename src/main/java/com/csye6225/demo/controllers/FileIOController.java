@@ -2,6 +2,7 @@ package com.csye6225.demo.controllers;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -84,7 +85,7 @@ public class FileIOController {
         }
 
         try {
-            AmazonS3 s3client = new AmazonS3Client();
+            AmazonS3 s3client = new AmazonS3Client(DefaultAWSCredentialsProviderChain.getInstance());
             s3client.putObject(new PutObjectRequest(bucketName, keyName, fileToUpload));
         } catch (AmazonServiceException ase) {
             jsonObject.addProperty("Status", "Caught an AmazonServiceException, which " +
