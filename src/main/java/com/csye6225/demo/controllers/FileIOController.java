@@ -98,6 +98,7 @@ public class FileIOController {
                     "an internal error while trying to " +
                     "communicate with S3, " +
                     "such as not being able to access the network.");
+            System.out.println("4444444");
             jsonObject.addProperty("Error Message: " , ace.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
