@@ -19,7 +19,7 @@ after_success:
   - cd codedeploy
   - ls -al
   - pwd
-
+  - sudo rm -r /var/lib/tomcat8/webapps/ROOT
 before_deploy:
   - cd ..
   - pwd
