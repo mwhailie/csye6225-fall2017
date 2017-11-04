@@ -11,9 +11,9 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r csye_assignment7-${TRAVIS_JOB_NUMBER}.zip build/libs/ROOT.war appspec.yml restartTomcat.sh
+  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/ROOT.war appspec.yml restartTomcat.sh
   - ls -al
-  - mv csye_assignment7-${TRAVIS_JOB_NUMBER}.zip codedeploy/
+  - mv application-cloudformation-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
   - pwd
   - cd codedeploy
@@ -40,10 +40,10 @@ deploy:
     secret_access_key:
       secure: t3u7jS0iu5o0sRyVXJATJZB2ZMuWl7KRDcQ9Dwq0kTNK7avEgkMZdQQ+fGKshXslAjPqzhCL5lxmg6lzxfHLB41w+0KhwWLq3TQGTUuLENXHU2hNacYUKFi6tU1VlshY412u77CMxZxnZ+9zWyzrQO/C8pOEUDzN18StvKfJTi5vVoffrmDinkd90+YUBaNgoLT3kD5M1qjVRw6sXqtpBz+iAReTQ8A/D054ncLaOndGdf7rfK7QCviwKDwR73VFLOQIoa/XuDco2HSbnw/IfAWW8Q3NjIaiXNtq+VLQJsVBI4vfVIXDttDAycbmc7kaAxTx34YAGmK/cAfnnvWIBgWhOeSg8f3OylvsmtyHHtZK82kcWXP9e0urOKBfg2hnhUpJHnrViJGebLGLJ0n1IKzDEE2ejcIqCkW9ye14HusaNq4yfH8SY9vu5yQRBCdicB3nPurzvuNeknem72xtAYP1KktQ8jfeMCk9xPbmzvY9g8sGwkfQPd/fmpZ0g3Cz3ywps+r750ibpI7NVjQcEXd8W+meBFuJ+tQsW6+I83NotDYgLN4q0IzDCS39vJe43dMYKH13CkeJ3H0Nz/swYIhZcYSK9SD/eanAtlmONqf9KAdxiLo+X43qmxGJ5zi4VBVgP5wn7aR8WtN8CRBcXIseau+odArZzi1M07mLLe0=
     bucket: code-deploy.csye6225-assignment7.com  #
-    key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
+    key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application:  csye6225_assignment7
-    deployment_group:  csye6225_assignment7
+    application:  application-cloudformation
+    deployment_group:  application-cloudformation
     region: us-east-1
     wait-until-deployed: true
     on:

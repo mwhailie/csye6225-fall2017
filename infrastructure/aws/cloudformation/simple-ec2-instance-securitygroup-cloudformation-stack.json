@@ -125,7 +125,7 @@
                                             "codedeploy:GetApplicationRevision"
                                         ],
                                         "Resource": [
-                                            "arn:aws:codedeploy:us-east-1:334797497357:application:csye6225_assignment7" 
+                                            "arn:aws:codedeploy:us-east-1:334797497357:application:application-cloudformation" 
                                         ]
                                     },
                                     {
@@ -342,7 +342,21 @@
                 }
             },
             "DeletionPolicy": "Delete"
-        }
+        },
+        "DeploymentGroup" : {
+            "Type" : "AWS::CodeDeploy::DeploymentGroup",
+            "Properties" : {
+              "ApplicationName" : "application-cloudformation",
+              "DeploymentGroupName" : "application-cloudformation",
+              "Ec2TagFilters" : [{
+                    "Key" : "NAME",
+                    "Value" : "CSYE6225"
+              }],
+              "DeploymentStyle" : "IN_PLACE",
+              "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
+              "ServiceRoleArn" : {"Ref" : "iamCodeDeployServiceRole"}
+            }
+          }
     },
     "Parameters": {
         "ParamVPCID": {
