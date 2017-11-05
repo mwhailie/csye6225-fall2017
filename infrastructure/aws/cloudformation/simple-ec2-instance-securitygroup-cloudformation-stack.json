@@ -184,13 +184,16 @@
 		                            "Action": ["sts:AssumeRole"],
 		                            "Effect": "Allow",
                                     "Principal": {
-                                            "Service": [ "ec2.amazonaws.com" ]
+                                            "Service": [ 
+                                                "codedeploy.amazonaws.com",
+                                                "ec2.amazonaws.com" 
+                                            ]
                                         }
                                     }
                             ]
                         },
                         "ManagedPolicyArns": ["arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"],
-                    "RoleName": "iamCodeDeployServiceRoleTemplate"
+                        "RoleName": "iamCodeDeployServiceRoleTemplate"
             }            
         },
         "csye6225webapp": {
@@ -343,18 +346,28 @@
             },
             "DeletionPolicy": "Delete"
         },
+        "codedeployApplication" : {
+            "Type" : "AWS::CodeDeploy::Application",
+            "Properties" : {
+              "ApplicationName" : "application-cloudformation"
+            }
+          },
         "DeploymentGroup" : {
             "Type" : "AWS::CodeDeploy::DeploymentGroup",
+            "DependsOn" : ["iamCodeDeployServiceRole"],
             "Properties" : {
               "ApplicationName" : "application-cloudformation",
               "DeploymentGroupName" : "application-cloudformation",
               "Ec2TagFilters" : [{
                     "Key" : "NAME",
+                    "Type" : "KEY_AND_VALUE",
                     "Value" : "CSYE6225"
               }],
-              "DeploymentStyle" : "IN_PLACE",
+              "DeploymentStyle" : {
+                      "DeploymentOption" : "WITHOUT_TRAFFIC_CONTROL"
+              },
               "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
-              "ServiceRoleArn" : {"Ref" : "iamCodeDeployServiceRole"}
+              "ServiceRoleArn" : {"Fn::GetAtt" : ["iamCodeDeployServiceRole", "Arn"] }
             }
           }
     },
