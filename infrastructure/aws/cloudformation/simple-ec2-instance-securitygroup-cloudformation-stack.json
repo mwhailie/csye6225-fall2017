@@ -125,8 +125,16 @@
                                             "codedeploy:GetApplicationRevision"
                                         ],
                                         "Resource": [
-                                            "arn:aws:codedeploy:us-east-1:334797497357:application:application-cloudformation" 
-                                        ]
+                                                {
+                                                    "Fn::Join": [
+                                                        "",
+                                                        [
+                                                            "arn:aws:codedeploy:us-east-1:",
+                                                            { "Ref" : "AWS::AccountId" },
+                                                            ":application:application-cloudformation"
+                                                        ]
+                                                ]}
+                                            ]
                                     },
                                     {
                                         "Effect": "Allow",
@@ -144,9 +152,33 @@
                                             "codedeploy:GetDeploymentConfig"
                                         ],
                                         "Resource": [
-                                            "arn:aws:codedeploy:us-east-1:334797497357:deploymentconfig:CodeDeployDefault.OneAtATime",
-                                            "arn:aws:codedeploy:us-east-1:334797497357:deploymentconfig:CodeDeployDefault.HalfAtATime",
-                                            "arn:aws:codedeploy:us-east-1:334797497357:deploymentconfig:CodeDeployDefault.AllAtOnce"
+                                            {
+                                                "Fn::Join": [
+                                                    "",
+                                                    [
+                                                        "arn:aws:codedeploy:us-east-1:",
+                                                        { "Ref" : "AWS::AccountId" },
+                                                        ":deploymentconfig:CodeDeployDefault.OneAtATime"
+                                                    ]
+                                            ]},
+                                            {
+                                                "Fn::Join": [
+                                                    "",
+                                                    [
+                                                        "arn:aws:codedeploy:us-east-1:",
+                                                        { "Ref" : "AWS::AccountId" },
+                                                        ":deploymentconfig:CodeDeployDefault.HalfAtATime"
+                                                    ]
+                                            ]},
+                                            {
+                                                "Fn::Join": [
+                                                    "",
+                                                    [
+                                                        "arn:aws:codedeploy:us-east-1:",
+                                                        { "Ref" : "AWS::AccountId" },
+                                                        ":deploymentconfig:CodeDeployDefault.AllAtOnce"
+                                                    ]
+                                            ]}
                                         ]
                                     }
                                 ]
