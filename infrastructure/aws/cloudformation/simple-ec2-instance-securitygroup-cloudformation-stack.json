@@ -26,6 +26,7 @@
                                 "sudo apt-get update && apt-get upgrade -y\n",
                                 "sudo apt-get -y install default-jre\n",
                                 "sudo apt-get -y install default-jdk\n",
+                                "sudo apt-get -y install mysql-client-core-5.7\n",
                                 "sudo apt-get -y install tomcat8\n",
                                 "sudo apt-get -y install ruby\n",
                                 "sudo apt-get install wget \n",
