@@ -70,7 +70,7 @@ public class FileIOController {
         String keyName        = task.getId() + ":" + attachment.getId().toString();
         File fileToUpload;
         try {
-            fileToUpload = transferFile(file, relativePath + folder);
+            fileToUpload = transferFile(file, "/home/ubuntu"/*relativePath + folder*/);
         }catch (IOException e){
             logger.error("1111111" );
             jsonObject.addProperty("Error Message: " , e.getMessage());
