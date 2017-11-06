@@ -58,7 +58,7 @@ public class FileIOController {
         String folder = "/myFile";
         String relativePath = System.getProperty("user.dir");
         //getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        String filePath = saveFile(file, relativePath + folder);
+        String filePath = saveFile(file, "/home/ubuntu"/*relativePath + folder*/);
 
         Attachment attachment = new Attachment();
         attachment.setPath(filePath);
@@ -66,7 +66,7 @@ public class FileIOController {
         attachmentRepository.save(attachment);
 
         //Upload to S3
-        String bucketName     = "csye6225-fall2017-mawenhe.me.csye6225.com";
+        String bucketName     = "csye6225bucket-cloudformation.com";
         String keyName        = task.getId() + ":" + attachment.getId().toString();
         File fileToUpload;
         try {

@@ -30,7 +30,7 @@ deploy:
     secret_access_key:
       secure: t3u7jS0iu5o0sRyVXJATJZB2ZMuWl7KRDcQ9Dwq0kTNK7avEgkMZdQQ+fGKshXslAjPqzhCL5lxmg6lzxfHLB41w+0KhwWLq3TQGTUuLENXHU2hNacYUKFi6tU1VlshY412u77CMxZxnZ+9zWyzrQO/C8pOEUDzN18StvKfJTi5vVoffrmDinkd90+YUBaNgoLT3kD5M1qjVRw6sXqtpBz+iAReTQ8A/D054ncLaOndGdf7rfK7QCviwKDwR73VFLOQIoa/XuDco2HSbnw/IfAWW8Q3NjIaiXNtq+VLQJsVBI4vfVIXDttDAycbmc7kaAxTx34YAGmK/cAfnnvWIBgWhOeSg8f3OylvsmtyHHtZK82kcWXP9e0urOKBfg2hnhUpJHnrViJGebLGLJ0n1IKzDEE2ejcIqCkW9ye14HusaNq4yfH8SY9vu5yQRBCdicB3nPurzvuNeknem72xtAYP1KktQ8jfeMCk9xPbmzvY9g8sGwkfQPd/fmpZ0g3Cz3ywps+r750ibpI7NVjQcEXd8W+meBFuJ+tQsW6+I83NotDYgLN4q0IzDCS39vJe43dMYKH13CkeJ3H0Nz/swYIhZcYSK9SD/eanAtlmONqf9KAdxiLo+X43qmxGJ5zi4VBVgP5wn7aR8WtN8CRBcXIseau+odArZzi1M07mLLe0=
     local_dir: codedeploy
-    bucket: csye6225-fall2017-wangshirui.me.csye6225.com  ####
+    bucket: "csye6225bucket-cloudformation.com"  ####
     region: us-east-1
     skip_cleanup: true
     on:
@@ -39,7 +39,7 @@ deploy:
     access_key_id: AKIAIKS3JQUCDYF5GB7A
     secret_access_key:
       secure: t3u7jS0iu5o0sRyVXJATJZB2ZMuWl7KRDcQ9Dwq0kTNK7avEgkMZdQQ+fGKshXslAjPqzhCL5lxmg6lzxfHLB41w+0KhwWLq3TQGTUuLENXHU2hNacYUKFi6tU1VlshY412u77CMxZxnZ+9zWyzrQO/C8pOEUDzN18StvKfJTi5vVoffrmDinkd90+YUBaNgoLT3kD5M1qjVRw6sXqtpBz+iAReTQ8A/D054ncLaOndGdf7rfK7QCviwKDwR73VFLOQIoa/XuDco2HSbnw/IfAWW8Q3NjIaiXNtq+VLQJsVBI4vfVIXDttDAycbmc7kaAxTx34YAGmK/cAfnnvWIBgWhOeSg8f3OylvsmtyHHtZK82kcWXP9e0urOKBfg2hnhUpJHnrViJGebLGLJ0n1IKzDEE2ejcIqCkW9ye14HusaNq4yfH8SY9vu5yQRBCdicB3nPurzvuNeknem72xtAYP1KktQ8jfeMCk9xPbmzvY9g8sGwkfQPd/fmpZ0g3Cz3ywps+r750ibpI7NVjQcEXd8W+meBFuJ+tQsW6+I83NotDYgLN4q0IzDCS39vJe43dMYKH13CkeJ3H0Nz/swYIhZcYSK9SD/eanAtlmONqf9KAdxiLo+X43qmxGJ5zi4VBVgP5wn7aR8WtN8CRBcXIseau+odArZzi1M07mLLe0=
-    bucket: csye6225-fall2017-wangshirui.me.csye6225.com  ####
+    bucket: "csye6225bucket-cloudformation.com"  ####
     key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
     application:  application-cloudformation
