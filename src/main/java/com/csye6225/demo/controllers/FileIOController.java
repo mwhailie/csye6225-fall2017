@@ -58,7 +58,7 @@ public class FileIOController {
         String folder = "/myFile";
         String relativePath = System.getProperty("user.dir");
         //getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        String filePath = saveFile(file, "/home/ubuntu/tempdir"/*relativePath + folder*/);
+        String filePath = saveFile(file, "/home/ubuntu"/*relativePath + folder*/);
 
         Attachment attachment = new Attachment();
         attachment.setPath(filePath);
@@ -66,20 +66,17 @@ public class FileIOController {
         attachmentRepository.save(attachment);
 
         //Upload to S3
-        // String bucketName     = "csye6225-fall2017-wangshirui.me.csye6225.com";
         String bucketName     = "csye6225bucket-cloudformation.com";
         String keyName        = task.getId() + ":" + attachment.getId().toString();
         File fileToUpload;
         try {
-            fileToUpload = transferFile(file, "/home/ubuntu/tempdir"/*relativePath + folder*/);
+            fileToUpload = transferFile(file, "/home/ubuntu"/*relativePath + folder*/);
         }catch (IOException e){
-            logger.error("1111111" );
             jsonObject.addProperty("Error Message: " , e.getMessage());
             jsonObject.addProperty("Error Type       " , e.getClass().toString());
             return jsonObject.toString();
         }
         catch (Exception e){
-            logger.error("22222222" );
             jsonObject.addProperty("Error Message: " , e.getMessage());
             jsonObject.addProperty("Error Type       " , e.getClass().toString());
             return jsonObject.toString();
@@ -111,7 +108,6 @@ public class FileIOController {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }catch (Exception e) {
-            logger.error("33333333" );
             jsonObject.addProperty("Error Type: " , e.getClass().toString());
             jsonObject.addProperty("Error Message: " , e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
