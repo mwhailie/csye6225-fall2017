@@ -66,7 +66,7 @@ public class FileIOController {
         attachmentRepository.save(attachment);
 
         //Upload to S3
-        String bucketName     = "csye6225bucketjyt0817-cloudformation.com";
+        String bucketName     = "csye6225bucket-cloudformation.com";
         String keyName        = task.getId() + ":" + attachment.getId().toString();
         File fileToUpload;
         try {
