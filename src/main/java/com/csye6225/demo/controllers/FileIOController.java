@@ -1,5 +1,13 @@
 package com.csye6225.demo.controllers;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.csye6225.demo.ingore.HardCodeEnum;
 import com.csye6225.demo.pojos.Attachment;
 import com.csye6225.demo.pojos.Task;
 import com.csye6225.demo.repositories.AttachmentRepository;
@@ -19,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.List;
@@ -35,29 +44,81 @@ public class FileIOController {
 
     @RequestMapping(value = "/tasks/{id}/attachments", method = RequestMethod.POST)
     @ResponseBody
-    public String attachFile(@PathVariable String id,  @RequestParam("file") MultipartFile file) throws Exception {
-        Task task = taskRepository.findOne(id);
-
-        System.out.println(task);
-
+    public String attachFile(@PathVariable String id,  @RequestParam("file") MultipartFile file,HttpServletResponse response) throws Exception {
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         JsonObject jsonObject = new JsonObject();
+        Task task;
+        try {
+            task = taskRepository.findOne(id);
+        }catch (Exception e){
+            jsonObject.addProperty("message", "task does not exist");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return jsonObject.toString();
+        }
 
-        //Gson gson = new Gson();
-       // Attachment attachment = gson.fromJson("",Attachment.class);
-
-        Attachment attachment = new Attachment();
         String folder = "/myFile";
         String relativePath = System.getProperty("user.dir");
         //getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        String filePath = saveFile(file, relativePath + folder);
+        String filePath = saveFile(file, "/home/ubuntu"/*relativePath + folder*/);
 
+        Attachment attachment = new Attachment();
         attachment.setPath(filePath);
         attachment.setTask(task);
         attachmentRepository.save(attachment);
 
+        //Upload to S3
+        String bucketName     = HardCodeEnum.BUCKET_NAME.value();
+        String keyName        = task.getId() + ":" + attachment.getId().toString();
+        File fileToUpload;
+        try {
+            fileToUpload = transferFile(file, "/home/ubuntu"/*relativePath + folder*/);
+        }catch (IOException e){
+            jsonObject.addProperty("Error Message: " , e.getMessage());
+            jsonObject.addProperty("Error Type       " , e.getClass().toString());
+            return jsonObject.toString();
+        }
+        catch (Exception e){
+            jsonObject.addProperty("Error Message: " , e.getMessage());
+            jsonObject.addProperty("Error Type       " , e.getClass().toString());
+            return jsonObject.toString();
+        }
+
+        try {
+            AmazonS3 s3client = new AmazonS3Client(DefaultAWSCredentialsProviderChain.getInstance());
+            s3client.putObject(new PutObjectRequest(bucketName, keyName, fileToUpload));
+        } catch (AmazonServiceException ase) {
+            jsonObject.addProperty("Status", "Caught an AmazonServiceException, which " +
+                    "means your request made it " +
+                    "to Amazon S3, but was rejected with an error response" +
+                    " for some reason.");
+            jsonObject.addProperty("Error Message    ",ase.getMessage());
+            jsonObject.addProperty("HTTP Status Code ",  ase.getStatusCode());
+            jsonObject.addProperty("AWS Error Code   " , ase.getErrorCode());
+            jsonObject.addProperty("Error Type       " , ase.getErrorType().toString());
+            jsonObject.addProperty("Request ID       " , ase.getRequestId());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return jsonObject.toString();
+
+        } catch (AmazonClientException ace) {
+            jsonObject.addProperty("Status", "Caught an AmazonClientException, which " +
+                    "means the client encountered " +
+                    "an internal error while trying to " +
+                    "communicate with S3, " +
+                    "such as not being able to access the network.");
+            jsonObject.addProperty("Error Message: " , ace.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return jsonObject.toString();
+        }catch (Exception e) {
+            jsonObject.addProperty("Error Type: " , e.getClass().toString());
+            jsonObject.addProperty("Error Message: " , e.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return jsonObject.toString();
+        }
+
         jsonObject.addProperty("path", attachment.getPath());
         jsonObject.addProperty("task", attachment.getTask().toString());
         jsonObject.addProperty("attachment_id", attachment.getId());
+        response.setStatus(HttpServletResponse.SC_OK);
         //jsonObject.addProperty("description", task.getDescription());
         return jsonObject.toString();
     }
@@ -83,6 +144,18 @@ public class FileIOController {
         }
     }
 
+    //transfer file
+    private File transferFile(MultipartFile file, String path) throws IOException {
+        if(!file.isEmpty()) {
+            String filename = file.getOriginalFilename();
+            File filepath = new File(path,filename);
+            logger.error("size of file is--------------------------------------" + filepath.length());
+            return filepath;
+        } else {
+            logger.error("empty multipartfile");
+            throw new IOException("empty multipartfile");
+        }
+    }
 
     @RequestMapping(value = "/tasks/{id}/attachments", method = RequestMethod.GET)
     @ResponseBody

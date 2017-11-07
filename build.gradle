@@ -67,12 +67,12 @@ dependencies {
     //compile('com.h2database:h2:+')
 // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'
-    
+
     compile('org.apache.commons:commons-lang3:+')
     compile('com.google.guava:guava:+')
     compile('org.apache.httpcomponents:httpclient:+')
     compile('com.google.code.gson:gson:+')
-    //   compile ('com.amazonaws:aws-java-sdk:+')
+    compile ('com.amazonaws:aws-java-sdk:+')
     //  compile ('com.google.cloud:google-cloud:+')
 
 
@@ -87,5 +87,5 @@ dependencies {
 }
 
 war {
-    archiveName = 'ROOT.war'
+    archiveName = 'csye6225app.war'
 }

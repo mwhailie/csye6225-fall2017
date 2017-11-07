@@ -14,7 +14,7 @@ public class User {
     //name test
     private String name;
     private String password;
-    private String email;
+    private String email;//note
     @OneToMany(mappedBy = "user",orphanRemoval=true, cascade=CascadeType.ALL)
     private List<Task> taskList;
 
