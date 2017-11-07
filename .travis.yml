@@ -43,18 +43,18 @@ deploy:
     bucket: $bucket_name
     key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application:  application-cloudformation
-    deployment_group:  application-cloudformation
+    application: $application_name
+    deployment_group: $deployment_group
     region: us-east-1
     wait-until-deployed: true
     on:
       all_branches: true
-    
+
 notifications:
   email:
     recipients:
-#      - wang.shirui@husky.neu.edu
-#      - yan.hao@husky.neu.edu
-#      - jing.yu@husky.neu.edu
-#      - ma.wenhe@husky.neu.edu
+      - wang.shirui@husky.neu.edu
+      - yan.hao@husky.neu.edu
+      - jing.yu@husky.neu.edu
+      - ma.wenhe@husky.neu.edu
 
