@@ -1,8 +1,4 @@
 
-sudo service tomcat7 stop
+#!/bin/bash
+sudo /etc/init.d/tomcat8 restart
 
-cd /var/lib/tomcat7/webapps
-
-sudo rm -rf ROOT
-
-sudo service tomcat7 start

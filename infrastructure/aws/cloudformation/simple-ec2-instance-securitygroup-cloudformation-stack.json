@@ -217,6 +217,7 @@
                 }
             },
             "DeletionPolicy": "Delete"
+<<<<<<< HEAD
         },
         "CodeDeployEC2ServiceRole": {
                "Type": "AWS::IAM::Role",
@@ -395,6 +396,9 @@
             } ]
          }
       } 
+=======
+        }
+>>>>>>> ac634f47fd715fa54096dfab220a26194deb23a7
     },
     "Parameters": {
         "ParamVPCID": {
