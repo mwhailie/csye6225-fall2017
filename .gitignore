@@ -21,6 +21,7 @@
 build/**/*
 .gradle/**/*
 /out/
+src/main/java/com/csye6225/demo/ignore/*
 
 ### NetBeans ###
 nbproject/private/
