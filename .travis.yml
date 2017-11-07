@@ -27,9 +27,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAJRB6KLAX7IHOELNQ
+    access_key_id: $key_id
     secret_access_key:
-      secure: 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
+      secure: $security
     local_dir: codedeploy
     bucket: "csye6225-fall2017-yanhao.me"  ####
     region: us-east-1
@@ -37,9 +37,9 @@ deploy:
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: AKIAJRB6KLAX7IHOELNQ
+    access_key_id: $key_id
     secret_access_key:
-      secure: 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
+      secure: $security
     bucket: "csye6225-fall2017-yanhao.me"  ####
     key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
