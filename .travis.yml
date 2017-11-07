@@ -41,8 +41,8 @@ deploy:
     bucket: csye6225bucket-cloudformation.com
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application: csye6225
-    deployment_group: csye6225
+    application: application-cloudformation
+    deployment_group: application-cloudformation
     region: us-east-1
     secret_access_key:
       secure: aVQrNZhl6Y3HwAlj+EdBSOwGSBh9gn3gMS3hibSH
