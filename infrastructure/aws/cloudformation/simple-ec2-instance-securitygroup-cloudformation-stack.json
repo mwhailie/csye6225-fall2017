@@ -341,7 +341,17 @@
             "Type": "AWS::S3::Bucket",
             "DeletionPolicy": "Delete",
             "Properties": {
-                "BucketName": "csye6225bucket-cloudformation.com"
+                "BucketName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref": "ParamRecordSetsName"
+                            },
+                            "csye6225.com"
+                        ]
+                    ]
+                }
             }
         },
         "RDSInstance": {
