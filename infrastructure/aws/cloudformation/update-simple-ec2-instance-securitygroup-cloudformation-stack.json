@@ -337,23 +337,6 @@
                 }
             }
         },
-        "RecordServiceS3Bucket": {
-            "Type": "AWS::S3::Bucket",
-            "DeletionPolicy": "Delete",
-            "Properties": {
-                "BucketName": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            {
-                                "Ref": "ParamRecordSetsName"
-                            },
-                            "csye6225.com"
-                        ]
-                    ]
-                }
-            }
-        },
         "RDSInstance": {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
@@ -402,7 +385,19 @@
               "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
               "ServiceRoleArn" : {"Fn::GetAtt" : ["iamCodeDeployServiceRole", "Arn"] }
             }
-          }
+          },
+         "MySNSTopic" : {
+            "Type" : "AWS::SNS::Topic",
+            "Properties" : {
+                "Subscription" : [{ 
+                    "Endpoint" : "yan.hao@husky.neu.edu" ,
+	                "Protocol" : "email" },
+		{ 
+                    "Endpoint" : "jing.yu@husky.neu.edu" ,
+	                "Protocol" : "email" }],
+                "TopicName" : "password_reset"
+            }
+         }
     },
     "Parameters": {
         "ParamVPCID": {
@@ -421,4 +416,7 @@
             "Type": "String"
         }
     }
+   
 }
+    
+
