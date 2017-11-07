@@ -4,6 +4,7 @@ import com.csye6225.demo.controllers.HomeController;
 import com.csye6225.demo.controllers.TaskController;
 import com.google.gson.JsonObject;
 import io.restassured.*;
+import io.restassured.http.ContentType;
 import io.restassured.internal.http.HTTPBuilder;
 import org.apache.http.client.ClientProtocolException;
 import org.junit.Ignore;
@@ -19,7 +20,7 @@ public class RestAssuredDemoApiTest {
   @Test
   public void testGetHomePage() throws URISyntaxException {
     System.out.println("test home page ");
-      RestAssured.when().get(new URI("http://localhost:8080/")).then().statusCode(401);
+      RestAssured.when().get(new URI("http://localhost:8080/")).then().contentType(ContentType.JSON);
   }
 
    @Test
