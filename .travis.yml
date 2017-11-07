@@ -1,15 +1,58 @@
 language: java
 jdk:
-- oraclejdk8
+  - oraclejdk8
+
 sudo: false
 install: true
+
 script:
-- "./gradlew war"
-- "./gradlew build"
+  - ./gradlew build
+  - ./gradlew war
+
+after_success:
+  - mkdir codedeploy
+  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh
+  - ls -al
+  - mv application-cloudformation-${TRAVIS_JOB_NUMBER}.zip codedeploy/
+  - ls -al
+  - pwd
+  - cd codedeploy
+  - ls -al
+  - pwd
+  - sudo rm -r /var/lib/tomcat8/webapps/ROOT
+before_deploy:
+  - cd ..
+  - pwd
+
+deploy:
+  - provider: s3
+    access_key_id: $access_key_id
+    secret_access_key:
+      secure: $secret_access_key
+    local_dir: codedeploy
+    bucket: $bucket_name
+    region: us-east-1
+    skip_cleanup: true
+    on:
+      all_branches: true
+  - provider: codedeploy
+    access_key_id: $access_key_id
+    secret_access_key:
+      secure: $secret_access_key
+    bucket: $bucket_name
+    key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
+    bundle_type: zip
+    application:  application-cloudformation
+    deployment_group:  application-cloudformation
+    region: us-east-1
+    wait-until-deployed: true
+    on:
+      all_branches: true
+
 notifications:
   email:
     recipients:
-    - wang.shirui@husky.neu.edu
-    - yan.hao@husky.neu.edu
-    - jing.yu@husky.neu.edu
-    - ma.wenhe@husky.neu.edu
+#      - wang.shirui@husky.neu.edu
+#      - yan.hao@husky.neu.edu
+#      - jing.yu@husky.neu.edu
+#      - ma.wenhe@husky.neu.edu
