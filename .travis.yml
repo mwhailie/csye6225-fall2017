@@ -26,9 +26,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: $access_key_id
+    access_key_id: $key_id
     secret_access_key:
-      secure: $secret_access_key
+      secure: $security
     local_dir: codedeploy
     bucket: $bucket_name
     region: us-east-1
@@ -36,9 +36,9 @@ deploy:
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: $access_key_id
+    access_key_id: $key_id
     secret_access_key:
-      secure: $secret_access_key
+      secure: $security
     bucket: $bucket_name
     key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
