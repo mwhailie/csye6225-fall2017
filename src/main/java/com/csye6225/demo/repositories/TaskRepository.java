@@ -8,5 +8,5 @@ import java.util.List;
 
 @Transactional
 public interface TaskRepository extends CrudRepository<Task, String>{
-    public List<Task> findTaskByUser_id(String id);
+    public List<Task> findTaskByUser_id(Integer id);
 }

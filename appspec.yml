@@ -6,12 +6,11 @@ files:
     destination: /home/ubuntu
   - source: ./restartTomcat.sh
     destination: /home/ubuntu
-  - source: ./build/libs/ROOT.war
-    destination: /var/lib/tomcat7/webapps
+  - source: ./build/libs/csye6225app.war
+    destination: /var/lib/tomcat8/webapps
 
 hooks:
   AfterInstall:
    - location: ./restartTomcat.sh
      timeout: 180
      runas: ubuntu
-
