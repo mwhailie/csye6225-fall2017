@@ -31,14 +31,14 @@ deploy:
     secret_access_key:
       secure: OZ4KfWQPd6EUCEzO7kIkpT9rtehxsVLVD89BluqT
     local_dir: codedeploy
-    bucket: code-deploy.csye6225-fall-jing.yu.me
+    bucket: csye6225bucketjyt0817-cloudformation.com
     region: us-east-1
     skip_cleanup: true
     on:
       all_branches: true
   - provider: codedeploy
     access_key_id: AKIAJIMWCWWGXXJNJJHA
-    bucket: code-deploy.csye6225-fall-jing.yu.me
+    bucket: csye6225bucketjyt0817-cloudformation.com
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
     application: csye6225
