@@ -37,15 +37,15 @@ deploy:
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: AKIAIKS3JQUCDYF5GB7A
-    bucket: csye6225bucket-cloudformation.com
+    access_key_id: AKIAJIMWCWWGXXJNJJHA
+    bucket: csye6225bucketjyt0817-cloudformation.com
     key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
     application: application-cloudformation
     deployment_group: application-cloudformation
     region: us-east-1
     secret_access_key:
-      secure: aVQrNZhl6Y3HwAlj+EdBSOwGSBh9gn3gMS3hibSH
+      secure: OZ4KfWQPd6EUCEzO7kIkpT9rtehxsVLVD89BluqT
     wait-until-deployed: true
     on:
       all_branches: true
