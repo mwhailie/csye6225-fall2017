@@ -48,7 +48,7 @@ deploy:
     wait-until-deployed: true
     on:
       all_branches: true
-    
+
 notifications:
   email:
     recipients:
@@ -57,4 +57,4 @@ notifications:
 #      - jing.yu@husky.neu.edu
 #      - ma.wenhe@husky.neu.edu
 
-      
+
