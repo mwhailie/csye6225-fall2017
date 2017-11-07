@@ -27,11 +27,11 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAIKS3JQUCDYF5GB7A
+    access_key_id: AKIAJIMWCWWGXXJNJJHA
     secret_access_key:
-      secure: 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
+      secure: OZ4KfWQPd6EUCEzO7kIkpT9rtehxsVLVD89BluqT
     local_dir: codedeploy
-    bucket: csye6225bucket-cloudformation.com
+    bucket: csye6225bucketjyt0817-cloudformation.com
     region: us-east-1
     skip_cleanup: true
     on:
