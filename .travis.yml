@@ -11,39 +11,39 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r csye_assignment7-${TRAVIS_JOB_NUMBER}.zip build/libs/ROOT.war appspec.yml restartTomcat.sh
+  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh
   - ls -al
-  - mv csye_assignment7-${TRAVIS_JOB_NUMBER}.zip codedeploy/
+  - mv application-cloudformation-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
   - pwd
   - cd codedeploy
   - ls -al
   - pwd
-
+  - sudo rm -r /var/lib/tomcat8/webapps/ROOT
 before_deploy:
   - cd ..
   - pwd
 
 deploy:
   - provider: s3
-    access_key_id: $access_key_id
+    access_key_id: AKIAIKS3JQUCDYF5GB7A
     secret_access_key:
-      secure: $secret_access_key
+      secure: t3u7jS0iu5o0sRyVXJATJZB2ZMuWl7KRDcQ9Dwq0kTNK7avEgkMZdQQ+fGKshXslAjPqzhCL5lxmg6lzxfHLB41w+0KhwWLq3TQGTUuLENXHU2hNacYUKFi6tU1VlshY412u77CMxZxnZ+9zWyzrQO/C8pOEUDzN18StvKfJTi5vVoffrmDinkd90+YUBaNgoLT3kD5M1qjVRw6sXqtpBz+iAReTQ8A/D054ncLaOndGdf7rfK7QCviwKDwR73VFLOQIoa/XuDco2HSbnw/IfAWW8Q3NjIaiXNtq+VLQJsVBI4vfVIXDttDAycbmc7kaAxTx34YAGmK/cAfnnvWIBgWhOeSg8f3OylvsmtyHHtZK82kcWXP9e0urOKBfg2hnhUpJHnrViJGebLGLJ0n1IKzDEE2ejcIqCkW9ye14HusaNq4yfH8SY9vu5yQRBCdicB3nPurzvuNeknem72xtAYP1KktQ8jfeMCk9xPbmzvY9g8sGwkfQPd/fmpZ0g3Cz3ywps+r750ibpI7NVjQcEXd8W+meBFuJ+tQsW6+I83NotDYgLN4q0IzDCS39vJe43dMYKH13CkeJ3H0Nz/swYIhZcYSK9SD/eanAtlmONqf9KAdxiLo+X43qmxGJ5zi4VBVgP5wn7aR8WtN8CRBcXIseau+odArZzi1M07mLLe0=
     local_dir: codedeploy
-    bucket: $bucket_name
+    bucket: "csye6225bucket-cloudformation.com"  ####
     region: us-east-1
     skip_cleanup: true
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: $access_key_id
+    access_key_id: AKIAIKS3JQUCDYF5GB7A
     secret_access_key:
-      secure: dsNOt4HaU+oJE+g+V8FpOL0GTfp3VuPTCyT/gbcRjGIG2B1E/aZiyShuojf1VxmaFA3UGom8lmMaTo9oDgDI/n3wQ6YqZCOwQeitK5Y8eG0fSVNjg94J8xeXzO/0nUd6tMs+Vr8Pxc9zuryybHw7VS83q0/oUer8wj6HOtoI190Cl85aXR11PgxVAUaB12mht08hBNseAAb0NsLi2irmk8EwQJRhxg2DaV1mpIHgCIBnawT5DZK4KeI4XV95WLqbkblF7UaA02vER8f0afors3VQTnYp6ZELt4UaLbjoHSscWHvmN04H0+UdwpCO/bLR6gIOws34O9JrEq0Y725jaxceo/RLOA6g4oL8AO5KRjEPFUlJuvn3ICg85xwMHpY8uOnV2TK0sTnSA19rLASPQqk2nbFd5ykmtAN7M7vpQhgWBsRVjim3Rxu8dX+q1ltm+2QUN4qWEpL3pSZcO8q94ImY71oTtgWjlh2re9r6yk5MIBJef7icjqdvD/7l5PYfDM3ENssJbt5W2eBCTZpCYecHcG+n/pkKfaTmwdGSUiA+aFZUj5QcM3txDALtXlCLpDeeWNnIe67A1aHnRvmXqWhCeuXtgvQnbz/0CzDBYwxU2G1kZeMqhIzOZXpChiaafyNR2iWDEtB9QrOAjPsZpaCR/t6Qn/j7BoWy7X1x2Ck=
-    bucket: $bucket_name
-    key: csye_assignment7-${TRAVIS_JOB_NUMBER}.zip
+      secure: t3u7jS0iu5o0sRyVXJATJZB2ZMuWl7KRDcQ9Dwq0kTNK7avEgkMZdQQ+fGKshXslAjPqzhCL5lxmg6lzxfHLB41w+0KhwWLq3TQGTUuLENXHU2hNacYUKFi6tU1VlshY412u77CMxZxnZ+9zWyzrQO/C8pOEUDzN18StvKfJTi5vVoffrmDinkd90+YUBaNgoLT3kD5M1qjVRw6sXqtpBz+iAReTQ8A/D054ncLaOndGdf7rfK7QCviwKDwR73VFLOQIoa/XuDco2HSbnw/IfAWW8Q3NjIaiXNtq+VLQJsVBI4vfVIXDttDAycbmc7kaAxTx34YAGmK/cAfnnvWIBgWhOeSg8f3OylvsmtyHHtZK82kcWXP9e0urOKBfg2hnhUpJHnrViJGebLGLJ0n1IKzDEE2ejcIqCkW9ye14HusaNq4yfH8SY9vu5yQRBCdicB3nPurzvuNeknem72xtAYP1KktQ8jfeMCk9xPbmzvY9g8sGwkfQPd/fmpZ0g3Cz3ywps+r750ibpI7NVjQcEXd8W+meBFuJ+tQsW6+I83NotDYgLN4q0IzDCS39vJe43dMYKH13CkeJ3H0Nz/swYIhZcYSK9SD/eanAtlmONqf9KAdxiLo+X43qmxGJ5zi4VBVgP5wn7aR8WtN8CRBcXIseau+odArZzi1M07mLLe0=
+    bucket: "csye6225bucket-cloudformation.com"  ####
+    key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
-    application: $application_name
-    deployment_group: $deployment_group
+    application:  application-cloudformation
+    deployment_group:  application-cloudformation
     region: us-east-1
     wait-until-deployed: true
     on:
@@ -53,8 +53,8 @@ notifications:
   email:
     recipients:
       - wang.shirui@husky.neu.edu
-      - yan.hao@husky.neu.edu
-      - jing.yu@husky.neu.edu
-      - ma.wenhe@husky.neu.edu
+#      - yan.hao@husky.neu.edu
+#      - jing.yu@husky.neu.edu
+#      - ma.wenhe@husky.neu.edu
 
       
