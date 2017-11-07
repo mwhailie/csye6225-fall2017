@@ -67,7 +67,7 @@ public class FileIOController {
         attachmentRepository.save(attachment);
 
         //Upload to S3
-        String bucketName     = HardCodeEnum.BUCKET_NAME.toString();
+        String bucketName     = HardCodeEnum.BUCKET_NAME.value();
         String keyName        = task.getId() + ":" + attachment.getId().toString();
         File fileToUpload;
         try {
