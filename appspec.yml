@@ -1,3 +1,4 @@
+
 version: 0.0
 os: linux
 
@@ -6,7 +7,7 @@ files:
     destination: /home/ubuntu
   - source: ./restartTomcat.sh
     destination: /home/ubuntu
-  - source: ./build/libs/ROOT.war
+  - source: ./build/libs/csye6225app.war
     destination: /var/lib/tomcat8/webapps
 
 hooks:
