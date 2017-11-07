@@ -7,6 +7,7 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.csye6225.demo.ingore.HardCodeEnum;
 import com.csye6225.demo.pojos.Attachment;
 import com.csye6225.demo.pojos.Task;
 import com.csye6225.demo.repositories.AttachmentRepository;
@@ -66,7 +67,7 @@ public class FileIOController {
         attachmentRepository.save(attachment);
 
         //Upload to S3
-        String bucketName     = "csye6225bucketjyt0817-cloudformation.com";
+        String bucketName     = HardCodeEnum.BUCKET_NAME.toString();
         String keyName        = task.getId() + ":" + attachment.getId().toString();
         File fileToUpload;
         try {
