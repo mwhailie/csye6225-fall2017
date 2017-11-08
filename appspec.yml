@@ -13,8 +13,8 @@ files:
 
 hooks:
   AfterInstall:
-    - location: ./createSetEnv.sh
-    - location: ./restartTomcat.sh
+   - location: ./createSetEnv.sh
+   - location: ./restartTomcat.sh
      timeout: 180
      runas: ubuntu
 
