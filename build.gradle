@@ -81,7 +81,7 @@ dependencies {
 
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 
-    testCompile('io.rest-assured:rest-assured:3.0.3')
+    testCompile('io.rest-assured:rest-assured:3.0.5')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 }
