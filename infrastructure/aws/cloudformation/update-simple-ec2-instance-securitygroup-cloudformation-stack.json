@@ -214,8 +214,8 @@
                             "Version": "2012-10-17",
                             "Statement": [
                                     {
-                                    "Action": ["sts:AssumeRole"],
-                                    "Effect": "Allow",
+		                            "Action": ["sts:AssumeRole"],
+		                            "Effect": "Allow",
                                     "Principal": {
                                             "Service": [ 
                                                 "codedeploy.amazonaws.com",
@@ -337,13 +337,6 @@
                 }
             }
         },
-        "RecordServiceS3Bucket": {
-            "Type": "AWS::S3::Bucket",
-            "DeletionPolicy": "Delete",
-            "Properties": {
-                "BucketName": "csye6225bucket-cloudformation.com"
-            }
-        },
         "RDSInstance": {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
@@ -392,7 +385,24 @@
               "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
               "ServiceRoleArn" : {"Fn::GetAtt" : ["iamCodeDeployServiceRole", "Arn"] }
             }
-          }
+          },
+         "MySNSTopic" : {
+            "Type" : "AWS::SNS::Topic",
+            "Properties" : {
+                "Subscription" : [
+                    { 
+                    "Endpoint" : "yan.hao@husky.neu.edu" ,
+	                "Protocol" : "email" },
+		              { 
+                    "Endpoint" : "jing.yu@husky.neu.edu" ,
+	                "Protocol" : "email" },
+                    { 
+                    "Endpoint" : "gita.jing@hotmail.com" ,
+                    "Protocol" : "email" }
+                ],
+                "TopicName" : "password_reset"
+            }
+         }
     },
     "Parameters": {
         "ParamVPCID": {
@@ -411,4 +421,5 @@
             "Type": "String"
         }
     }
+   
 }
