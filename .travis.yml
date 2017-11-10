@@ -12,7 +12,7 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh
+  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh createSetEnv.sh
   - ls -al
   - mv application-cloudformation-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
@@ -27,9 +27,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: $access_key_id
+    access_key_id: $key_id
     secret_access_key:
-      secure: $secret_access_key
+      secure: $security
     local_dir: codedeploy
     bucket: $bucket_name
     region: us-east-1
@@ -37,9 +37,9 @@ deploy:
     on:
       all_branches: true
   - provider: codedeploy
-    access_key_id: $access_key_id
+    access_key_id: $key_id
     secret_access_key:
-      secure: $secret_access_key
+      secure: $security
     bucket: $bucket_name
     key: application-cloudformation-${TRAVIS_JOB_NUMBER}.zip
     bundle_type: zip
@@ -57,4 +57,3 @@ notifications:
       - yan.hao@husky.neu.edu
       - jing.yu@husky.neu.edu
       - ma.wenhe@husky.neu.edu
-

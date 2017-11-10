@@ -389,17 +389,12 @@
          "MySNSTopic" : {
             "Type" : "AWS::SNS::Topic",
             "Properties" : {
-                "Subscription" : [
-                    { 
+                "Subscription" : [{ 
                     "Endpoint" : "yan.hao@husky.neu.edu" ,
 	                "Protocol" : "email" },
-		              { 
+		{ 
                     "Endpoint" : "jing.yu@husky.neu.edu" ,
-	                "Protocol" : "email" },
-                    { 
-                    "Endpoint" : "gita.jing@hotmail.com" ,
-                    "Protocol" : "email" }
-                ],
+	                "Protocol" : "email" }],
                 "TopicName" : "password_reset"
             }
          }
@@ -421,5 +416,4 @@
             "Type": "String"
         }
     }
-   
 }

@@ -67,7 +67,7 @@ public class FileIOController {
         attachmentRepository.save(attachment);
 
         //Upload to S3
-        String bucketName     = HardCodeEnum.BUCKET_NAME.value();
+        String bucketName     = "csye6225bucket-cloudformation1.com";
         String keyName        = task.getId() + ":" + attachment.getId().toString();
         File fileToUpload;
         try {
@@ -85,6 +85,7 @@ public class FileIOController {
 
         try {
             AmazonS3 s3client = new AmazonS3Client(DefaultAWSCredentialsProviderChain.getInstance());
+            bucketName = s3client.listBuckets().get(2).getName();
             s3client.putObject(new PutObjectRequest(bucketName, keyName, fileToUpload));
         } catch (AmazonServiceException ase) {
             jsonObject.addProperty("Status", "Caught an AmazonServiceException, which " +
