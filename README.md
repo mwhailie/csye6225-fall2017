@@ -50,6 +50,7 @@ where *user* is the username and *password* is the password.
  ```
 
 ## GitHub Releases
+* [v4.0](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v5.0) - Assignment 7
 * [v4.0](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v4.0) - Assignment 6
 * [v3.0](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v3.0) - Assignment 5
 * [v2.1](https://github.com/mwhailie/csye6225-fall2017/releases/tag/v2.1) - Assignment 4
