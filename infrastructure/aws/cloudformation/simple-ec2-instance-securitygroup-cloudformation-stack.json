@@ -229,6 +229,27 @@
                         "RoleName": "iamCodeDeployServiceRoleTemplate"
             }            
         },
+        "iamLambdaExecutionRole" : {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                        "AssumeRolePolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                    {
+		                            "Action": ["sts:AssumeRole"],
+		                            "Effect": "Allow",
+                                    "Principal": {
+                                            "Service": [ 
+                                                "lambda.amazonaws.com" 
+                                            ]
+                                        }
+                                    }
+                            ]
+                        },
+                        "ManagedPolicyArns": ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"],
+                        "RoleName": "iamLambdaExecutionRole"
+            }            
+        },
         "csye6225webapp": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
@@ -402,7 +423,26 @@
               "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
               "ServiceRoleArn" : {"Fn::GetAtt" : ["iamCodeDeployServiceRole", "Arn"] }
             }
-          }
+          },
+         "MySNSTopic" : {
+            "Type" : "AWS::SNS::Topic",
+            "Properties" : {
+                "Subscription" : [{ 
+                    "Endpoint" : "yan.hao@husky.neu.edu" ,
+	                "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "jing.yu@husky.neu.edu" ,
+                    "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "wang.shirui@husky.neu.edu" ,
+                    "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "ma.wenhe@husky.neu.edu" ,
+                    "Protocol" : "email" }
+                ],
+                "TopicName" : "password_reset"
+            }
+         }
     },
     "Parameters": {
         "ParamVPCID": {

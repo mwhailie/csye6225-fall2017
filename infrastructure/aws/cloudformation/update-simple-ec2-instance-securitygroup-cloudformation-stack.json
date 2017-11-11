@@ -392,9 +392,16 @@
                 "Subscription" : [{ 
                     "Endpoint" : "yan.hao@husky.neu.edu" ,
 	                "Protocol" : "email" },
-		{ 
+		            { 
                     "Endpoint" : "jing.yu@husky.neu.edu" ,
-	                "Protocol" : "email" }],
+                    "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "wang.shirui@husky.neu.edu" ,
+                    "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "ma.wenhe@husky.neu.edu" ,
+                    "Protocol" : "email" }
+                ],
                 "TopicName" : "password_reset"
             }
          }
