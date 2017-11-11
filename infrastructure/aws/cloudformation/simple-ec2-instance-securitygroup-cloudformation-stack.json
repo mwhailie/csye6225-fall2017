@@ -355,7 +355,11 @@
                 "ProvisionedThroughput": {
                     "ReadCapacityUnits": "5",
                     "WriteCapacityUnits": "5"
-                }
+                },
+                "TimeToLiveSpecification" :{
+                    "AttributeName" : "1200",
+                    "Enabled" : true
+                  }
             }
         },
         "RecordServiceS3Bucket": {
