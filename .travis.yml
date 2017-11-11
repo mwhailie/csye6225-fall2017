@@ -11,7 +11,7 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh
+  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh createSetEnv.sh
   - ls -al
   - mv application-cloudformation-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
