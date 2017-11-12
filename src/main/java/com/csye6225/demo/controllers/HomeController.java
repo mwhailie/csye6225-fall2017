@@ -3,11 +3,16 @@ package com.csye6225.demo.controllers;
 
 //our's
 
+import com.amazonaws.services.sns.AmazonSNSClient;
+import com.amazonaws.services.sns.AmazonSNSClientBuilder;
+import com.amazonaws.services.sns.model.CreateTopicRequest;
+import com.amazonaws.services.sns.model.PublishRequest;
 import com.csye6225.demo.pojos.User;
 import com.csye6225.demo.repositories.TaskRepository;
 import com.csye6225.demo.repositories.UserRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,8 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.Date;
 
 //Professor's
@@ -108,6 +115,34 @@ public class HomeController {
       jsonObject.addProperty("message", "Register failure!  " + user.getName() + " already exists! ");
     }
     return jsonObject.toString();
+  }
+
+
+  @RequestMapping(value = "/forgot-password", method = RequestMethod.POST, produces = "application/json")
+  @ResponseBody
+  public String registerPost(Principal principal, HttpServletResponse response) {
+
+    response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
+    JsonObject jsonObject = new JsonObject();
+
+    User user;
+    try{
+      user = userRepository.findByEmail(principal.getName());
+    }catch (Exception e){
+      jsonObject.addProperty("message", "user does not exist");
+      return jsonObject.toString();
+    }
+
+    String email = user.getEmail();
+    AmazonSNSClient snsClient = (AmazonSNSClient) AmazonSNSClientBuilder.defaultClient();
+    CreateTopicRequest crequest = new CreateTopicRequest();
+    crequest.setName("from controller change psw");
+
+    PublishRequest publish = new PublishRequest();
+    publish.setMessage(email);
+    snsClient.createTopic(crequest).setTopicArn("arn:aws:sns:us-east-1:334797497357:password_reset");
+    snsClient.publish(publish);
+    return "";
   }
 
 }
