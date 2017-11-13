@@ -46,20 +46,30 @@ public class ResetPasswordController {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return jsonObject.toString();
         }
+        String msg;
+        String topicArn;
+        try{
+            AmazonSNSClient snsClient = new AmazonSNSClient();
+            snsClient.setRegion(Region.getRegion(Regions.US_EAST_1));
 
-        AmazonSNSClient snsClient = new AmazonSNSClient();
-        snsClient.setRegion(Region.getRegion(Regions.US_EAST_1));
-
-        CreateTopicRequest createTopicRequest = new CreateTopicRequest("resetPassword");
-        CreateTopicResult createTopicResult = snsClient.createTopic(createTopicRequest);
-        createTopicResult.getTopicArn();
+            CreateTopicRequest createTopicRequest = new CreateTopicRequest("resetPassword");
+            CreateTopicResult createTopicResult = snsClient.createTopic(createTopicRequest);
+//        createTopicResult.getTopicArn();
 //        String topicArn = "arn:aws:sns:us-east-1:123456789012:resetPassword";
-        String topicArn = createTopicResult.getTopicArn();
+            topicArn = createTopicResult.getTopicArn();
 
-        String msg = email;
-        PublishRequest publishRequest = new PublishRequest(topicArn, msg);
-        PublishResult publishResult = snsClient.publish(publishRequest);
+            msg = email;
+            PublishRequest publishRequest = new PublishRequest(topicArn, msg);
+            PublishResult publishResult = snsClient.publish(publishRequest);
 
+        }catch (Exception e){
+            jsonObject.addProperty("message", e.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return jsonObject.toString();
+        }
+        jsonObject.addProperty("Status: ","topic pulish successfully!");
+        jsonObject.addProperty("topic ARN: ", topicArn);
+        jsonObject.addProperty("Request password user: ",msg);
         response.setStatus(HttpServletResponse.SC_OK);
         return jsonObject.toString();
     }
