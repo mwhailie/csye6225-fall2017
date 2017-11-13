@@ -15,6 +15,7 @@ import com.amazonaws.services.sns.model.PublishResult;
 import com.amazonaws.services.sns.model.DeleteTopicRequest;
 import org.apache.http.entity.ContentType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,7 @@ import java.util.Date;
 public class ResetPasswordController {
     @RequestMapping(value = "/forgot-password", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String resetPassword(HttpServletResponse response) {
+    public String resetPassword(@RequestBody String email, HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         JsonObject jsonObject = new JsonObject();
 
@@ -35,10 +36,11 @@ public class ResetPasswordController {
 
         CreateTopicRequest createTopicRequest = new CreateTopicRequest("resetPassword");
         CreateTopicResult createTopicResult = snsClient.createTopic(createTopicRequest);
+        createTopicResult.getTopicArn();
+//        String topicArn = "arn:aws:sns:us-east-1:123456789012:resetPassword";
+        String topicArn = createTopicResult.getTopicArn();
 
-        String topicArn = "arn:aws:sns:us-east-1:123456789012:resetPassword";
-
-        String msg = "My text published to SNS topic with email endpoint";
+        String msg = email;
         PublishRequest publishRequest = new PublishRequest(topicArn, msg);
         PublishResult publishResult = snsClient.publish(publishRequest);
 
