@@ -203,7 +203,7 @@
                                 }
                         ]
                     },
-                    "ManagedPolicyArns": [{"Ref": "iamPolicyCodeDeployEC2S3"}, {"Ref" : "iamPolicyTravisUploadToS3"}],
+                    "ManagedPolicyArns": [{"Ref": "iamPolicyCodeDeployEC2S3"}, {"Ref" : "iamPolicyTravisUploadToS3"}, "arn:aws:iam::aws:policy/AmazonSESFullAccess"],
                     "RoleName": "CodeDeployEC2ServiceRoleTemplate"
             }
         },
@@ -227,6 +227,27 @@
                         },
                         "ManagedPolicyArns": ["arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"],
                         "RoleName": "iamCodeDeployServiceRoleTemplate"
+            }            
+        },
+        "iamLambdaExecutionRole" : {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                        "AssumeRolePolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                    {
+		                            "Action": ["sts:AssumeRole"],
+		                            "Effect": "Allow",
+                                    "Principal": {
+                                            "Service": [ 
+                                                "lambda.amazonaws.com" 
+                                            ]
+                                        }
+                                    }
+                            ]
+                        },
+                        "ManagedPolicyArns": ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole", "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess","arn:aws:iam::aws:policy/AmazonSESFullAccess"],
+                        "RoleName": "iamLambdaExecutionRole"
             }            
         },
         "csye6225webapp": {
@@ -334,7 +355,11 @@
                 "ProvisionedThroughput": {
                     "ReadCapacityUnits": "5",
                     "WriteCapacityUnits": "5"
-                }
+                },
+                "TimeToLiveSpecification" :{
+                    "AttributeName" : "1200",
+                    "Enabled" : true
+                  }
             }
         },
         "RecordServiceS3Bucket": {
@@ -392,7 +417,26 @@
               "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
               "ServiceRoleArn" : {"Fn::GetAtt" : ["iamCodeDeployServiceRole", "Arn"] }
             }
-          }
+          },
+         "MySNSTopic" : {
+            "Type" : "AWS::SNS::Topic",
+            "Properties" : {
+                "Subscription" : [{ 
+                    "Endpoint" : "yan.hao@husky.neu.edu" ,
+	                "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "jing.yu@husky.neu.edu" ,
+                    "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "wang.shirui@husky.neu.edu" ,
+                    "Protocol" : "email" },
+		            { 
+                    "Endpoint" : "ma.wenhe@husky.neu.edu" ,
+                    "Protocol" : "email" }
+                ],
+                "TopicName" : "password_reset"
+            }
+         }
     },
     "Parameters": {
         "ParamVPCID": {
