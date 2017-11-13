@@ -42,8 +42,10 @@ public class ResetPasswordController {
         try{
             user = userRepository.findByEmail(email);
         }catch (Exception e){
-            jsonObject.addProperty("message", "user does not exist");
+
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            jsonObject.addProperty("Message: ", "user does not exist");
+            jsonObject.addProperty("Code Status: ", response.getStatus());
             return jsonObject.toString();
         }
         String msg;
@@ -63,14 +65,17 @@ public class ResetPasswordController {
             PublishResult publishResult = snsClient.publish(publishRequest);
 
         }catch (Exception e){
-            jsonObject.addProperty("message", e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            jsonObject.addProperty("Code Status", response.getStatus());
+            jsonObject.addProperty("message", e.getMessage());
             return jsonObject.toString();
         }
+        response.setStatus(HttpServletResponse.SC_OK);
+        jsonObject.addProperty("Code Status: ", response.getStatus());
         jsonObject.addProperty("Status: ","topic pulish successfully!");
         jsonObject.addProperty("topic ARN: ", topicArn);
         jsonObject.addProperty("Request password user: ",msg);
-        response.setStatus(HttpServletResponse.SC_OK);
+
         return jsonObject.toString();
     }
 }
