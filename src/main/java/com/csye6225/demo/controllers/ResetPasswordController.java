@@ -31,7 +31,7 @@ public class ResetPasswordController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/forgot-password", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/forgot-password", method = RequestMethod.POST)
     @ResponseBody
     public String resetPassword(@RequestBody String email, HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
@@ -47,7 +47,7 @@ public class ResetPasswordController {
             return jsonObject.toString();
         }
 
-        AmazonSNSClient snsClient = new AmazonSNSClient(new ClasspathPropertiesFileCredentialsProvider());
+        AmazonSNSClient snsClient = new AmazonSNSClient();
         snsClient.setRegion(Region.getRegion(Regions.US_EAST_1));
 
         CreateTopicRequest createTopicRequest = new CreateTopicRequest("resetPassword");
