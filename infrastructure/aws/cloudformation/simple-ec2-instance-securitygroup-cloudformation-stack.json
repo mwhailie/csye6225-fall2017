@@ -214,8 +214,8 @@
                             "Version": "2012-10-17",
                             "Statement": [
                                     {
-		                            "Action": ["sts:AssumeRole"],
-		                            "Effect": "Allow",
+                                    "Action": ["sts:AssumeRole"],
+                                    "Effect": "Allow",
                                     "Principal": {
                                             "Service": [ 
                                                 "codedeploy.amazonaws.com",
@@ -366,17 +366,7 @@
             "Type": "AWS::S3::Bucket",
             "DeletionPolicy": "Delete",
             "Properties": {
-                "BucketName": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            {
-                                "Ref": "ParamRecordSetsName"
-                            },
-                            "csye6225.com"
-                        ]
-                    ]
-                }
+                "BucketName": "csye6225bucket-cloudformation.com"
             }
         },
         "RDSInstance": {
