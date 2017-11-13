@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/").permitAll()
             .antMatchers("/user/register").permitAll()
+            .antMatchers("/forgot-password").permitAll()
         .anyRequest().authenticated()
         .and()
         .httpBasic()
@@ -46,8 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public void configure(WebSecurity web) throws Exception {
     web
             .ignoring()
-            .antMatchers("/user/register")
-            .antMatchers("/forgot-password");
+            .antMatchers("/user/register");
   }
 
   @Bean
