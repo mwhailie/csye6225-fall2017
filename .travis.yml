@@ -12,7 +12,7 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh createSetEnv.sh
+  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml restartTomcat.sh createSetEnv.sh infrastructure/cloudwatch/awslogs.conf
   - ls -al
   - mv application-cloudformation-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
@@ -53,7 +53,4 @@ deploy:
 notifications:
   email:
     recipients:
-      - wang.shirui@husky.neu.edu
-      - yan.hao@husky.neu.edu
-      - jing.yu@husky.neu.edu
       - ma.wenhe@husky.neu.edu

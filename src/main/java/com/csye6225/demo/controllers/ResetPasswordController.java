@@ -44,8 +44,8 @@ public class ResetPasswordController {
         }catch (Exception e){
 
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            jsonObject.addProperty("Message: ", "user does not exist");
-            jsonObject.addProperty("Code Status: ", response.getStatus());
+            jsonObject.addProperty("Message", "user does not exist");
+            jsonObject.addProperty("Code Status", response.getStatus());
             return jsonObject.toString();
         }
         String msg;
@@ -71,10 +71,10 @@ public class ResetPasswordController {
             return jsonObject.toString();
         }
         response.setStatus(HttpServletResponse.SC_OK);
-        jsonObject.addProperty("Code Status: ", response.getStatus());
-        jsonObject.addProperty("Status: ","topic pulish successfully!");
-        jsonObject.addProperty("topic ARN: ", topicArn);
-        jsonObject.addProperty("Request password user: ",msg);
+        jsonObject.addProperty("Code Status", response.getStatus());
+        jsonObject.addProperty("Status","topic pulish successfully!");
+        jsonObject.addProperty("topic ARN", topicArn);
+        jsonObject.addProperty("Request password user",msg);
 
         return jsonObject.toString();
     }
