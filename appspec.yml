@@ -15,6 +15,7 @@ files:
 
 hooks:
   AfterInstall:
+   - location: ./awsLogServiceSetup.sh
    - location: ./restartTomcat.sh
      timeout: 180
      runas: ubuntu

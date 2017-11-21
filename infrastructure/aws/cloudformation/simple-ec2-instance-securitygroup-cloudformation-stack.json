@@ -210,7 +210,7 @@
                         }
                     ]
                 },
-                "ManagedPolicyName" : "loudWatch"
+                "ManagedPolicyName" : "cloudWatch"
             }
         },
         "roleCodeDeployEC2ServiceRole" : {
@@ -542,10 +542,7 @@
           "Type": "AWS::SNS::Topic",
           "Properties": {
             "Subscription": [
-                {
-                    "Endpoint": "ma.wenhe@husky.neu.edu" ,
-                    "Protocol": "email"
-                }
+                
              ]
           }
         }
