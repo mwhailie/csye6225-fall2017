@@ -8,12 +8,14 @@ files:
     destination: /home/ubuntu
   - source: ./createSetEnv.sh
     destination: /home/ubuntu
+  - source: ./infrastructure/cloudwatch/awslogs.conf
+    destination: /home/ubuntu
   - source: ./build/libs/csye6225app.war
     destination: /var/lib/tomcat8/webapps
 
 hooks:
   AfterInstall:
-   - location: ./createSetEnv.sh
+   - location: ./awsLogServiceSetup.sh
    - location: ./restartTomcat.sh
      timeout: 180
      runas: ubuntu

@@ -74,7 +74,7 @@ dependencies {
     compile('com.google.code.gson:gson:+')
     compile ('com.amazonaws:aws-java-sdk:+')
     //  compile ('com.google.cloud:google-cloud:+')
-
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-sns', version: '1.11.228'
 
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('mysql:mysql-connector-java')
