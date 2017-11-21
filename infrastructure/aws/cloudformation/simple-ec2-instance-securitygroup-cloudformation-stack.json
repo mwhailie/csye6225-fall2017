@@ -423,6 +423,23 @@
                   }
             }
         },
+        "RecordServiceS3Bucket": {
+            "Type": "AWS::S3::Bucket",
+            "DeletionPolicy": "Delete",
+            "Properties": {
+                "BucketName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref": "ParamRecordSetsName"
+                            },
+                            "csye6225.com"
+                        ]
+                    ]
+                }
+            }
+        },
         "RDSInstance": {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
@@ -569,7 +586,6 @@
           }
         }
     },
-
     "Parameters": {
         "ParamVPCID": {
             "Type": "String"
