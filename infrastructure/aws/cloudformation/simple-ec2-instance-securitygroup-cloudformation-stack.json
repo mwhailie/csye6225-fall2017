@@ -4,6 +4,40 @@
     "Resources": {
         "EC2Instance": {
             "Type": "AWS::EC2::Instance",
+            "Metadata": {
+                "Comment": "Install a simple web application",
+                "AWS::CloudFormation::Init": {
+                    "config": {
+                        "packages": {
+                            "yum": {
+                                "httpd": [],
+                                "php": []
+                            }
+                        },
+                        "files": {
+                            "/tmp/apacheaccess.conf": {
+                                "content": {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "[general]\n",
+                                            "state_file= /var/awslogs/agent-state\n",
+                                            "[/var/log/httpd/access_log]\n",
+                                            "file = /var/log/httpd/access_log\n",
+                                            "log_group_name = ", {"Ref": "WebServerLogGroup"}, "\n",
+                                            "log_stream_name = {instance_id}/apache.log\n",
+                                            "datetime_format = %d/%b/%Y:%H:%M:%S"
+                                        ]
+                                    ]
+                                },
+                                "mode": "000400",
+                                "owner": "apache",
+                                "group": "apache"
+                            }
+                        }
+                    }
+                }
+            },
             "Properties": {
                 "ImageId": "ami-cd0f5cb6",
                 "InstanceType": "t2.micro",
@@ -30,7 +64,10 @@
                                 "sudo apt-get -y install tomcat8\n",
                                 "sudo apt-get -y install ruby\n",
                                 "sudo apt-get install wget \n",
+                                "sudo apt-get -y install python\n",
                                 "cd /home/ubuntu\n",
+                                "wget https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py\n",
+                                "sudo python ./awslogs-agent-setup.py -n -r us-east-1 --region us-east-1 -c /tmp/apacheaccess.conf\n",
                                 "wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install\n",
                                 "chmod +x ./install\n",
                                 "sudo ./install auto\n",
@@ -188,6 +225,30 @@
                 "Groups" : ["deployment"]
             }
         },
+        "iamPolicyCloudWatch" : {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+                "Description" : "CloudWatch.",
+                "PolicyDocument" : {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents",
+                                "logs:DescribeLogStreams"
+                            ],
+                            "Resource": [
+                                "arn:aws:logs:*:*:*"
+                            ]
+                        }
+                    ]
+                },
+                "ManagedPolicyName" : "loudWatch"
+            }
+        },
         "roleCodeDeployEC2ServiceRole" : {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -214,8 +275,8 @@
                             "Version": "2012-10-17",
                             "Statement": [
                                     {
-		                            "Action": ["sts:AssumeRole"],
-		                            "Effect": "Allow",
+                                    "Action": ["sts:AssumeRole"],
+                                    "Effect": "Allow",
                                     "Principal": {
                                             "Service": [ 
                                                 "codedeploy.amazonaws.com",
@@ -362,23 +423,6 @@
                   }
             }
         },
-        "RecordServiceS3Bucket": {
-            "Type": "AWS::S3::Bucket",
-            "DeletionPolicy": "Delete",
-            "Properties": {
-                "BucketName": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            {
-                                "Ref": "ParamRecordSetsName"
-                            },
-                            "csye6225.com"
-                        ]
-                    ]
-                }
-            }
-        },
         "RDSInstance": {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
@@ -431,23 +475,101 @@
          "MySNSTopic" : {
             "Type" : "AWS::SNS::Topic",
             "Properties" : {
-                "Subscription" : [{ 
-                    "Endpoint" : "yan.hao@husky.neu.edu" ,
-	                "Protocol" : "email" },
-		            { 
-                    "Endpoint" : "jing.yu@husky.neu.edu" ,
-                    "Protocol" : "email" },
-		            { 
-                    "Endpoint" : "wang.shirui@husky.neu.edu" ,
-                    "Protocol" : "email" },
+                "Subscription" : [
 		            { 
                     "Endpoint" : "ma.wenhe@husky.neu.edu" ,
                     "Protocol" : "email" }
                 ],
                 "TopicName" : "password_reset"
             }
-         }
+         },
+        "WebServerLogGroup" : {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "RetentionInDays": 7
+            }
+        },
+        "404MetricFilter": {
+            "Type": "AWS::Logs::MetricFilter",
+            "Properties": {
+                "LogGroupName": {
+                    "Ref": "WebServerLogGroup"
+                },
+                "FilterPattern": "[ip, identity, user_id, timestamp, request, status_code = 404, size, ...]",
+                "MetricTransformations": [
+                    {
+                        "MetricValue": "1",
+                        "MetricNamespace": "test/404s",
+                        "MetricName": "test404Count"
+                    }
+                ]
+            }
+        },
+        "BytesTransferredMetricFilter": {
+            "Type": "AWS::Logs::MetricFilter",
+            "Properties": {
+                "LogGroupName": {
+                    "Ref": "WebServerLogGroup"
+                },
+                "FilterPattern": "[ip, identity, user_id, timestamp, request, status_code, size, ...]",
+                "MetricTransformations": [
+                    {
+                        "MetricValue": "$size",
+                        "MetricNamespace": "test/BytesTransferred",
+                        "MetricName": "testBytesTransferred"
+                    }
+                ]
+            }
+        },
+        "404Alarm": {
+            "Type": "AWS::CloudWatch::Alarm",
+            "Properties": {
+                "AlarmDescription": "The number of 404s is greater than 2 over 2 minutes",
+                "MetricName": "test404Count",
+                "Namespace": "test/404s",
+                "Statistic": "Sum",
+                "Period": "60",
+                "EvaluationPeriods": "2",
+                "Threshold": "2",
+                "AlarmActions": [
+                    {
+                        "Ref": "AlarmNotificationTopic"
+                    }
+                ],
+                "ComparisonOperator": "GreaterThanThreshold"
+            }
+        },
+        "BandwidthAlarm": {
+            "Type": "AWS::CloudWatch::Alarm",
+            "Properties": {
+                "AlarmDescription": "The average volume of traffic is greater 3500 KB over 10 minutes",
+                "MetricName": "testBytesTransferred",
+                "Namespace": "test/BytesTransferred",
+                "Statistic": "Average",
+                "Period": "300",
+                "EvaluationPeriods": "2",
+                "Threshold": "3500",
+                "AlarmActions": [
+                    {
+                        "Ref": "AlarmNotificationTopic"
+                    }
+                ],
+                "ComparisonOperator": "GreaterThanThreshold"
+            }
+        },
+        "AlarmNotificationTopic": {
+          "Type": "AWS::SNS::Topic",
+          "Properties": {
+            "Subscription": [
+                {
+                    "Endpoint": "ma.wenhe@husky.neu.edu" ,
+                    "Protocol": "email"
+                }
+             ]
+          }
+        }
     },
+
     "Parameters": {
         "ParamVPCID": {
             "Type": "String"

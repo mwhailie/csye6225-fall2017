@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
@@ -38,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/").permitAll()
             .antMatchers("/user/register").permitAll()
+            .antMatchers("/forgot-password").permitAll()
         .anyRequest().authenticated()
         .and()
         .httpBasic()
@@ -59,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
     manager.createUser(User.withUsername("user").password(bCryptPasswordEncoder.encode("password")).roles("USER").build());
     return manager;
+
   }
 
 
@@ -67,8 +67,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     auth.jdbcAuthentication().dataSource(this.dataSource).usersByUsernameQuery("select email, password, true from user where email = ?").passwordEncoder(bCryptPasswordEncoder)
             .authoritiesByUsernameQuery("select email, 'USER' from user where email = ?");
   }
-//  @Bean
-//  public PasswordEncoder passwordEncoder() {
-//    return NoOpPasswordEncoder.getInstance();
-//  }
+
 }
