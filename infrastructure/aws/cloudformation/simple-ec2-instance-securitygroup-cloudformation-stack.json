@@ -4,40 +4,6 @@
     "Resources": {
         "EC2Instance": {
             "Type": "AWS::EC2::Instance",
-            "Metadata": {
-                "Comment": "Install a simple web application",
-                "AWS::CloudFormation::Init": {
-                    "config": {
-                        "packages": {
-                            "yum": {
-                                "httpd": [],
-                                "php": []
-                            }
-                        },
-                        "files": {
-                            "/tmp/apacheaccess.conf": {
-                                "content": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "[general]\n",
-                                            "state_file= /var/awslogs/agent-state\n",
-                                            "[/var/log/httpd/access_log]\n",
-                                            "file = /var/log/httpd/access_log\n",
-                                            "log_group_name = ", {"Ref": "WebServerLogGroup"}, "\n",
-                                            "log_stream_name = {instance_id}/apache.log\n",
-                                            "datetime_format = %d/%b/%Y:%H:%M:%S"
-                                        ]
-                                    ]
-                                },
-                                "mode": "000400",
-                                "owner": "apache",
-                                "group": "apache"
-                            }
-                        }
-                    }
-                }
-            },
             "Properties": {
                 "ImageId": "ami-cd0f5cb6",
                 "InstanceType": "t2.micro",
@@ -65,9 +31,6 @@
                                 "sudo apt-get -y install ruby\n",
                                 "sudo apt-get install wget \n",
                                 "sudo apt-get -y install python\n",
-                                "cd /home/ubuntu\n",
-                                "wget https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py\n",
-                                "sudo python ./awslogs-agent-setup.py -n -r us-east-1 --region us-east-1 -c /tmp/apacheaccess.conf\n",
                                 "wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install\n",
                                 "chmod +x ./install\n",
                                 "sudo ./install auto\n",
@@ -246,7 +209,7 @@
                         }
                     ]
                 },
-                "ManagedPolicyName" : "loudWatch"
+                "ManagedPolicyName" : "cloudWatch"
             }
         },
         "roleCodeDeployEC2ServiceRole" : {
@@ -578,10 +541,7 @@
           "Type": "AWS::SNS::Topic",
           "Properties": {
             "Subscription": [
-                {
-                    "Endpoint": "ma.wenhe@husky.neu.edu" ,
-                    "Protocol": "email"
-                }
+                
              ]
           }
         }
