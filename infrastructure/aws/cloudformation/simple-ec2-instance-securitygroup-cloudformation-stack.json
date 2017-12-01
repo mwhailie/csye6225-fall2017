@@ -202,7 +202,7 @@
                 "TargetGroupArn": { "Ref": "LoadBalancerTargetGroup" }
               }],
               "LoadBalancerArn": { "Ref": "ElasticLoadBalancerV2" },
-              "Port": "80",
+              "Port": "443",
               "Protocol": "HTTPS",
               "Certificates": [
                     {
