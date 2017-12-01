@@ -197,6 +197,15 @@
             } ]
           }
         },
+        "ElasticLoadBalancerV2" : {
+          "Type" : "AWS::ElasticLoadBalancingV2::LoadBalancer",
+          "Properties": {
+            "Subnets" : [ {"Ref": "ParamSubnetID"}, {"Ref" : "ParamSubnetID2"}],
+            "Tags" : [
+              { "Key" : "NAME", "Value" : "CSYE6225" }
+            ]
+          }
+        },
         "iamInstanceProfile" : {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
