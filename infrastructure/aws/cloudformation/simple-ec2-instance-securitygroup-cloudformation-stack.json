@@ -583,7 +583,7 @@
               "DeploymentStyle" : {
                       "DeploymentOption" : "WITHOUT_TRAFFIC_CONTROL"
               },
-              "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
+              "DeploymentConfigName" : "CodeDeployDefault.AllAtOnce",
               "ServiceRoleArn" : {"Fn::GetAtt" : ["iamCodeDeployServiceRole", "Arn"] }
             }
           },
