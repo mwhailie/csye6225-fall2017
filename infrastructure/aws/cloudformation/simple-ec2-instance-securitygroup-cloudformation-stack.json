@@ -200,7 +200,7 @@
         "ElasticLoadBalancerV2" : {
           "Type" : "AWS::ElasticLoadBalancingV2::LoadBalancer",
           "Properties": {
-            "Scheme" : "internal",
+            "Subnets" : [ {"Ref": "ParamSubnetID"}, {"Ref" : "ParamSubnetID2"}],
             "Tags" : [
               { "Key" : "NAME", "Value" : "CSYE6225" }
             ]
