@@ -57,3 +57,19 @@ In the dashboard, click Product List tab and click activate beside the ssl certi
 To finish the SSL activation, we need to create the CNAME record accordingly at AWS DNS route53.
 
 ## 3. Create the CNAME record manually at AWS DNS route53 
+
+## 4. Installing the SSL certificate on AWS
+
+To use the IAM API to upload a certificate, send an UploadServerCertificate request. The following example shows how to do this with the AWS Command Line Interface (AWS CLI). The example assumes the following:
+
+The PEM-encoded certificate is stored in a file named csye6225-fall2017-mawenhe_me.crt.
+The PEM-encoded certificate chain is stored in a file named csye6225-fall2017-mawenhe_me.ca-bundle.
+The PEM-encoded, unencrypted private key is stored in a file named private-key.pem.
+
+```
+aws iam upload-server-certificate 
+	--server-certificate-name SSLCertificate 
+	--certificate-body file://csye6225-fall2017-mawenhe_me.crt 
+	--certificate-chain file://csye6225-fall2017-mawenhe_me.ca-bundle  
+	--private-key file://private-key.pem
+```
