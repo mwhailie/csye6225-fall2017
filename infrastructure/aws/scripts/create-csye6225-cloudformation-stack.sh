@@ -10,4 +10,4 @@ HOSTEDZONE_ID=$(aws route53 list-hosted-zones --query "HostedZones[0].Id" --outp
 
 NAME=$(aws route53 list-hosted-zones --query "HostedZones[0].Name" --output text)
 
-aws cloudformation create-stack --stack-name $1 --template-body file://../cloudformation/simple-ec2-instance-securitygroup-cloudformation-stack.json --parameters "ParameterKey=ParamVPCID,ParameterValue=$VPC_ID" "ParameterKey=ParamSubnetID,ParameterValue=$SUBNET_ID" "ParameterKey=ParamHostedZoneID,ParameterValue=$HOSTEDZONE_ID" "ParameterKey=ParamRecordSetsName,ParameterValue=$NAME" "ParameterKey=ParamSubnetID2,ParameterValue=$SUBNET_ID_2" --capabilities "CAPABILITY_NAMED_IAM" 
+aws cloudformation update-stack --stack-name $1 --template-body file://../cloudformation/simple-ec2-instance-securitygroup-cloudformation-stack.json --parameters "ParameterKey=ParamVPCID,ParameterValue=$VPC_ID" "ParameterKey=ParamSubnetID,ParameterValue=$SUBNET_ID" "ParameterKey=ParamHostedZoneID,ParameterValue=$HOSTEDZONE_ID" "ParameterKey=ParamRecordSetsName,ParameterValue=$NAME" "ParameterKey=ParamSubnetID2,ParameterValue=$SUBNET_ID_2" --capabilities "CAPABILITY_NAMED_IAM" 

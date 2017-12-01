@@ -53,4 +53,3 @@ deploy:
 notifications:
   email:
     recipients:
-      - ma.wenhe@husky.neu.edu
