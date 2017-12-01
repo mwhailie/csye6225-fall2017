@@ -58,6 +58,13 @@ To finish the SSL activation, we need to create the CNAME record accordingly at 
 
 ## 3. Create the CNAME record manually at AWS DNS route53 
 
+
+After applying for SSL certificate, you can check the detail information by clicking Domain Lists -> Details -> Products -> MANAGE.
+Then you can get the host domain and the target value.
+
+In [AWS Route53](https://console.aws.amazon.com/route53/home), create Record Sets and set the name as the host domain, Values as the target value which mentioned bofore.
+Change the type of the record set as CNAME. CNAME record(Canonical Name record) is a type of resource record in the Domain Name System (DNS) used to specify that a domain name is an alias for another domain.
+
 ## 4. Installing the SSL certificate on AWS
 
 To use the IAM API to upload a certificate, send an UploadServerCertificate request. The following example shows how to do this with the AWS Command Line Interface (AWS CLI). The example assumes the following:
@@ -73,3 +80,4 @@ aws iam upload-server-certificate
 	--certificate-chain file://csye6225-fall2017-mawenhe_me.ca-bundle  
 	--private-key file://private-key.pem
 ```
+
