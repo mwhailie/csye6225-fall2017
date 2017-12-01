@@ -12,7 +12,7 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml awsLogServiceSetup.sh restartTomcat.sh createSetEnv.sh infrastructure/cloudwatch/awslogs.conf
+  - zip -r application-cloudformation-${TRAVIS_JOB_NUMBER}.zip build/libs/csye6225app.war appspec.yml awsLogServiceSetup.sh restartTomcat.sh createSetEnv.sh infrastructure/aws/cloudwatch/awslogs.conf
   - ls -al
   - mv application-cloudformation-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls -al
