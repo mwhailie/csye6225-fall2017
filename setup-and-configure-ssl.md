@@ -28,7 +28,7 @@ The following information needs to be filled in.
 ```
 Country Name (2 letter code) [AU]:
 State or Province Name (full name) [Some-State]:
-Locality Name (eg, city) []:Boston
+Locality Name (eg, city) []:
 Organization Name (eg, company) [Internet Widgits Pty Ltd]:
 Organizational Unit Name (eg, section) []:
 Common Name (e.g. server FQDN or YOUR name) []:
