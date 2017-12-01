@@ -47,6 +47,13 @@ cat csr.pem
 
 ## 2. Activate the SSL Certificates
 
-Use Namecheap get one year SSL certificate for free with Github Student Developer pack.
+Use Namecheap to get one year SSL certificate for free with Github Student Developer pack.
 
-## 3. Create the CNAME record manually at AWS DNS route53
+In your [Github Student Developer pack](https://education.github.com/pack), copy your offer code for one year SSL certificate.
+Log in [Cheap Name Website](https://www.namecheap.com/cart/addtocart.aspx?producttype=ssl&product=positivessl&action=purchase&period=1-YEAR&qty=1), apply your code to purchase the one year SSL certificate for free.
+
+In the dashboard, click Product List tab and click activate beside the ssl certificate. Copy the content of csr.pem and paste into the required field and select DNS as DCN method. After submission, we have initially activated the SSL certificate and the certificate status is in progress. 
+
+To finish the SSL activation, we need to create the CNAME record accordingly at AWS DNS route53.
+
+## 3. Create the CNAME record manually at AWS DNS route53 
