@@ -206,7 +206,7 @@
               "Protocol": "HTTPS",
               "Certificates": [
                     {
-                        "LI": {
+                        "CertificateArn": {
                             "Ref": "ParamCertificateArn"
                         }
                     }
@@ -224,17 +224,12 @@
                 "HttpCode" : "200"
               },
               "Name": "LoadBalancerTargetGroup",
-              "Port": "80",
-              "Protocol": "HTTP",
+              "Port": "443",
+              "Protocol": "HTTPS",
               "TargetGroupAttributes": [{
                 "Key": "deregistration_delay.timeout_seconds",
                 "Value": "20"
               }],
-              "Targets": [
-                { "Id": {"Ref" : "EC2Instance1"}, "Port": "80" },
-                { "Id": {"Ref" : "EC2Instance2"}, "Port": "80" },
-                { "Id": {"Ref" : "EC2Instance3"}, "Port": "80" }
-              ],
               "UnhealthyThresholdCount": 3,
               "VpcId": {
                 "Ref": "ParamVPCID"
