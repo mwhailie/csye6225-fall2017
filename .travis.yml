@@ -25,7 +25,6 @@ after_success:
 before_deploy:
   - cd ..
   - pwd
-  - sudo rm -r /usr/share/tomcat8/bin/setenv.sh
 
 deploy:
   - provider: s3
