@@ -67,7 +67,9 @@ Change the type of the record set as CNAME. CNAME record(Canonical Name record) 
 
 ## 4. Installing the SSL certificate on AWS
 
-To use the IAM API to upload a certificate, send an UploadServerCertificate request. The following example shows how to do this with the AWS Command Line Interface (AWS CLI). The example assumes the following:
+After the certificate is issued, download the certificate. Put it in the same directory with private-key.pem.
+
+The following command shows how to upload a certificate with AWS CLI. The command assumes the following:
 
 The PEM-encoded certificate is stored in a file named csye6225-fall2017-mawenhe_me.crt.
 The PEM-encoded certificate chain is stored in a file named csye6225-fall2017-mawenhe_me.ca-bundle.
@@ -81,3 +83,7 @@ aws iam upload-server-certificate
 	--private-key file://private-key.pem
 ```
 
+Once the certificate is uploaded, you can verify the information in the IAM store. Use the following command to query the ARN of the certificate:
+```
+aws iam list-server-certificates --query "ServerCertificateMetadataList[0].Arn" --output text
+```
