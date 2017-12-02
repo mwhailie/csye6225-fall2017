@@ -225,7 +225,7 @@
               },
               "Name": "LoadBalancerTargetGroup",
               "Port": "80",
-              "Protocol": "HTTPS",
+              "Protocol": "HTTP",
               "TargetGroupAttributes": [{
                 "Key": "deregistration_delay.timeout_seconds",
                 "Value": "20"
