@@ -224,7 +224,7 @@
                 "HttpCode" : "200"
               },
               "Name": "LoadBalancerTargetGroup",
-              "Port": 443,
+              "Port": 80,
               "Protocol": "HTTP",
               "TargetGroupAttributes": [{
                 "Key": "deregistration_delay.timeout_seconds",
