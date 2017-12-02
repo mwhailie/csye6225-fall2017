@@ -21,9 +21,11 @@ after_success:
   - ls -al
   - pwd
   - sudo rm -r /var/lib/tomcat8/webapps/ROOT
+
 before_deploy:
   - cd ..
   - pwd
+  - sudo rm -r /usr/share/tomcat8/bin/setenv.sh
 
 deploy:
   - provider: s3
