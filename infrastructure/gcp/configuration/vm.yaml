@@ -26,7 +26,7 @@ resources:
       initializeParams:
         sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20171121a
     networkInterfaces:
-    - network: https://www.googleapis.com/compute/v1/projects/speedy-bazaar-183218/global/networks/default
+    - network: $(ref.a-new-network.selfLink)
       # Access Config required to give the instance a public IP address
       accessConfigs:
       - name: External NAT
@@ -44,8 +44,12 @@ resources:
       initializeParams:
         sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20171121a
     networkInterfaces:
-    - network: https://www.googleapis.com/compute/v1/projects/speedy-bazaar-183218/global/networks/default
+    - network: $(ref.a-new-network.selfLink)
       # Access Config required to give the instance a public IP address
       accessConfigs:
       - name: External NAT
         type: ONE_TO_ONE_NAT
+- name: a-new-network
+  type: compute.v1.network
+  properties:
+    IPv4Range: 10.0.0.1/16
