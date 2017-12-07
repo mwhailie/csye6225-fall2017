@@ -1,5 +1,7 @@
 # CSYE6225
 
+This is a web application based on Spring Boot, RESTful API and deployed on AWS.
+
 ## Team Members
 
 * **Shirui Wang** , *001226459* , wang.shirui@husky.neu.edu
@@ -7,10 +9,15 @@
 * **Yuting Jing** , *001221590* , jing.yu@husky.neu.edu
 * **Haoan Yan** , *001220895* , yan.hao@husky.neu.edu
 
+## Built With
+
+* [Spring Boot](https://projects.spring.io/spring-boot/) - The web framework used
+* [Gradle](https://gradle.org/) - Dependency Management
+* [Travis](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Set up
 
-To run this project, you may have to change the following code in application.properties
+To run this project on local environment, you may have to change the following code in application.properties file.
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/db_csye6225
 spring.datasource.username=root
@@ -26,8 +33,8 @@ create database db_csye6225;
 ## Make Unauthenticated HTTP Request
 
 Execute following command on your bash shell
-``` bash
-$ curl http://localhost:8080
+``` 
+$ curl https://csye6225-fall2017-mawenhe.me/csye6225app
 ```
 
 ### Expected Response:
@@ -38,11 +45,15 @@ $ curl http://localhost:8080
 ## Authenticate for HTTP Request
 
 Execute following command on your bash shell
-``` bash
-$ curl -u user:password http://localhost:8080
 ```
-
-where *user* is the username and *password* is the password.
+$ curl -X POST \
+  http://csye6225-fall2017-mawenhe.me/csye6225app \
+  -H 'authorization: Basic MUAxOjE=' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 9362bd7c-8dc6-22b2-6e9f-60696512376e'
+```
+where *authorization* is given to a registered user with username and password.
 
 ### Expected Response:
  ```
