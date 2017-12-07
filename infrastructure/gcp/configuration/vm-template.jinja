@@ -1,0 +1,42 @@
+resources:
+- type: compute.v1.instance
+  name: vm-ubuntu
+  properties:
+    zone: us-east1-b
+    machineType: https://www.googleapis.com/compute/v1/projects/rich-sunlight-188120/zones/us-east1-b/machineTypes/f1-micro
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20171121a
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/rich-sunlight-188120/global/networks/default
+      # Access Config required to give the instance a public IP address
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+    metadata:
+      items:
+      - key: startup-script
+        value: |
+          #!/bin/bash
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update && apt-get upgrade -y
+          sudo apt-get -y install default-jre
+          sudo apt-get -y install default-jdk
+          sudo apt-get -y install mysql-client-core-5.7
+          sudo apt-get -y install tomcat8
+          sudo apt-get -y install ruby
+          sudo apt-get install wget
+          sudo apt-get -y install python
+          
+    
+- name: storagebucket-01
+  type: storage.v1.bucket
+  properties:
+    storageClass: MULTI_REGIONAL
+    versioning:
+      enabled: false
+
