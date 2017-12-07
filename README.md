@@ -13,7 +13,7 @@ This is a web application based on Spring Boot, RESTful API and deployed on AWS.
 
 * [Spring Boot](https://projects.spring.io/spring-boot/) - The web framework used
 * [Gradle](https://gradle.org/) - Dependency Management
-* [Travis](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [IntelliJ](https://www.jetbrains.com/idea/) - IDE used to develop the web app
 
 ## Set up
 
@@ -29,6 +29,20 @@ Then execute the following command in your mysql
 ```
 create database db_csye6225;
 ```
+
+## REST API Endpoints
+
+| HTTP method  | URI path | Description |
+| ------------- | ------------- |  ------------- |
+| GET  | /  | Get the home page |
+| POST  | /user/register  | Create account for user |
+| GET  | /tasks  | Get all tasks for the user |
+| POST  | /tasks  | Create a to-do task for the user |
+| PUT  | /tasks/{id} | Update a to-do task for the user |
+| DELETE  | /tasks/{id} | Delete a to-do task for the user |
+| GET  | /tasks/{id}/attachments  | Get list of files attached to the to-do task |
+| POST  | /tasks/{id}/attachments  | Attach a file to the to-do task |
+| DELETE  | /tasks/{id}/attachments/{idAttachments} | Delete file attached to the to-do task |
 
 ## Make Unauthenticated HTTP Request
 
