@@ -51,7 +51,7 @@ resources:
     tags:
       items:
         - csye6225
-- name: csye6225-rui-bucket
+- name: {{ env["project"] }}-bucket
   type: storage.v1.bucket
   properties:
     storageClass: MULTI_REGIONAL
