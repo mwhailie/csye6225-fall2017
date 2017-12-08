@@ -18,7 +18,9 @@ imports:
 - path: network-template.jinja
 - path: firewall-template.jinja
 - path: compute-engine-template.jinja
+- path: pubsub_topic.jinja
+- path: service_account.jinja
 
 resources:
-- name: compute-engine-setup
+- name: compute-engine
   type: compute-engine-template.jinja

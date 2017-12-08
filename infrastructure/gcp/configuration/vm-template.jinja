@@ -49,7 +49,7 @@ resources:
           sudo apt-get install wget
           sudo apt-get -y install python    
     
-- name: {{ env["name"] }}-bucket
+- name: {{ env["project"] }}-bucket
   type: storage.v1.bucket
   properties:
     storageClass: MULTI_REGIONAL
