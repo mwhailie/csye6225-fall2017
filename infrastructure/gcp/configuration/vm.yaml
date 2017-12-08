@@ -19,7 +19,21 @@ imports:
 - path: firewall-template.jinja
 - path: compute-engine-template.jinja
 - path: cloudsql-template.jinja
+- path: pubsub-cloud-function.jinja
+- path: service-account.jinja
+- path: bucket.jinja
 
 resources:
-- name: compute-engine-setup
+- name: compute-engine
   type: compute-engine-template.jinja
+- name: function
+  type: pubsub-cloud-function.jinja
+  properties:
+     region: us-central1
+     entryPoint: handler
+     sourceArchiveUrl: gs://cloud-function-sample/function.zip
+- name: bucket
+  type: bucket.jinja
+outputs:
+- name: function-output
+  value: $(ref.function.cloud-function-response)
