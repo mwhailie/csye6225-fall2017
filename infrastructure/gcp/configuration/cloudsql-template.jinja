@@ -15,7 +15,7 @@ resources:
 - name: {{ env["name"] }}-cloudsql-instance
   type: sqladmin.v1beta4.instance
   properties:
-    name: mysql-instance-csye6225-fall2017-jingyuting
+    name: {{ env["project"] }}-sql-instance
     instanceType: CLOUD_SQL_INSTANCE
     kind: sql#instance
     databaseVersion: MYSQL_5_7
@@ -29,7 +29,7 @@ resources:
   properties:
     name: mysql-database01
     kind: sql#database
-    instance: mysql-instance-csye6225-fall2017-jingyuting
+    instance: {{ env["project"] }}-sql-instance
     project: {{ env["project"] }}
 
 
