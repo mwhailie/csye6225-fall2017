@@ -31,12 +31,27 @@ resources:
           sudo apt-get -y install ruby
           sudo apt-get install wget
           sudo apt-get -y install python
-          
-    
+    tags:
+      items:
+        - CSYE6225
 - name: storagebucket-01
   type: storage.v1.bucket
   properties:
     storageClass: MULTI_REGIONAL
     versioning:
       enabled: false
+- type: compute#firewall
+  name: instanceFirewall
+  properties:
+    description: Firewall for instance
+    network: global/networks/default
+    sourceTags:
+      - CSYE6225
+    targetTags:
+      - CSYE6225
+    allowed:
+      - {IPProtocol: TCP, ports: ['22', '80', '443', '8080', 12345-12349]}
+
+
+
 

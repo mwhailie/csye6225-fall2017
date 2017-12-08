@@ -1,6 +1,9 @@
 imports:
 - path: vm-template.jinja
 
+
 resources:
 - name: vm-instance
   type: vm-template.jinja
+  
+  
