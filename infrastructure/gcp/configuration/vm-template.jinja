@@ -1,3 +1,6 @@
+{%.set BUCKET03 = "storagebucket-03" %}
+
+
 resources:
 - type: compute.v1.instance
   name: vm-ubuntu
@@ -31,9 +34,15 @@ resources:
           sudo apt-get -y install ruby
           sudo apt-get install wget
           sudo apt-get -y install python
-          
-    
-- name: storagebucket-01
+              
+- name: storagebucket-02
+  type: storage.v1.bucket
+  properties:
+    storageClass: MULTI_REGIONAL
+    versioning:
+      enabled: false
+
+- name: {{ BUCKET03 }}
   type: storage.v1.bucket
   properties:
     storageClass: MULTI_REGIONAL
