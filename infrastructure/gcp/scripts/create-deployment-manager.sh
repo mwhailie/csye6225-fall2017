@@ -1,8 +1,8 @@
 #!/bin/bash
 #create a stack instance
 
-#projectID=$(gcloud projects list --query "list[0].PROJECT_ID" --output text)
+projectID=$(gcloud config list --format 'value(core.project)')
 
-gcloud deployment-manager deployments create my-first-deployment --config ../configuration/vm.yaml
+gcloud deployment-manager deployments update my-first-deployment --config ../configuration/vm.yaml 
 
-gcloud deployment-manager deployments list
+gcloud deployment-manager deployments list 
