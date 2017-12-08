@@ -20,6 +20,7 @@ imports:
 - path: compute-engine-template.jinja
 - path: pubsub-cloud-function.jinja
 - path: service-account.jinja
+- path: bucket.jinja
 
 
 resources:
@@ -31,6 +32,8 @@ resources:
      region: us-central1
      entryPoint: handler
      sourceArchiveUrl: gs://cloud-function-sample/function.zip
+- name: bucket
+  type: bucket.jinja
 outputs:
 - name: function-output
   value: $(ref.function.cloud-function-response)
