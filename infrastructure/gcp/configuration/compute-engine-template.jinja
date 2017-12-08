@@ -14,7 +14,7 @@ limitations under the License.
 
 resources:
 - name: &SA_NAME {{ env["name"] }}-vm-access
-  type: service_account.jinja
+  type: service-account.jinja
 - name: {{ env["name"] }}-vm1
   type: vm-template.jinja
   properties:
