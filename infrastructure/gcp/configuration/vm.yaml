@@ -21,6 +21,7 @@ imports:
 - path: pubsub_topic.jinja
 - path: service_account.jinja
 
+
 resources:
 - name: compute-engine
   type: compute-engine-template.jinja

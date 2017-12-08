@@ -48,7 +48,9 @@ resources:
           sudo apt-get -y install ruby
           sudo apt-get install wget
           sudo apt-get -y install python    
-    
+    tags:
+      items:
+        - csye6225
 - name: {{ env["project"] }}-bucket
   type: storage.v1.bucket
   properties:

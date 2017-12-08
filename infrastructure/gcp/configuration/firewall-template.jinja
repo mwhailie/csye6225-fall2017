@@ -19,4 +19,8 @@ resources:
     sourceRanges: ["0.0.0.0/0"]
     allowed:
     - IPProtocol: TCP
-      ports: ["80"]
+      ports: ['22', '80', '443', '8080', 12345-12349]
+    sourceTags:
+      - csye6225
+    targetTags:
+      - csye6225
