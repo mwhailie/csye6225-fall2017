@@ -13,23 +13,13 @@ limitations under the License.
 
 
 resources:
-{#
 - name: &SA_NAME {{ env["name"] }}-vm-access
   type: service_account.jinja
-  #}
 - name: {{ env["name"] }}-vm1
   type: vm-template.jinja
-{#
   properties:
     serviceAccountId: *SA_NAME
-    #}
 - name: {{ env["name"] }}-nw
   type: network-template.jinja
 - name: {{ env["name"] }}-fw
   type: firewall-template.jinja
-  {#
-- name: {{ env["name"] }}-my-pubsub-topic
-  type: pubsub_topic.jinja
-  properties:
-    serviceAccountId: *SA_NAME
-    #}
