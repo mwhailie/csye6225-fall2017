@@ -18,10 +18,10 @@ imports:
 - path: network-template.jinja
 - path: firewall-template.jinja
 - path: compute-engine-template.jinja
+- path: cloudsql-template.jinja
 - path: pubsub-cloud-function.jinja
 - path: service-account.jinja
 - path: bucket.jinja
-
 
 resources:
 - name: compute-engine
