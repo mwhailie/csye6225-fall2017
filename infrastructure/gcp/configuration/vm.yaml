@@ -22,6 +22,10 @@ imports:
 - path: pubsub-cloud-function.jinja
 - path: service-account.jinja
 - path: bucket.jinja
+- path: dns-template.jinja
+- path: dnsZone.py
+- path: dnsZone.py.schema
+
 
 resources:
 - name: compute-engine
@@ -34,6 +38,8 @@ resources:
      sourceArchiveUrl: gs://cloud-function-sample/function.zip
 - name: bucket
   type: bucket.jinja
+- name: dns
+  type: dns-template.jinja
 outputs:
 - name: function-output
   value: $(ref.function.cloud-function-response)
