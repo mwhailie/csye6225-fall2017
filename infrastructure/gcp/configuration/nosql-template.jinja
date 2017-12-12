@@ -3,6 +3,11 @@ resources:
 - name: bigtable-instance
   type: bigtableadmin.v2.instance
   properties:
-    displayName: csye6225-rui-bigtable
-    type: DEVELOPMENT
-  parent: projects/angelic-edition-188121
+    parent: projects/angelic-edition-188121
+    instanceId: bigtabletemplate
+    instance: 
+        displayName: bigtabletemplate
+    clusters:
+      cluster1:
+        location: projects/angelic-edition-188121/locations/us-east1-c
+        serveNodes: 3

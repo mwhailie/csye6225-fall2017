@@ -11,19 +11,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 #}
 
-
 resources:
-- name: &SA_NAME {{ env["name"] }}-vm-access
-  type: service-account.jinja
-- name: {{ env["name"] }}-vm1
-  type: vm-template.jinja
+- name: {{ env["name"] }}-cloudsql-instance
+  type: sqladmin.v1beta4.instance
   properties:
-    serviceAccountId: *SA_NAME
-- name: {{ env["name"] }}-nw
-  type: network-template.jinja
-- name: {{ env["name"] }}-fw
-  type: firewall-template.jinja
-- name: {{ env["name"] }}-bigtable
-  type: nosql-template.jinja
-- name: {{ env["name"] }}-sql
-  type: cloudsql-template.jinja
+    name: {{ env["project"] }}-sql-instance-shirui
+    instanceType: CLOUD_SQL_INSTANCE
+    kind: sql#instance
+    databaseVersion: MYSQL_5_7
+    project: {{ env["project"] }}
+    region: us-east1
+    settings:
+      tier: db-f1-micro
+      kind: sql#settings
+- name: {{ env["name"] }}-cloudsql-database
+  type: sqladmin.v1beta4.database
+  properties:
+    name: mysql-database01
+    kind: sql#database
+    instance: {{ env["project"] }}-sql-instance-shirui
+    project: {{ env["project"] }}
+
+
+

@@ -11,19 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 #}
 
-
 resources:
-- name: &SA_NAME {{ env["name"] }}-vm-access
-  type: service-account.jinja
-- name: {{ env["name"] }}-vm1
-  type: vm-template.jinja
+- name: {{ env["project"] }}-bucket
+  type: storage.v1.bucket
   properties:
-    serviceAccountId: *SA_NAME
-- name: {{ env["name"] }}-nw
-  type: network-template.jinja
-- name: {{ env["name"] }}-fw
-  type: firewall-template.jinja
-- name: {{ env["name"] }}-bigtable
-  type: nosql-template.jinja
-- name: {{ env["name"] }}-sql
-  type: cloudsql-template.jinja
+    storageClass: MULTI_REGIONAL
+    versioning:
+      enabled: false
