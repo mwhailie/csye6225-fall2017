@@ -15,7 +15,7 @@ resources:
 - name: {{ env["name"] }}-cloudsql-instance
   type: sqladmin.v1beta4.instance
   properties:
-    name: {{ env["project"] }}-sql-instance-shirui
+    name: {{ env["project"] }}-sql-instance-000000
     instanceType: CLOUD_SQL_INSTANCE
     kind: sql#instance
     databaseVersion: MYSQL_5_7
@@ -29,7 +29,7 @@ resources:
   properties:
     name: mysql-database01
     kind: sql#database
-    instance: {{ env["project"] }}-sql-instance-shirui
+    instance: {{ env["project"] }}-sql-instance-000000
     project: {{ env["project"] }}
 
 
