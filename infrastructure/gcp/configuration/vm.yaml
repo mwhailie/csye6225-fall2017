@@ -18,7 +18,7 @@ imports:
 - path: network-template.jinja
 - path: firewall-template.jinja
 - path: compute-engine-template.jinja
-
+- path: nosql-template.jinja
 
 resources:
 - name: compute-engine-setup
