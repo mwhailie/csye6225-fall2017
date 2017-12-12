@@ -1,5 +1,5 @@
 #!/bin/bash
-#create a stack instance
+#create a deployment manager on google could platform
 
 projectID=$(gcloud config list --format 'value(core.project)')
 

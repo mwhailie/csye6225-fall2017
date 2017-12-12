@@ -25,7 +25,7 @@ imports:
 - path: dns-template.jinja
 - path: dnsZone.py
 - path: dnsZone.py.schema
-
+- path: auto-scaledgroup-template.jinja
 
 resources:
 - name: compute-engine
@@ -40,6 +40,13 @@ resources:
   type: bucket.jinja
 - name: dns
   type: dns-template.jinja
+- name: auto-scaledgroup
+  type: auto-scaledgroup-template.jinja
+  properties:
+    regions: 
+      - us-west1
+      - us-east1
+
 outputs:
 - name: function-output
   value: $(ref.function.cloud-function-response)

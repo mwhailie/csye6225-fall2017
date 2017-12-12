@@ -31,7 +31,7 @@ resources:
         # NEED TO DELETE HARD CODE HEREEEEEEEEEE
         sourceImage: {{ COMPUTE_URL_BASE }}projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20171121a
     networkInterfaces:
-    - network: global/networks/default
+    - network: $(ref.{{ env["deployment"] }}-network.selfLink)
       # Access Config required to give the instance a public IP address
       accessConfigs:
       - name: External NAT
