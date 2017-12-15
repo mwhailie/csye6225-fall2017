@@ -19,6 +19,7 @@ imports:
 - path: firewall-template.jinja
 - path: compute-engine-template.jinja
 - path: cloudsql-instance-template.jinja
+- path: nosql-template.jinja
 - path: pubsub-cloud-function.jinja
 - path: service-account.jinja
 - path: bucket.jinja
