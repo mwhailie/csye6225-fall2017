@@ -49,7 +49,9 @@ resources:
           sudo apt-get -y install tomcat8
           sudo apt-get -y install ruby
           sudo apt-get install wget
-          sudo apt-get -y install python    
+          sudo apt-get -y install python
+          curl -sSO "https://dl.google.com/cloudagents/install-logging-agent.sh"
+          sudo bash install-logging-agent.sh
     tags:
       items:
         - csye6225
