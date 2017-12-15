@@ -2,13 +2,13 @@ imports:
 - path: dnsZone.py
 
 resources:
-- name: csye6225-fall2017-mawenhe
+- name: csye6225-fall2017-jingyuting
   type: dnsZone.py
   properties:
-    dnsName: csye6225-fall2017-mawenhe.me.
+    dnsName: csye6225-fall2017-jingyu.me.
     description: My description.
     resourceRecordSets:
-    - name: csye6225-fall2017-mawenhe.me.
+    - name: csye6225-fall2017-jingyu.me.
       type: TXT
       ttl: 3600
       rrdatas:
@@ -16,7 +16,7 @@ resources:
       # them in double quotes when sent to the DNS API, otherwise they are split
       # on whitespace into a series of strings.
       - '"Set by DM."'
-    - name: csye6225-fall2017-mawenhe.me.
+    - name: csye6225-fall2017-jingyu.me.
       type: A
       ttl: 3600
       rrdatas:

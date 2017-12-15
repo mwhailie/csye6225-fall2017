@@ -12,24 +12,12 @@ limitations under the License.
 #}
 
 resources:
-- name: {{ env["name"] }}-cloudsql-instance
-  type: sqladmin.v1beta4.instance
-  properties:
-    name: {{ env["project"] }}-sql-instance
-    instanceType: CLOUD_SQL_INSTANCE
-    kind: sql#instance
-    databaseVersion: MYSQL_5_7
-    project: {{ env["project"] }}
-    region: us-east1
-    settings:
-      tier: db-f1-micro
-      kind: sql#settings
 - name: {{ env["name"] }}-cloudsql-database
   type: sqladmin.v1beta4.database
   properties:
     name: mysql-database01
     kind: sql#database
-    instance: {{ env["project"] }}-sql-instance
+    instance: {{ env["project"] }}-sql-instance-{{ env["current_time"] }}
     project: {{ env["project"] }}
 
 

@@ -1,0 +1,13 @@
+resources:
+- name: {{ env["name"] }}-cloudsql-instance
+  type: sqladmin.v1beta4.instance
+  properties:
+    name: {{ env["project"] }}-sql-instance2
+    instanceType: CLOUD_SQL_INSTANCE
+    kind: sql#instance
+    databaseVersion: MYSQL_5_7
+    project: {{ env["project"] }}
+    region: us-east1
+    settings:
+      tier: db-f1-micro
+      kind: sql#settings

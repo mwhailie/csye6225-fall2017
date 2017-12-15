@@ -18,7 +18,7 @@ imports:
 - path: network-template.jinja
 - path: firewall-template.jinja
 - path: compute-engine-template.jinja
-- path: cloudsql-template.jinja
+- path: cloudsql-instance-template.jinja
 - path: pubsub-cloud-function.jinja
 - path: service-account.jinja
 - path: bucket.jinja
@@ -26,6 +26,7 @@ imports:
 - path: dnsZone.py
 - path: dnsZone.py.schema
 - path: auto-scaledgroup-template.jinja
+- path: LogMetric-template.jinja
 
 resources:
 - name: compute-engine
@@ -46,6 +47,8 @@ resources:
     regions: 
       - us-west1
       - us-east1
+- name: log-metric
+  type: LogMetric-template.jinja
 
 outputs:
 - name: function-output
