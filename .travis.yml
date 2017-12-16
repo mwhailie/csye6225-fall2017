@@ -21,6 +21,7 @@ after_success:
   - ls -al
   - pwd
   - sudo rm -r /var/lib/tomcat8/webapps/ROOT
+
 before_deploy:
   - cd ..
   - pwd
