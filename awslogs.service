@@ -12,5 +12,3 @@ ExecStart=/var/awslogs/bin/awslogs-agent-launcher.sh --start --background --pidf
 
 [Install]
 WantedBy=multi-user.target
-
-sudo systemctl start awslogs.service\n
