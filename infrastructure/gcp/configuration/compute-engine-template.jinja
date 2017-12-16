@@ -23,9 +23,7 @@ resources:
   type: network-template.jinja
 - name: {{ env["name"] }}-fw
   type: firewall-template.jinja
-- name: {{ env["name"] }}-sql-instance
+- name: {{ env["project"] }}-sql-instance
   type: cloudsql-instance-template.jinja
 - name: {{ env["name"] }}-bigtable
   type: nosql-template.jinja
-- name: {{ env["name"] }}-sql-instance
-  type: cloudsql-instance-template.jinja

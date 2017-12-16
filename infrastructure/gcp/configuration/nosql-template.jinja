@@ -16,3 +16,6 @@ resources:
   properties:
     tableId: bigtable-template
     parent: projects/{{ env["project"] }}/instances/bigtable-template
+  metadata:
+    dependsOn:
+      - bigtable-instance

@@ -12,7 +12,7 @@ limitations under the License.
 #}
 
 resources:
-- name: {{ env["name"] }}-cloudsql-instance
+- name: {{ env["project"] }}-cloudsql-instance-213
   type: sqladmin.v1beta4.instance
   properties:
     name: {{ env["project"] }}-sql-instance2
