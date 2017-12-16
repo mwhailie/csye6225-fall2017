@@ -23,6 +23,8 @@
                             [
                                 "#!/bin/bash -ex\n",
                                 "export DEBIAN_FRONTEND=noninteractive\n",
+                                "sudo touch /var/log/applog.log\n",
+                                "sudo chmod 777 /var/log/applog.log\n",
                                 "sudo apt-get update && apt-get upgrade -y\n",
                                 "sudo apt-get -y install default-jre\n",
                                 "sudo apt-get -y install default-jdk\n",
@@ -84,6 +86,8 @@
                             [
                                 "#!/bin/bash -ex\n",
                                 "export DEBIAN_FRONTEND=noninteractive\n",
+                                "sudo touch /var/log/applog.log\n",
+                                "sudo chmod 777 /var/log/applog.log\n",
                                 "sudo apt-get update && apt-get upgrade -y\n",
                                 "sudo apt-get -y install default-jre\n",
                                 "sudo apt-get -y install default-jdk\n",
@@ -145,6 +149,8 @@
                             [
                                 "#!/bin/bash -ex\n",
                                 "export DEBIAN_FRONTEND=noninteractive\n",
+                                "sudo touch /var/log/applog.log\n",
+                                "sudo chmod 777 /var/log/applog.log\n",
                                 "sudo apt-get update && apt-get upgrade -y\n",
                                 "sudo apt-get -y install default-jre\n",
                                 "sudo apt-get -y install default-jdk\n",
@@ -194,7 +200,7 @@
               ]
             }
           },
-          "LoadBalancerListener": {
+          "LoadBalancerListener443": {
             "Type": "AWS::ElasticLoadBalancingV2::Listener",
             "Properties": {
               "DefaultActions": [{
@@ -224,16 +230,12 @@
                 "HttpCode" : "200"
               },
               "Name": "LoadBalancerTargetGroup",
-              "Port": 80,
+              "Port": 8080,
               "Protocol": "HTTP",
-              "TargetGroupAttributes": [{
-                "Key": "deregistration_delay.timeout_seconds",
-                "Value": "20"
-              }],
               "Targets": [
-                { "Id": {"Ref" : "EC2Instance1"}, "Port": 443 },
-                { "Id": {"Ref" : "EC2Instance2"}, "Port": 443 },
-                { "Id": {"Ref" : "EC2Instance3"}, "Port": 443 }
+                { "Id": {"Ref" : "EC2Instance1"}, "Port": 8080 },
+                { "Id": {"Ref" : "EC2Instance2"}, "Port": 8080 },
+                { "Id": {"Ref" : "EC2Instance3"}, "Port": 8080 }
               ],
               "UnhealthyThresholdCount": 3,
               "VpcId": {
@@ -409,7 +411,7 @@
                                 }
                         ]
                     },
-                    "ManagedPolicyArns": [{"Ref": "iamPolicyCodeDeployEC2S3"}, {"Ref" : "iamPolicyTravisUploadToS3"}, "arn:aws:iam::aws:policy/AmazonSESFullAccess"],
+                    "ManagedPolicyArns": [{"Ref": "iamPolicyCodeDeployEC2S3"}, {"Ref" : "iamPolicyTravisUploadToS3"}, "arn:aws:iam::aws:policy/AmazonSESFullAccess", {"Ref" : "iamPolicyCloudWatch"}],
                     "RoleName": "CodeDeployEC2ServiceRoleTemplate"
             }
         },
@@ -481,6 +483,12 @@
                         "FromPort": 443,
                         "ToPort": 443,
                         "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort" : 0,
+                        "ToPort" : 65535,
+                        "CidrIp": "0.0.0.0/0"
                     }
                 ]
             }
@@ -529,30 +537,25 @@
                             "Ref": "ParamRecordSetsName"
                         },
                         "Type": "A",
-                        "TTL": "60",
-                        "ResourceRecords": [
-                            {
+                        "AliasTarget":{
+                            "HostedZoneId" : {
                                 "Fn::GetAtt": [
-                                    "EC2Instance1",
-                                    "PublicIp"
+                                    "ElasticLoadBalancerV2",
+                                    "CanonicalHostedZoneID"
                                 ]
                             },
-                            {
+                            "DNSName" : { 
                                 "Fn::GetAtt": [
-                                    "EC2Instance2",
-                                    "PublicIp"
-                                ]
+                                    "ElasticLoadBalancerV2",
+                                    "DNSName"
+                                ] 
                             },
-                            {
-                                "Fn::GetAtt": [
-                                    "EC2Instance3",
-                                    "PublicIp"
-                                ]
-                            }
-                        ]
+                            "EvaluateTargetHealth" : false
+                        }
                     }
                 ]
-            }
+            },
+            "DependsOn": ["ElasticLoadBalancerV2"]
         },
         "DynamoDBTable": {
             "Type": "AWS::DynamoDB::Table",

@@ -10,6 +10,8 @@ files:
     destination: /home/ubuntu
   - source: ./infrastructure/aws/cloudwatch/awslogs.conf
     destination: /home/ubuntu
+  - source: ./awslogs.service
+    destination: /etc/systemd/system
   - source: ./build/libs/csye6225app.war
     destination: /var/lib/tomcat8/webapps
 
